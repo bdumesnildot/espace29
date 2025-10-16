@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  --font-family-eina01: 'Eina01', ui-sans-serif, system-ui, sans-serif;
+  --font-family-eina02: 'Eina02', ui-sans-serif, system-ui, sans-serif;
+  --font-family-eina03: 'Eina03', ui-sans-serif, system-ui, sans-serif;
+  --font-family-eina04: 'Eina04', ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility font-eina01 {
+  font-family: theme(--font-family-eina01);
+}
+@utility font-eina02 {
+  font-family: theme(--font-family-eina02);
+}
+@utility font-eina03 {
+  font-family: theme(--font-family-eina03);
+}
+@utility font-eina04 {
+  font-family: theme(--font-family-eina04);
+}
