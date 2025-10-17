@@ -22,6 +22,7 @@ import Layout from "../../layouts/Layout.astro"
         <li><a href="#spacing" class="hover:text-gray-600 transition-colors">Spacing</a></li>
         <li><a href="#layout" class="hover:text-gray-600 transition-colors">Layout</a></li>
         <li><a href="#components" class="hover:text-gray-600 transition-colors">Components</a></li>
+        <li><a href="#interactions" class="hover:text-gray-600 transition-colors">Interactions</a></li>
       </ul>
     </nav>
 
@@ -552,23 +553,243 @@ import Layout from "../../layouts/Layout.astro"
           <div class="space-y-6">
             <div>
               <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Input Field</label>
-              <input type="text" placeholder="Enter text here..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 font-eina03">
+              <input type="text" placeholder="Enter text here..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03">
               <div class="text-sm font-mono text-gray-600 mt-2">
-                w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900
+                w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none
               </div>
             </div>
             <div>
               <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Textarea</label>
-              <textarea placeholder="Enter message..." rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 font-eina03"></textarea>
+              <textarea placeholder="Enter message..." rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03"></textarea>
             </div>
             <div>
               <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Select Dropdown</label>
-              <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 font-eina03">
+              <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03">
                 <option>Choose an option</option>
                 <option>Option 1</option>
                 <option>Option 2</option>
               </select>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactions Section -->
+    <section id="interactions" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Interactions</h2>
+      
+      <div class="mb-8">
+        <p class="text-lg font-eina03 text-gray-600 max-w-3xl">
+          Interaction states maintain the minimal design philosophy while providing clear feedback to users. 
+          All hover and focus states use subtle grayscale transitions, with the single accent color reserved for critical focus states.
+        </p>
+      </div>
+
+      <!-- Hover States -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Hover States</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Button Hovers</h4>
+            <div class="space-y-4">
+              <button class="bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105">
+                Hover Me
+              </button>
+              <button class="border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                Secondary Hover
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                transition-all duration-200 transform hover:scale-105
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Card Hovers</h4>
+            <div class="bg-white rounded-lg shadow-md hover:shadow-xl p-4 border border-gray-200 transition-all duration-300 cursor-pointer hover:-translate-y-1">
+              <h5 class="text-lg font-eina03 font-semibold mb-2">Hover Card</h5>
+              <p class="text-gray-600 font-eina03 text-sm">Subtle lift and shadow increase</p>
+            </div>
+            <div class="text-sm font-mono text-gray-600 mt-2">
+              hover:shadow-xl hover:-translate-y-1 transition-all duration-300
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Link Hovers</h4>
+            <div class="space-y-3">
+              <a href="#" class="block text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200">
+                Simple link hover
+              </a>
+              <a href="#" class="block text-gray-700 hover:text-gray-900 font-eina03 border-b border-transparent hover:border-gray-300 transition-all duration-200">
+                Link with underline
+              </a>
+              <a href="#" class="block text-gray-700 hover:text-gray-900 font-eina03 relative overflow-hidden transition-colors duration-200 hover:bg-gray-50 px-2 py-1 rounded">
+                Background hover
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Focus States -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Focus States</h3>
+        <div class="max-w-4xl">
+          <div class="mb-6">
+            <p class="text-gray-600 font-eina03 mb-4">
+              Focus states use our single accent color (gray-900) to create clear accessibility indicators. 
+              All interactive elements have visible focus rings that meet WCAG guidelines.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="text-lg font-semibold mb-4">Form Focus</h4>
+              <div class="space-y-4">
+                <input type="text" placeholder="Click to focus" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03 transition-all duration-200">
+                <textarea placeholder="Focus state example" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03 transition-all duration-200"></textarea>
+                <div class="text-sm font-mono text-gray-600">
+                  focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-semibold mb-4">Button Focus</h4>
+              <div class="space-y-4">
+                <button class="bg-gray-900 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                  Primary Focus
+                </button>
+                <button class="border-2 border-gray-300 hover:border-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                  Secondary Focus
+                </button>
+                <div class="text-sm font-mono text-gray-600">
+                  focus:ring-2 focus:ring-gray-900 focus:ring-offset-2
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active States -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Active States</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Button Active</h4>
+            <div class="space-y-4">
+              <button class="bg-gray-900 hover:bg-gray-800 active:bg-gray-950 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-150 active:scale-95">
+                Press Me
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                active:bg-gray-950 active:scale-95 transition-all duration-150
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Navigation Active</h4>
+            <nav class="space-y-2">
+              <a href="#" class="block px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200">
+                Normal Link
+              </a>
+              <a href="#" class="block px-4 py-2 bg-gray-100 text-gray-900 font-medium rounded-lg border-l-4 border-gray-900">
+                Active Link
+              </a>
+              <a href="#" class="block px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200">
+                Another Link
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disabled States -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Disabled States</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Disabled Buttons</h4>
+            <div class="space-y-4">
+              <button disabled class="bg-gray-300 text-gray-500 font-eina04 font-semibold py-3 px-6 rounded-lg cursor-not-allowed">
+                Disabled Primary
+              </button>
+              <button disabled class="border-2 border-gray-200 text-gray-400 font-eina04 font-semibold py-3 px-6 rounded-lg cursor-not-allowed">
+                Disabled Secondary
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                bg-gray-300 text-gray-500 cursor-not-allowed
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Disabled Form</h4>
+            <div class="space-y-4">
+              <input type="text" disabled placeholder="Disabled input" class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-400 cursor-not-allowed focus:outline-none font-eina03">
+              <select disabled class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-400 cursor-not-allowed focus:outline-none font-eina03">
+                <option>Disabled select</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading States -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Loading States</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Loading Buttons</h4>
+            <div class="space-y-4">
+              <button class="bg-gray-900 text-white font-eina04 font-semibold py-3 px-6 rounded-lg flex items-center gap-3">
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Loading...
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                border-2 border-white border-t-transparent animate-spin
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Content Loading</h4>
+            <div class="space-y-3">
+              <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
+              <div class="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
+              <div class="h-4 bg-gray-200 rounded animate-pulse w-1/2"></div>
+              <div class="text-sm font-mono text-gray-600 mt-3">
+                bg-gray-200 animate-pulse
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interaction Guidelines -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Interaction Guidelines</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="p-6 bg-white border border-gray-100 rounded-lg">
+            <h4 class="text-lg font-semibold mb-4 text-gray-900">Timing & Easing</h4>
+            <ul class="text-sm space-y-2 text-gray-700 font-eina03">
+              <li>• <code class="text-xs bg-gray-100 px-1 rounded">duration-200</code> - Quick interactions (hover, focus)</li>
+              <li>• <code class="text-xs bg-gray-100 px-1 rounded">duration-300</code> - Card hovers, layout shifts</li>
+              <li>• <code class="text-xs bg-gray-100 px-1 rounded">duration-150</code> - Active/pressed states</li>
+              <li>• <code class="text-xs bg-gray-100 px-1 rounded">ease-in-out</code> - Default easing</li>
+            </ul>
+          </div>
+          <div class="p-6 bg-white border border-gray-100 rounded-lg">
+            <h4 class="text-lg font-semibold mb-4 text-gray-900">Accessibility</h4>
+            <ul class="text-sm space-y-2 text-gray-700 font-eina03">
+              <li>• Always include focus states with visible rings</li>
+              <li>• Use <code class="text-xs bg-gray-100 px-1 rounded">focus:ring-offset-2</code> for buttons</li>
+              <li>• Respect <code class="text-xs bg-gray-100 px-1 rounded">prefers-reduced-motion</code></li>
+              <li>• Maintain minimum 44px touch targets</li>
+            </ul>
           </div>
         </div>
       </div>
