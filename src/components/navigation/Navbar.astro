@@ -1,41 +1,35 @@
 ---
-const currentPath = Astro.url.pathname;
+import { navigationItems } from "@lib/navigation-helper.ts"
 
-const navItems = [
-  { href: "/", label: "Espace29" },
-  { href: "/infos", label: "Infos" },
-  { href: "/agenda", label: "Agenda" },
-  { href: "/artistes", label: "Artistes" },
-  { href: "/dev/design-system", label: "Design system" }
-];
+const currentPath = Astro.url.pathname
 
 const isActiveLink = (href: string) => {
-  if (href === "/") return currentPath === "/";
-  return currentPath.startsWith(href);
-};
+  if (href === "/") return currentPath === "/"
+  return currentPath.startsWith(href)
+}
 
 const getLinkStyle = (href: string) => {
-  const baseStyle = "font-eina03 hover:text-gray-600 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1";
-  
+  const baseStyle =
+    "font-eina03 hover:text-gray-600 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1"
+
   if (isActiveLink(href)) {
-    return `${baseStyle} text-gray-900 font-medium border-gray-900`;
+    return `${baseStyle} text-gray-900 font-medium border-gray-900`
   }
-  
-  return `${baseStyle} text-gray-700 border-transparent`;
-};
+
+  return `${baseStyle} text-gray-700 border-transparent`
+}
 ---
 
-<nav class="border-y-2 mt-2.5">
+<nav class="border-y-2 mt-2.5 bg-gray-50">
   <ul class="flex gap-10 justify-start py-4 px-10 text-2xl no-underline">
-    {navItems.map(({ href, label }) => (
-      <li>
-        <a 
-          href={href} 
-          class={getLinkStyle(href)}
-        >
-          {label}
-        </a>
-      </li>
-    ))}
+    {
+      navigationItems.map(({ href, label }) => (
+        <li>
+          <a href={href} class={getLinkStyle(href)}>
+            {label}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>

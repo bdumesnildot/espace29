@@ -2,6 +2,7 @@
 import "../styles/global.css"
 
 import Navbar from "../components/navigation/Navbar.astro"
+import NavbarMobile from "../components/navigation/NavbarMobile.astro"
 
 export interface Props {
   title?: string
@@ -59,7 +60,12 @@ const { title = "Espace29" } = Astro.props
     class="bg-gray-50 m-0 p-0 h-screen w-screen font-sans text-gray-900 flex flex-col"
   >
     <header>
-      <Navbar />
+      <div class="hidden md:block">
+        <Navbar />
+      </div>
+      <div class="block md:hidden">
+        <NavbarMobile />
+      </div>
     </header>
     <div class="grow">
       <slot />
