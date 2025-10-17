@@ -9,11 +9,8 @@ export default {
         eina03: ["Eina03", "ui-sans-serif", "system-ui", "sans-serif"],
         eina04: ["Eina04", "ui-sans-serif", "system-ui", "sans-serif"],
       },
-      fontWeight: {
-        regular: "400",
-        semibold: "600",
-      },
       fontSize: {
+        // Legacy-specific typography scale with embedded weights
         "8xl": ["120px", { lineHeight: "1", fontWeight: "600" }],
         "7xl": ["100px", { lineHeight: "1", fontWeight: "600" }],
         "6xl": ["80px", { lineHeight: "1", fontWeight: "400" }],
@@ -27,4 +24,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

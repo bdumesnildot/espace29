@@ -1,0 +1,621 @@
+---
+import Layout from "../../layouts/Layout.astro"
+---
+
+<Layout title="Design System - Espace29">
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <!-- Header -->
+    <header class="mb-16 text-center">
+      <h1 class="text-8xl font-eina01 font-semibold mb-4">Design System</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        A comprehensive design system for Espace29 built with Tailwind CSS and the sophisticated Eina font collection.
+        Use these components and styles to maintain visual consistency across the platform.
+      </p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="mb-12 border-b border-gray-200 pb-6">
+      <ul class="flex flex-wrap gap-6 justify-center text-lg">
+        <li><a href="#typography" class="hover:text-blue-600 transition-colors">Typography</a></li>
+        <li><a href="#colors" class="hover:text-blue-600 transition-colors">Colors</a></li>
+        <li><a href="#spacing" class="hover:text-blue-600 transition-colors">Spacing</a></li>
+        <li><a href="#layout" class="hover:text-blue-600 transition-colors">Layout</a></li>
+        <li><a href="#components" class="hover:text-blue-600 transition-colors">Components</a></li>
+        <li><a href="#navigation" class="hover:text-blue-600 transition-colors">Navigation</a></li>
+      </ul>
+    </nav>
+
+    <!-- Typography Section -->
+    <section id="typography" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Typography</h2>
+      
+      <!-- Font Families -->
+      <div class="mb-16">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Font Families</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="p-6 bg-gray-50 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">Eina01 - Display/Hero</h4>
+            <p class="font-eina01 text-2xl mb-2">font-eina01</p>
+            <p class="text-sm text-gray-600">Perfect for large headings and hero text</p>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">Eina02 - Headlines</h4>
+            <p class="font-eina02 text-2xl mb-2">font-eina02</p>
+            <p class="text-sm text-gray-600">Ideal for section headings and titles</p>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">Eina03 - Body Text</h4>
+            <p class="font-eina03 text-2xl mb-2">font-eina03</p>
+            <p class="text-sm text-gray-600">Best for body text and content</p>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">Eina04 - UI Elements</h4>
+            <p class="font-eina04 text-2xl mb-2">font-eina04</p>
+            <p class="text-sm text-gray-600">Great for buttons and UI elements</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Font Sizes -->
+      <div class="mb-16">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Typography Scale</h3>
+        <div class="space-y-6">
+          <div class="flex items-center gap-6 p-4 border-l-4 border-blue-500">
+            <span class="text-8xl font-eina01 font-semibold">text-8xl</span>
+            <div>
+              <p class="font-mono text-sm">120px, font-weight: 600</p>
+              <p class="text-gray-600">Hero headings</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-blue-400">
+            <span class="text-7xl font-eina01 font-semibold">text-7xl</span>
+            <div>
+              <p class="font-mono text-sm">100px, font-weight: 600</p>
+              <p class="text-gray-600">Large display headings</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-blue-300">
+            <span class="text-6xl font-eina02">text-6xl</span>
+            <div>
+              <p class="font-mono text-sm">80px, font-weight: 400</p>
+              <p class="text-gray-600">Section headings</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-blue-200">
+            <span class="text-5xl font-eina02">text-5xl</span>
+            <div>
+              <p class="font-mono text-sm">60px, font-weight: 400</p>
+              <p class="text-gray-600">Major headings</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-gray-300">
+            <span class="text-4xl font-eina03">text-4xl</span>
+            <div>
+              <p class="font-mono text-sm">35px, line-height: 1.2, font-weight: 400</p>
+              <p class="text-gray-600">Content headings</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-gray-200">
+            <span class="text-3xl font-eina03">text-3xl</span>
+            <div>
+              <p class="font-mono text-sm">30px, font-weight: 400</p>
+              <p class="text-gray-600">Subheadings</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-gray-200">
+            <span class="text-2xl font-eina03">text-2xl</span>
+            <div>
+              <p class="font-mono text-sm">25px, font-weight: 400</p>
+              <p class="text-gray-600">Card titles</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-gray-100">
+            <span class="text-xl font-eina03">text-xl</span>
+            <div>
+              <p class="font-mono text-sm">20px, font-weight: 400</p>
+              <p class="text-gray-600">Large body text</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-4 border-l-4 border-gray-100">
+            <span class="text-lg font-eina03">text-lg</span>
+            <div>
+              <p class="font-mono text-sm">15px, line-height: 1.6, font-weight: 400</p>
+              <p class="text-gray-600">Body text, paragraphs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Font Weights -->
+      <div class="mb-16">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Font Weights</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 bg-gray-50 rounded">
+            <p class="text-xl font-light font-eina03 mb-2">Light</p>
+            <code class="text-sm">font-light (300)</code>
+          </div>
+          <div class="p-4 bg-gray-50 rounded">
+            <p class="text-xl font-normal font-eina03 mb-2">Regular</p>
+            <code class="text-sm">font-normal (400)</code>
+          </div>
+          <div class="p-4 bg-gray-50 rounded">
+            <p class="text-xl font-semibold font-eina03 mb-2">Semibold</p>
+            <code class="text-sm">font-semibold (600)</code>
+          </div>
+          <div class="p-4 bg-gray-50 rounded">
+            <p class="text-xl font-bold font-eina03 mb-2">Bold</p>
+            <code class="text-sm">font-bold (700)</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colors Section -->
+    <section id="colors" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Colors</h2>
+      
+      <!-- Primary Colors -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Gray Scale (Primary)</h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4">
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-50 rounded mb-2 border"></div>
+            <p class="text-sm font-mono">gray-50</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-100 rounded mb-2"></div>
+            <p class="text-sm font-mono">gray-100</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-200 rounded mb-2"></div>
+            <p class="text-sm font-mono">gray-200</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-300 rounded mb-2"></div>
+            <p class="text-sm font-mono">gray-300</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-400 rounded mb-2"></div>
+            <p class="text-sm font-mono">gray-400</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-500 rounded mb-2"></div>
+            <p class="text-sm font-mono text-white">gray-500</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-600 rounded mb-2"></div>
+            <p class="text-sm font-mono text-white">gray-600</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-700 rounded mb-2"></div>
+            <p class="text-sm font-mono text-white">gray-700</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-800 rounded mb-2"></div>
+            <p class="text-sm font-mono text-white">gray-800</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-gray-900 rounded mb-2"></div>
+            <p class="text-sm font-mono text-white">gray-900</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accent Colors -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Accent Colors</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Blue (Primary)</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-center">
+                <div class="w-full h-16 bg-blue-500 rounded mb-2"></div>
+                <p class="text-xs font-mono">blue-500</p>
+              </div>
+              <div class="text-center">
+                <div class="w-full h-16 bg-blue-600 rounded mb-2"></div>
+                <p class="text-xs font-mono">blue-600</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Green (Success)</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-center">
+                <div class="w-full h-16 bg-green-500 rounded mb-2"></div>
+                <p class="text-xs font-mono">green-500</p>
+              </div>
+              <div class="text-center">
+                <div class="w-full h-16 bg-green-600 rounded mb-2"></div>
+                <p class="text-xs font-mono">green-600</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Red (Error)</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-center">
+                <div class="w-full h-16 bg-red-500 rounded mb-2"></div>
+                <p class="text-xs font-mono">red-500</p>
+              </div>
+              <div class="text-center">
+                <div class="w-full h-16 bg-red-600 rounded mb-2"></div>
+                <p class="text-xs font-mono">red-600</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Yellow (Warning)</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-center">
+                <div class="w-full h-16 bg-yellow-500 rounded mb-2"></div>
+                <p class="text-xs font-mono">yellow-500</p>
+              </div>
+              <div class="text-center">
+                <div class="w-full h-16 bg-yellow-600 rounded mb-2"></div>
+                <p class="text-xs font-mono">yellow-600</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacing Section -->
+    <section id="spacing" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Spacing</h2>
+      
+      <!-- Spacing Scale -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Spacing Scale</h3>
+        <div class="space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-4 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-1</code>
+            <span class="text-gray-600">0.25rem (4px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-8 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-2</code>
+            <span class="text-gray-600">0.5rem (8px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-3</code>
+            <span class="text-gray-600">0.75rem (12px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-4</code>
+            <span class="text-gray-600">1rem (16px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-5</code>
+            <span class="text-gray-600">1.25rem (20px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-24 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-6</code>
+            <span class="text-gray-600">1.5rem (24px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-32 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-8</code>
+            <span class="text-gray-600">2rem (32px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-40 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-10</code>
+            <span class="text-gray-600">2.5rem (40px)</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-48 h-4 bg-blue-500"></div>
+            <code class="font-mono text-sm w-16">space-x-12</code>
+            <span class="text-gray-600">3rem (48px)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Spacing Patterns -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Common Spacing Patterns</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="p-6 bg-gray-50 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">Component Spacing</h4>
+            <ul class="space-y-2 font-mono text-sm">
+              <li>p-4, p-6 - Internal padding</li>
+              <li>mb-4, mb-6, mb-8 - Element separation</li>
+              <li>gap-4, gap-6 - Grid/flex gaps</li>
+            </ul>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">Layout Spacing</h4>
+            <ul class="space-y-2 font-mono text-sm">
+              <li>px-6, py-12 - Page margins</li>
+              <li>mb-12, mb-16, mb-20 - Section spacing</li>
+              <li>max-w-7xl mx-auto - Content centering</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layout Section -->
+    <section id="layout" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Layout</h2>
+      
+      <!-- Container Examples -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Containers</h3>
+        <div class="space-y-6">
+          <div class="border border-gray-300 rounded p-4">
+            <code class="text-sm font-mono mb-2 block">max-w-7xl mx-auto px-6</code>
+            <div class="max-w-7xl mx-auto px-6 bg-blue-50 p-4 rounded">
+              Main content container (1280px max width)
+            </div>
+          </div>
+          <div class="border border-gray-300 rounded p-4">
+            <code class="text-sm font-mono mb-2 block">max-w-4xl mx-auto</code>
+            <div class="max-w-4xl mx-auto bg-green-50 p-4 rounded">
+              Article/content container (896px max width)
+            </div>
+          </div>
+          <div class="border border-gray-300 rounded p-4">
+            <code class="text-sm font-mono mb-2 block">max-w-2xl mx-auto</code>
+            <div class="max-w-2xl mx-auto bg-yellow-50 p-4 rounded">
+              Text content container (672px max width)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Examples -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Grid Layouts</h3>
+        <div class="space-y-8">
+          <div>
+            <code class="text-sm font-mono mb-4 block">grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6</code>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="bg-blue-100 p-4 rounded text-center">Item 1</div>
+              <div class="bg-blue-100 p-4 rounded text-center">Item 2</div>
+              <div class="bg-blue-100 p-4 rounded text-center">Item 3</div>
+              <div class="bg-blue-100 p-4 rounded text-center">Item 4</div>
+              <div class="bg-blue-100 p-4 rounded text-center">Item 5</div>
+              <div class="bg-blue-100 p-4 rounded text-center">Item 6</div>
+            </div>
+          </div>
+          <div>
+            <code class="text-sm font-mono mb-4 block">grid grid-cols-2 md:grid-cols-4 gap-4</code>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="bg-green-100 p-4 rounded text-center">Card 1</div>
+              <div class="bg-green-100 p-4 rounded text-center">Card 2</div>
+              <div class="bg-green-100 p-4 rounded text-center">Card 3</div>
+              <div class="bg-green-100 p-4 rounded text-center">Card 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flex Examples -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Flex Layouts</h3>
+        <div class="space-y-6">
+          <div>
+            <code class="text-sm font-mono mb-4 block">flex justify-between items-center</code>
+            <div class="flex justify-between items-center bg-gray-100 p-4 rounded">
+              <span>Left content</span>
+              <span>Right content</span>
+            </div>
+          </div>
+          <div>
+            <code class="text-sm font-mono mb-4 block">flex flex-col md:flex-row gap-6</code>
+            <div class="flex flex-col md:flex-row gap-6">
+              <div class="bg-purple-100 p-4 rounded flex-1">Flexible item 1</div>
+              <div class="bg-purple-100 p-4 rounded flex-1">Flexible item 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components Section -->
+    <section id="components" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Components</h2>
+      
+      <!-- Buttons -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Buttons</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Primary Buttons</h4>
+            <div class="space-y-4">
+              <button class="bg-blue-600 hover:bg-blue-700 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors">
+                Primary Button
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                bg-blue-600 hover:bg-blue-700 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Secondary Buttons</h4>
+            <div class="space-y-4">
+              <button class="border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors">
+                Secondary Button
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Text Buttons</h4>
+            <div class="space-y-4">
+              <button class="text-blue-600 hover:text-blue-700 font-eina04 font-semibold py-3 px-6 transition-colors">
+                Text Button
+              </button>
+              <div class="text-sm font-mono text-gray-600">
+                text-blue-600 hover:text-blue-700 font-eina04 font-semibold py-3 px-6 transition-colors
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Cards</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Basic Card</h4>
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h5 class="text-xl font-eina03 font-semibold mb-3">Card Title</h5>
+              <p class="text-gray-600 font-eina03 mb-4">This is a basic card with shadow and border styling.</p>
+              <button class="text-blue-600 hover:text-blue-700 font-eina04 font-medium">Learn More →</button>
+            </div>
+            <div class="text-sm font-mono text-gray-600 mt-2">
+              bg-white rounded-lg shadow-lg p-6 border border-gray-200
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Hover Card</h4>
+            <div class="bg-white rounded-lg shadow-md hover:shadow-xl p-6 border border-gray-200 transition-shadow cursor-pointer">
+              <h5 class="text-xl font-eina03 font-semibold mb-3">Interactive Card</h5>
+              <p class="text-gray-600 font-eina03 mb-4">This card has hover effects and transitions.</p>
+              <span class="text-blue-600 font-eina04 font-medium">Click to explore →</span>
+            </div>
+            <div class="text-sm font-mono text-gray-600 mt-2">
+              bg-white rounded-lg shadow-md hover:shadow-xl p-6 transition-shadow
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forms -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Form Elements</h3>
+        <div class="max-w-2xl">
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Input Field</label>
+              <input type="text" placeholder="Enter text here..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-eina03">
+              <div class="text-sm font-mono text-gray-600 mt-2">
+                w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Textarea</label>
+              <textarea placeholder="Enter message..." rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-eina03"></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Select Dropdown</label>
+              <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-eina03">
+                <option>Choose an option</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Section -->
+    <section id="navigation" class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Navigation</h2>
+      
+      <!-- Navigation Examples -->
+      <div class="mb-12">
+        <h3 class="text-3xl font-eina03 font-medium mb-8">Navigation Patterns</h3>
+        
+        <!-- Horizontal Navigation -->
+        <div class="mb-8">
+          <h4 class="text-xl font-semibold mb-4">Horizontal Navigation</h4>
+          <nav class="border-y-2 border-gray-200 py-4">
+            <ul class="flex gap-10 justify-start px-10 text-2xl">
+              <li><a href="#" class="hover:text-blue-600 transition-colors font-eina03">Home</a></li>
+              <li><a href="#" class="hover:text-blue-600 transition-colors font-eina03">About</a></li>
+              <li><a href="#" class="hover:text-blue-600 transition-colors font-eina03">Services</a></li>
+              <li><a href="#" class="hover:text-blue-600 transition-colors font-eina03">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="text-sm font-mono text-gray-600 mt-2">
+            flex gap-10 justify-start px-10 text-2xl hover:text-blue-600 transition-colors
+          </div>
+        </div>
+
+        <!-- Breadcrumbs -->
+        <div class="mb-8">
+          <h4 class="text-xl font-semibold mb-4">Breadcrumbs</h4>
+          <nav class="flex space-x-2 text-sm text-gray-600 font-eina04">
+            <a href="#" class="hover:text-blue-600">Home</a>
+            <span>/</span>
+            <a href="#" class="hover:text-blue-600">Category</a>
+            <span>/</span>
+            <span class="text-gray-900">Current Page</span>
+          </nav>
+          <div class="text-sm font-mono text-gray-600 mt-2">
+            flex space-x-2 text-sm text-gray-600 hover:text-blue-600
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mb-8">
+          <h4 class="text-xl font-semibold mb-4">Pagination</h4>
+          <nav class="flex items-center justify-center space-x-2">
+            <button class="px-3 py-2 text-gray-500 hover:text-gray-700 font-eina04">←</button>
+            <button class="px-3 py-2 bg-blue-600 text-white rounded font-eina04">1</button>
+            <button class="px-3 py-2 text-gray-700 hover:text-blue-600 font-eina04">2</button>
+            <button class="px-3 py-2 text-gray-700 hover:text-blue-600 font-eina04">3</button>
+            <button class="px-3 py-2 text-gray-500 hover:text-gray-700 font-eina04">→</button>
+          </nav>
+          <div class="text-sm font-mono text-gray-600 mt-2">
+            flex items-center justify-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Guidelines -->
+    <section class="mb-20">
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">Usage Guidelines</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-8 bg-green-50 rounded-lg border border-green-200">
+          <h3 class="text-2xl font-eina03 font-semibold text-green-800 mb-6">✅ Best Practices</h3>
+          <ul class="space-y-3 text-green-700 font-eina03">
+            <li>• Use Eina01 for hero headlines and display text</li>
+            <li>• Use Eina03 for body text and content</li>
+            <li>• Maintain consistent spacing using the defined scale</li>
+            <li>• Use semantic HTML elements with Tailwind classes</li>
+            <li>• Apply hover states and transitions for interactivity</li>
+            <li>• Follow mobile-first responsive design principles</li>
+          </ul>
+        </div>
+        
+        <div class="p-8 bg-red-50 rounded-lg border border-red-200">
+          <h3 class="text-2xl font-eina03 font-semibold text-red-800 mb-6">❌ Avoid</h3>
+          <ul class="space-y-3 text-red-700 font-eina03">
+            <li>• Mixing font families randomly</li>
+            <li>• Using arbitrary values instead of design tokens</li>
+            <li>• Inconsistent spacing patterns</li>
+            <li>• Missing hover and focus states</li>
+            <li>• Hard-coded colors not in the system</li>
+            <li>• Breaking the established typography hierarchy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 pt-12 text-center">
+      <p class="text-gray-600 font-eina03">
+        Espace29 Design System - Built with Tailwind CSS and the Eina font collection
+      </p>
+      <p class="text-sm text-gray-500 mt-2 font-eina04">
+        Use these patterns and components to maintain visual consistency across the platform
+      </p>
+    </footer>
+  </main>
+</Layout>

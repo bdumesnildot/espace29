@@ -1,9 +1,18 @@
 ---
-interface Props {
-  error: unknown
-}
-
-const { error } = Astro.props
+import Layout from "../layouts/Layout.astro"
 ---
 
-<div>{error instanceof Error ? error.message : "Unknown error"}</div>
+<Layout title="505 - HTTP Version Not Supported">
+  <div class="h-full flex flex-col items-center justify-center">
+    <h1 class="text-4xl font-bold mb-8 text-gray-900 font-eina02">
+      505 - HTTP Version Not Supported
+    </h1>
+    <p class="text-xl text-gray-700 font-eina02 mb-4">
+      Oops! The server does not support the HTTP protocol version used in the
+      request.
+    </p>
+    <a href="/" class="text-sky-600 hover:underline font-eina02"
+      >Return to Home</a
+    >
+  </div>
+</Layout>
