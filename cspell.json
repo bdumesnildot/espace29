@@ -1,0 +1,43 @@
+{
+  "version": "0.2",
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "words": ["eina"],
+  "dictionaryDefinitions": [],
+  "enableFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "markdown",
+    "mdx",
+    "json",
+    "jsonc"
+  ],
+  "files": [
+    "**/*.md",
+    "**/*.mdx",
+    "**/*.json",
+    "**/*.jsonc",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.astro"
+  ],
+  "useGitignore": true,
+  "overrides": [
+    {
+      "filename": "*",
+      "languageSettings": [
+        {
+          "languageId": "*",
+          "caseSensitive": false
+        }
+      ]
+    }
+  ],
+  "import": ["@cspell/dict-fr-fr/cspell-ext.json"],
+  "ignorePaths": []
+}
