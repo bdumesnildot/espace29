@@ -1,18 +1,48 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 ---
 
-<Layout title="e29 | 505">
-  <div class="h-full flex flex-col items-center justify-center">
-    <h1 class="text-4xl font-bold mb-8 text-gray-900 font-eina02">
-      505 - HTTP Version Not Supported
-    </h1>
-    <p class="text-xl text-gray-700 font-eina02 mb-4">
-      Oops! The server does not support the HTTP protocol version used in the
-      request.
-    </p>
-    <a href="/" class="text-sky-600 hover:underline font-eina02"
-      >Return to Home</a
-    >
-  </div>
+<Layout title="e29 | Version non supportée">
+  <main class="min-h-screen flex items-center justify-center px-6 py-12">
+    <div class="max-w-2xl mx-auto text-center">
+      <!-- Error Code -->
+      <div class="mb-8">
+        <h1 class="text-8xl font-eina01 font-semibold text-gray-900 mb-4">
+          505
+        </h1>
+        <div class="w-24 h-px bg-gray-300 mx-auto mb-8"></div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="mb-12">
+        <h2 class="text-4xl font-eina02 font-medium text-gray-900 mb-6">
+          Version non supportée
+        </h2>
+        <p class="text-xl font-eina03 leading-relaxed text-gray-700 mb-6">
+          La version du protocole HTTP utilisée n'est pas supportée par notre
+          serveur.
+        </p>
+        <p class="text-lg font-eina03 text-gray-600">
+          Cette erreur est généralement temporaire. Veuillez mettre à jour votre
+          navigateur ou réessayer avec un navigateur plus récent.
+        </p>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button
+          onclick="window.location.reload()"
+          class="bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+        >
+          Recharger la page
+        </button>
+        <a
+          href="/"
+          class="text-gray-700 hover:text-gray-900 font-eina04 font-semibold py-3 px-6 transition-colors duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none rounded-lg"
+        >
+          Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </main>
 </Layout>
