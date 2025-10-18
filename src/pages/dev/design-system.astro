@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro"
+import Card from "../../components/ui/card/Card.astro"
 ---
 
 <Layout title="e29 | Design System">
@@ -8,48 +9,94 @@ import Layout from "../../layouts/Layout.astro"
     <header class="mb-16 text-center">
       <h1 class="text-8xl font-eina01 font-semibold mb-4">Design System</h1>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        A minimal design system for Espace29 — a white canvas approach that allows artist content to be the focus.
-        Built with restraint using gray scale tones and the sophisticated Eina typography collection.
+        A minimal design system for Espace29 — a white canvas approach that
+        allows artist content to be the focus. Built with restraint using gray
+        scale tones and the sophisticated Eina typography collection.
       </p>
     </header>
 
     <!-- Navigation -->
     <nav class="mb-12 border-b border-gray-100 pb-6">
       <ul class="flex flex-wrap gap-6 justify-center text-lg">
-        <li><a href="#philosophy" class="hover:text-gray-600 transition-colors">Philosophy</a></li>
-        <li><a href="#typography" class="hover:text-gray-600 transition-colors">Typography</a></li>
-        <li><a href="#colors" class="hover:text-gray-600 transition-colors">Colors</a></li>
-        <li><a href="#spacing" class="hover:text-gray-600 transition-colors">Spacing</a></li>
-        <li><a href="#layout" class="hover:text-gray-600 transition-colors">Layout</a></li>
-        <li><a href="#components" class="hover:text-gray-600 transition-colors">Components</a></li>
-        <li><a href="#interactions" class="hover:text-gray-600 transition-colors">Interactions</a></li>
+        <li>
+          <a href="#philosophy" class="hover:text-gray-600 transition-colors"
+            >Philosophy</a
+          >
+        </li>
+        <li>
+          <a href="#typography" class="hover:text-gray-600 transition-colors"
+            >Typography</a
+          >
+        </li>
+        <li>
+          <a href="#colors" class="hover:text-gray-600 transition-colors"
+            >Colors</a
+          >
+        </li>
+        <li>
+          <a href="#spacing" class="hover:text-gray-600 transition-colors"
+            >Spacing</a
+          >
+        </li>
+        <li>
+          <a href="#layout" class="hover:text-gray-600 transition-colors"
+            >Layout</a
+          >
+        </li>
+        <li>
+          <a href="#components" class="hover:text-gray-600 transition-colors"
+            >Components</a
+          >
+        </li>
+        <li>
+          <a href="#interactions" class="hover:text-gray-600 transition-colors"
+            >Interactions</a
+          >
+        </li>
       </ul>
     </nav>
 
     <!-- White Canvas Philosophy Section -->
     <section id="philosophy" class="mb-20">
-      <h2 class="text-5xl font-eina02 font-semibold mb-12">White Canvas Philosophy</h2>
-      
+      <h2 class="text-5xl font-eina02 font-semibold mb-12">
+        White Canvas Philosophy
+      </h2>
+
       <div class="max-w-4xl mx-auto">
         <div class="p-8 bg-gray-50/50 rounded-lg border border-gray-100">
-          <h3 class="text-3xl font-eina03 font-medium mb-6">Restraint as Design</h3>
+          <h3 class="text-3xl font-eina03 font-medium mb-6">
+            Restraint as Design
+          </h3>
           <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
-            Espace29 embraces the concept of a white canvas — a purposefully minimal interface that serves as the foundation for artistic expression. 
-            Our design system prioritizes restraint over ornamentation, creating space for artist content to flourish without visual competition.
+            Espace29 embraces the concept of a white canvas — a purposefully
+            minimal interface that serves as the foundation for artistic
+            expression. Our design system prioritizes restraint over
+            ornamentation, creating space for artist content to flourish without
+            visual competition.
           </p>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <div>
-              <h4 class="text-xl font-eina04 font-semibold mb-4 text-gray-900">Core Principles</h4>
+              <h4 class="text-xl font-eina04 font-semibold mb-4 text-gray-900">
+                Core Principles
+              </h4>
               <ul class="space-y-3 text-gray-700 font-eina03">
-                <li>• <strong>Minimalism:</strong> Less interface, more content</li>
-                <li>• <strong>Neutrality:</strong> Grayscale palette that doesn't compete</li>
+                <li>
+                  • <strong>Minimalism:</strong> Less interface, more content
+                </li>
+                <li>
+                  • <strong>Neutrality:</strong> Grayscale palette that doesn't compete
+                </li>
                 <li>• <strong>Clarity:</strong> Clean typography hierarchy</li>
-                <li>• <strong>Flexibility:</strong> Adapts to any artistic medium</li>
+                <li>
+                  • <strong>Flexibility:</strong> Adapts to any artistic medium
+                </li>
               </ul>
             </div>
             <div>
-              <h4 class="text-xl font-eina04 font-semibold mb-4 text-gray-900">Content First</h4>
+              <h4 class="text-xl font-eina04 font-semibold mb-4 text-gray-900">
+                Content First
+              </h4>
               <ul class="space-y-3 text-gray-700 font-eina03">
                 <li>• Artist work is the primary visual element</li>
                 <li>• UI elements fade into the background</li>
@@ -65,7 +112,7 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Typography Section -->
     <section id="typography" class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Typography</h2>
-      
+
       <!-- Font Families -->
       <div class="mb-16">
         <h3 class="text-3xl font-eina03 font-medium mb-8">Font Families</h3>
@@ -73,30 +120,56 @@ import Layout from "../../layouts/Layout.astro"
           <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
             <h4 class="text-xl font-semibold mb-4">Eina01 - Rational Style</h4>
             <p class="font-eina01 text-4xl mb-4">Typography Sample</p>
-            <p class="font-eina01 text-lg mb-2">The quick brown fox jumps over the lazy dog</p>
-            <p class="text-sm text-gray-600">Rational, structured design for display and hero text</p>
-            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded">font-eina01</code>
+            <p class="font-eina01 text-lg mb-2">
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p class="text-sm text-gray-600">
+              Rational, structured design for display and hero text
+            </p>
+            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded"
+              >font-eina01</code
+            >
           </div>
           <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
             <h4 class="text-xl font-semibold mb-4">Eina02 - Humanist Style</h4>
             <p class="font-eina02 text-4xl mb-4">Typography Sample</p>
-            <p class="font-eina02 text-lg mb-2">The quick brown fox jumps over the lazy dog</p>
-            <p class="text-sm text-gray-600">Warm, humanist approach for headings and titles</p>
-            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded">font-eina02</code>
+            <p class="font-eina02 text-lg mb-2">
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p class="text-sm text-gray-600">
+              Warm, humanist approach for headings and titles
+            </p>
+            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded"
+              >font-eina02</code
+            >
           </div>
           <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
             <h4 class="text-xl font-semibold mb-4">Eina03 - Geometric Style</h4>
             <p class="font-eina03 text-4xl mb-4">Typography Sample</p>
-            <p class="font-eina03 text-lg mb-2">The quick brown fox jumps over the lazy dog</p>
-            <p class="text-sm text-gray-600">Clean, geometric precision for body text and content</p>
-            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded">font-eina03</code>
+            <p class="font-eina03 text-lg mb-2">
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p class="text-sm text-gray-600">
+              Clean, geometric precision for body text and content
+            </p>
+            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded"
+              >font-eina03</code
+            >
           </div>
           <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-            <h4 class="text-xl font-semibold mb-4">Eina04 - Industrial Style</h4>
+            <h4 class="text-xl font-semibold mb-4">
+              Eina04 - Industrial Style
+            </h4>
             <p class="font-eina04 text-4xl mb-4">Typography Sample</p>
-            <p class="font-eina04 text-lg mb-2">The quick brown fox jumps over the lazy dog</p>
-            <p class="text-sm text-gray-600">Strong, industrial efficiency for UI elements</p>
-            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded">font-eina04</code>
+            <p class="font-eina04 text-lg mb-2">
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p class="text-sm text-gray-600">
+              Strong, industrial efficiency for UI elements
+            </p>
+            <code class="text-xs font-mono bg-gray-100 px-2 py-1 rounded"
+              >font-eina04</code
+            >
           </div>
         </div>
       </div>
@@ -136,7 +209,9 @@ import Layout from "../../layouts/Layout.astro"
           <div class="flex items-center gap-6 p-4 border-l-4 border-gray-300">
             <span class="text-4xl font-eina03">text-4xl</span>
             <div>
-              <p class="font-mono text-sm">35px, line-height: 1.2, font-weight: 400</p>
+              <p class="font-mono text-sm">
+                35px, line-height: 1.2, font-weight: 400
+              </p>
               <p class="text-gray-600">Content headings</p>
             </div>
           </div>
@@ -164,7 +239,9 @@ import Layout from "../../layouts/Layout.astro"
           <div class="flex items-center gap-6 p-4 border-l-4 border-gray-100">
             <span class="text-lg font-eina03">text-lg</span>
             <div>
-              <p class="font-mono text-sm">15px, line-height: 1.6, font-weight: 400</p>
+              <p class="font-mono text-sm">
+                15px, line-height: 1.6, font-weight: 400
+              </p>
               <p class="text-gray-600">Body text, paragraphs</p>
             </div>
           </div>
@@ -198,20 +275,26 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Colors Section -->
     <section id="colors" class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Colors</h2>
-      
+
       <div class="mb-8">
         <p class="text-lg font-eina03 text-gray-600 max-w-3xl">
-          Our color palette embraces restraint. The foundation is built on grayscale tones that provide structure without distraction, 
-          with a single accent color reserved for critical interactions only.
+          Our color palette embraces restraint. The foundation is built on
+          grayscale tones that provide structure without distraction, with a
+          single accent color reserved for critical interactions only.
         </p>
       </div>
-      
+
       <!-- Primary Colors -->
       <div class="mb-12">
-        <h3 class="text-3xl font-eina03 font-medium mb-8">Grayscale Foundation</h3>
+        <h3 class="text-3xl font-eina03 font-medium mb-8">
+          Grayscale Foundation
+        </h3>
         <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4">
           <div class="text-center">
-            <div class="w-full h-20 bg-white rounded mb-2 border border-gray-200"></div>
+            <div
+              class="w-full h-20 bg-white rounded mb-2 border border-gray-200"
+            >
+            </div>
             <p class="text-sm font-mono">white</p>
             <p class="text-xs text-gray-500">Canvas</p>
           </div>
@@ -268,16 +351,21 @@ import Layout from "../../layouts/Layout.astro"
         <h3 class="text-3xl font-eina03 font-medium mb-8">Minimal Accent</h3>
         <div class="max-w-md">
           <div class="p-6 bg-gray-50 rounded-lg border border-gray-100">
-            <h4 class="text-lg font-semibold mb-4 text-gray-900">Single Accent Color</h4>
+            <h4 class="text-lg font-semibold mb-4 text-gray-900">
+              Single Accent Color
+            </h4>
             <div class="flex items-center gap-4 mb-4">
               <div class="w-16 h-16 bg-gray-900 rounded"></div>
               <div>
                 <p class="text-sm font-mono">gray-900</p>
-                <p class="text-xs text-gray-600">For critical actions and focus states only</p>
+                <p class="text-xs text-gray-600">
+                  For critical actions and focus states only
+                </p>
               </div>
             </div>
             <p class="text-sm text-gray-600 font-eina03">
-              Used sparingly for essential interactions: form focus states, primary buttons, and active navigation items.
+              Used sparingly for essential interactions: form focus states,
+              primary buttons, and active navigation items.
             </p>
           </div>
         </div>
@@ -285,30 +373,65 @@ import Layout from "../../layouts/Layout.astro"
 
       <!-- Usage Guidelines -->
       <div class="mb-12">
-        <h3 class="text-3xl font-eina03 font-medium mb-8">Color Usage Guidelines</h3>
+        <h3 class="text-3xl font-eina03 font-medium mb-8">
+          Color Usage Guidelines
+        </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="p-6 bg-white border border-gray-100 rounded-lg">
-            <h4 class="text-lg font-semibold mb-3 text-gray-900">Background Layers</h4>
+            <h4 class="text-lg font-semibold mb-3 text-gray-900">
+              Background Layers
+            </h4>
             <ul class="text-sm space-y-2 text-gray-700 font-eina03">
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">white</code> - Main canvas</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-50</code> - Sections</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-100</code> - Cards</li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">white</code> - Main
+                canvas
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-50</code> -
+                Sections
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-100</code>
+                - Cards
+              </li>
             </ul>
           </div>
           <div class="p-6 bg-white border border-gray-100 rounded-lg">
-            <h4 class="text-lg font-semibold mb-3 text-gray-900">Text Hierarchy</h4>
+            <h4 class="text-lg font-semibold mb-3 text-gray-900">
+              Text Hierarchy
+            </h4>
             <ul class="text-sm space-y-2 text-gray-700 font-eina03">
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-900</code> - Headings</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-700</code> - Body text</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-500</code> - Meta text</li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-900</code>
+                - Headings
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-700</code>
+                - Body text
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-500</code>
+                - Meta text
+              </li>
             </ul>
           </div>
           <div class="p-6 bg-white border border-gray-100 rounded-lg">
-            <h4 class="text-lg font-semibold mb-3 text-gray-900">Interface Elements</h4>
+            <h4 class="text-lg font-semibold mb-3 text-gray-900">
+              Interface Elements
+            </h4>
             <ul class="text-sm space-y-2 text-gray-700 font-eina03">
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-200</code> - Borders</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-300</code> - Dividers</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">gray-900</code> - Accents</li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-200</code>
+                - Borders
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-300</code>
+                - Dividers
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded">gray-900</code>
+                - Accents
+              </li>
             </ul>
           </div>
         </div>
@@ -318,7 +441,7 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Spacing Section -->
     <section id="spacing" class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Spacing</h2>
-      
+
       <!-- Spacing Scale -->
       <div class="mb-12">
         <h3 class="text-3xl font-eina03 font-medium mb-8">Spacing Scale</h3>
@@ -373,7 +496,9 @@ import Layout from "../../layouts/Layout.astro"
 
       <!-- Common Spacing Patterns -->
       <div class="mb-12">
-        <h3 class="text-3xl font-eina03 font-medium mb-8">Common Spacing Patterns</h3>
+        <h3 class="text-3xl font-eina03 font-medium mb-8">
+          Common Spacing Patterns
+        </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
             <h4 class="text-xl font-semibold mb-4">Component Spacing</h4>
@@ -398,26 +523,34 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Layout Section -->
     <section id="layout" class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Layout</h2>
-      
+
       <!-- Container Examples -->
       <div class="mb-12">
         <h3 class="text-3xl font-eina03 font-medium mb-8">Containers</h3>
         <div class="space-y-6">
           <div class="border border-gray-300 rounded p-4">
-            <code class="text-sm font-mono mb-2 block">max-w-7xl mx-auto px-6</code>
-            <div class="max-w-7xl mx-auto px-6 bg-gray-50 border border-gray-200 p-4 rounded">
+            <code class="text-sm font-mono mb-2 block"
+              >max-w-7xl mx-auto px-6</code
+            >
+            <div
+              class="max-w-7xl mx-auto px-6 bg-gray-50 border border-gray-200 p-4 rounded"
+            >
               Main content container (1280px max width)
             </div>
           </div>
           <div class="border border-gray-300 rounded p-4">
             <code class="text-sm font-mono mb-2 block">max-w-4xl mx-auto</code>
-            <div class="max-w-4xl mx-auto bg-gray-100 border border-gray-200 p-4 rounded">
+            <div
+              class="max-w-4xl mx-auto bg-gray-100 border border-gray-200 p-4 rounded"
+            >
               Article/content container (896px max width)
             </div>
           </div>
           <div class="border border-gray-300 rounded p-4">
             <code class="text-sm font-mono mb-2 block">max-w-2xl mx-auto</code>
-            <div class="max-w-2xl mx-auto bg-gray-200 border border-gray-300 p-4 rounded">
+            <div
+              class="max-w-2xl mx-auto bg-gray-200 border border-gray-300 p-4 rounded"
+            >
               Text content container (672px max width)
             </div>
           </div>
@@ -429,23 +562,67 @@ import Layout from "../../layouts/Layout.astro"
         <h3 class="text-3xl font-eina03 font-medium mb-8">Grid Layouts</h3>
         <div class="space-y-8">
           <div>
-            <code class="text-sm font-mono mb-4 block">grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6</code>
+            <code class="text-sm font-mono mb-4 block"
+              >grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6</code
+            >
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Item 1</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Item 2</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Item 3</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Item 4</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Item 5</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Item 6</div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Item 1
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Item 2
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Item 3
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Item 4
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Item 5
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Item 6
+              </div>
             </div>
           </div>
           <div>
-            <code class="text-sm font-mono mb-4 block">grid grid-cols-2 md:grid-cols-4 gap-4</code>
+            <code class="text-sm font-mono mb-4 block"
+              >grid grid-cols-2 md:grid-cols-4 gap-4</code
+            >
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Card 1</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Card 2</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Card 3</div>
-              <div class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center">Card 4</div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Card 1
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Card 2
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Card 3
+              </div>
+              <div
+                class="bg-white border border-gray-200 shadow-sm p-4 rounded text-center"
+              >
+                Card 4
+              </div>
             </div>
           </div>
         </div>
@@ -456,17 +633,27 @@ import Layout from "../../layouts/Layout.astro"
         <h3 class="text-3xl font-eina03 font-medium mb-8">Flex Layouts</h3>
         <div class="space-y-6">
           <div>
-            <code class="text-sm font-mono mb-4 block">flex justify-between items-center</code>
-            <div class="flex justify-between items-center bg-white border border-gray-200 p-4 rounded">
+            <code class="text-sm font-mono mb-4 block"
+              >flex justify-between items-center</code
+            >
+            <div
+              class="flex justify-between items-center bg-white border border-gray-200 p-4 rounded"
+            >
               <span>Left content</span>
               <span>Right content</span>
             </div>
           </div>
           <div>
-            <code class="text-sm font-mono mb-4 block">flex flex-col md:flex-row gap-6</code>
+            <code class="text-sm font-mono mb-4 block"
+              >flex flex-col md:flex-row gap-6</code
+            >
             <div class="flex flex-col md:flex-row gap-6">
-              <div class="bg-gray-50 border border-gray-200 p-4 rounded flex-1">Flexible item 1</div>
-              <div class="bg-gray-50 border border-gray-200 p-4 rounded flex-1">Flexible item 2</div>
+              <div class="bg-gray-50 border border-gray-200 p-4 rounded flex-1">
+                Flexible item 1
+              </div>
+              <div class="bg-gray-50 border border-gray-200 p-4 rounded flex-1">
+                Flexible item 2
+              </div>
             </div>
           </div>
         </div>
@@ -476,7 +663,7 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Components Section -->
     <section id="components" class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Components</h2>
-      
+
       <!-- Buttons -->
       <div class="mb-12">
         <h3 class="text-3xl font-eina03 font-medium mb-8">Buttons</h3>
@@ -484,33 +671,42 @@ import Layout from "../../layouts/Layout.astro"
           <div>
             <h4 class="text-lg font-semibold mb-4">Primary Buttons</h4>
             <div class="space-y-4">
-              <button class="bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors">
+              <button
+                class="bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
                 Primary Button
               </button>
               <div class="text-sm font-mono text-gray-600">
-                bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors
+                bg-gray-900 hover:bg-gray-800 text-white font-eina04
+                font-semibold py-3 px-6 rounded-lg transition-colors
               </div>
             </div>
           </div>
           <div>
             <h4 class="text-lg font-semibold mb-4">Secondary Buttons</h4>
             <div class="space-y-4">
-              <button class="border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors">
+              <button
+                class="border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
                 Secondary Button
               </button>
               <div class="text-sm font-mono text-gray-600">
-                border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors
+                border-2 border-gray-300 hover:border-gray-400 text-gray-700
+                font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors
               </div>
             </div>
           </div>
           <div>
             <h4 class="text-lg font-semibold mb-4">Text Buttons</h4>
             <div class="space-y-4">
-              <button class="text-gray-700 hover:text-gray-900 font-eina04 font-semibold py-3 px-6 transition-colors">
+              <button
+                class="text-gray-700 hover:text-gray-900 font-eina04 font-semibold py-3 px-6 transition-colors"
+              >
                 Text Button
               </button>
               <div class="text-sm font-mono text-gray-600">
-                text-gray-700 hover:text-gray-900 font-eina04 font-semibold py-3 px-6 transition-colors
+                text-gray-700 hover:text-gray-900 font-eina04 font-semibold py-3
+                px-6 transition-colors
               </div>
             </div>
           </div>
@@ -520,27 +716,192 @@ import Layout from "../../layouts/Layout.astro"
       <!-- Cards -->
       <div class="mb-12">
         <h3 class="text-3xl font-eina03 font-medium mb-8">Cards</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h4 class="text-lg font-semibold mb-4">Basic Card</h4>
-            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-              <h5 class="text-xl font-eina03 font-semibold mb-3">Card Title</h5>
-              <p class="text-gray-600 font-eina03 mb-4">This is a basic card with shadow and border styling.</p>
-              <button class="text-gray-700 hover:text-gray-900 font-eina04 font-medium">Learn More →</button>
+
+        <!-- Default Card Variant -->
+        <div class="mb-12">
+          <h4 class="text-2xl font-eina03 font-medium mb-6">Default Cards</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div>
+              <h5 class="text-lg font-semibold mb-4">Basic Card</h5>
+              <Card
+                title="Modern Card Design"
+                subtitle="Design System Component"
+                description="A clean, modern card following the design system principles with proper typography hierarchy."
+              />
+              <div class="text-sm font-mono text-gray-600 mt-3">
+                &lt;Card title="..." subtitle="..." description="..." /&gt;
+              </div>
             </div>
-            <div class="text-sm font-mono text-gray-600 mt-2">
-              bg-white rounded-lg shadow-lg p-6 border border-gray-200
+
+            <div>
+              <h5 class="text-lg font-semibold mb-4">Card with Image</h5>
+              <Card
+                title="Visual Content Card"
+                subtitle="With Hero Image"
+                description="Cards can include hero images that work seamlessly with the content layout."
+                imageUrl="https://picsum.photos/500"
+                imageAlt="Abstract art installation"
+              />
+              <div class="text-sm font-mono text-gray-600 mt-3">
+                &lt;Card title="..." imageUrl="..." imageAlt="..." /&gt;
+              </div>
+            </div>
+
+            <div>
+              <h5 class="text-lg font-semibold mb-4">Interactive Card</h5>
+              <Card
+                title="Clickable Card"
+                subtitle="With Link"
+                description="Cards can be made interactive with href or onClick handlers for navigation."
+                href="#"
+                ariaLabel="Navigate to detailed view"
+              />
+              <div class="text-sm font-mono text-gray-600 mt-3">
+                &lt;Card title="..." href="#" ariaLabel="..." /&gt;
+              </div>
             </div>
           </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-4">Hover Card</h4>
-            <div class="bg-white rounded-lg shadow-md hover:shadow-xl p-6 border border-gray-200 transition-shadow cursor-pointer">
-              <h5 class="text-xl font-eina03 font-semibold mb-3">Interactive Card</h5>
-              <p class="text-gray-600 font-eina03 mb-4">This card has hover effects and transitions.</p>
-              <span class="text-gray-700 font-eina04 font-medium">Click to explore →</span>
+        </div>
+
+        <!-- Legacy Style Cards -->
+        <div class="mb-12">
+          <h4 class="text-2xl font-eina03 font-medium mb-6">
+            Legacy Style Cards
+          </h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h5 class="text-lg font-semibold mb-4">Event Card</h5>
+              <Card
+                variant="event"
+                title="EXPOSITION COLLECTIVE"
+                subtitle="15 Mars - 30 Avril 2024"
+                description="Une sélection d'œuvres contemporaines explorant les thèmes de l'identité et de la transformation urbaine."
+                imageUrl="https://picsum.photos/500"
+                imageAlt="Contemporary art exhibition"
+                grayscale={true}
+                href="#"
+              />
+              <div class="text-sm font-mono text-gray-600 mt-3">
+                &lt;Card variant="event" grayscale={true} ... /&gt;
+              </div>
             </div>
-            <div class="text-sm font-mono text-gray-600 mt-2">
-              bg-white rounded-lg shadow-md hover:shadow-xl p-6 transition-shadow
+
+            <div>
+              <h5 class="text-lg font-semibold mb-4">Artist Card</h5>
+              <Card
+                variant="artist"
+                title="MARIE DUBOIS"
+                subtitle="Artiste Plasticienne"
+                description="Travaille principalement avec des installations multimédia qui questionnent notre rapport à l'espace urbain."
+                imageUrl="https://picsum.photos/500"
+                imageAlt="Artist portrait in studio"
+                grayscale={true}
+                href="#"
+              />
+              <div class="text-sm font-mono text-gray-600 mt-3">
+                &lt;Card variant="artist" grayscale={true} ... /&gt;
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Props Documentation -->
+        <div class="mb-12">
+          <h4 class="text-2xl font-eina03 font-medium mb-6">Card Props</h4>
+          <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-200">
+                    <th class="text-left py-3 font-eina04 font-semibold"
+                      >Prop</th
+                    >
+                    <th class="text-left py-3 font-eina04 font-semibold"
+                      >Type</th
+                    >
+                    <th class="text-left py-3 font-eina04 font-semibold"
+                      >Default</th
+                    >
+                    <th class="text-left py-3 font-eina04 font-semibold"
+                      >Description</th
+                    >
+                  </tr>
+                </thead>
+                <tbody class="font-eina03">
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">title</td>
+                    <td class="py-3 text-gray-600">string</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700"
+                      >Card title text (required)</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">subtitle</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">Optional subtitle text</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">description</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">Optional description text</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">imageUrl</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">Optional hero image URL</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">imageAlt</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">""</td>
+                    <td class="py-3 text-gray-700"
+                      >Alt text for image accessibility</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">href</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">Makes card a link element</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">variant</td>
+                    <td class="py-3 text-gray-600"
+                      >"default" | "event" | "artist"</td
+                    >
+                    <td class="py-3 text-gray-500">"default"</td>
+                    <td class="py-3 text-gray-700">Card style variant</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">grayscale</td>
+                    <td class="py-3 text-gray-600">boolean</td>
+                    <td class="py-3 text-gray-500">false</td>
+                    <td class="py-3 text-gray-700"
+                      >Apply grayscale filter to image</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">className</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">""</td>
+                    <td class="py-3 text-gray-700">Additional CSS classes</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-mono text-gray-900">ariaLabel</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700"
+                      >Accessibility label for interactive cards</td
+                    >
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -552,19 +913,39 @@ import Layout from "../../layouts/Layout.astro"
         <div class="max-w-2xl">
           <div class="space-y-6">
             <div>
-              <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Input Field</label>
-              <input type="text" placeholder="Enter text here..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03">
+              <label
+                class="block text-sm font-eina04 font-medium text-gray-700 mb-2"
+                >Input Field</label
+              >
+              <input
+                type="text"
+                placeholder="Enter text here..."
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03"
+              />
               <div class="text-sm font-mono text-gray-600 mt-2">
-                w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none
+                w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2
+                focus:ring-gray-900 focus:border-gray-900 focus:outline-none
               </div>
             </div>
             <div>
-              <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Textarea</label>
-              <textarea placeholder="Enter message..." rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03"></textarea>
+              <label
+                class="block text-sm font-eina04 font-medium text-gray-700 mb-2"
+                >Textarea</label
+              >
+              <textarea
+                placeholder="Enter message..."
+                rows="4"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03"
+              ></textarea>
             </div>
             <div>
-              <label class="block text-sm font-eina04 font-medium text-gray-700 mb-2">Select Dropdown</label>
-              <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03">
+              <label
+                class="block text-sm font-eina04 font-medium text-gray-700 mb-2"
+                >Select Dropdown</label
+              >
+              <select
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03"
+              >
                 <option>Choose an option</option>
                 <option>Option 1</option>
                 <option>Option 2</option>
@@ -578,11 +959,13 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Interactions Section -->
     <section id="interactions" class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Interactions</h2>
-      
+
       <div class="mb-8">
         <p class="text-lg font-eina03 text-gray-600 max-w-3xl">
-          Interaction states maintain the minimal design philosophy while providing clear feedback to users. 
-          All hover and focus states use subtle grayscale transitions, with the single accent color reserved for critical focus states.
+          Interaction states maintain the minimal design philosophy while
+          providing clear feedback to users. All hover and focus states use
+          subtle grayscale transitions, with the single accent color reserved
+          for critical focus states.
         </p>
       </div>
 
@@ -593,10 +976,14 @@ import Layout from "../../layouts/Layout.astro"
           <div>
             <h4 class="text-lg font-semibold mb-4">Button Hovers</h4>
             <div class="space-y-4">
-              <button class="bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <button
+                class="bg-gray-900 hover:bg-gray-800 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+              >
                 Hover Me
               </button>
-              <button class="border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+              <button
+                class="border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200"
+              >
                 Secondary Hover
               </button>
               <div class="text-sm font-mono text-gray-600">
@@ -604,28 +991,41 @@ import Layout from "../../layouts/Layout.astro"
               </div>
             </div>
           </div>
-          
+
           <div>
             <h4 class="text-lg font-semibold mb-4">Card Hovers</h4>
-            <div class="bg-white rounded-lg shadow-md hover:shadow-xl p-4 border border-gray-200 transition-all duration-300 cursor-pointer hover:-translate-y-1">
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-xl p-4 border border-gray-200 transition-all duration-300 cursor-pointer hover:-translate-y-1"
+            >
               <h5 class="text-lg font-eina03 font-semibold mb-2">Hover Card</h5>
-              <p class="text-gray-600 font-eina03 text-sm">Subtle lift and shadow increase</p>
+              <p class="text-gray-600 font-eina03 text-sm">
+                Subtle lift and shadow increase
+              </p>
             </div>
             <div class="text-sm font-mono text-gray-600 mt-2">
               hover:shadow-xl hover:-translate-y-1 transition-all duration-300
             </div>
           </div>
-          
+
           <div>
             <h4 class="text-lg font-semibold mb-4">Link Hovers</h4>
             <div class="space-y-3">
-              <a href="#" class="block text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200">
+              <a
+                href="#"
+                class="block text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200"
+              >
                 Simple link hover
               </a>
-              <a href="#" class="block text-gray-700 hover:text-gray-900 font-eina03 border-b border-transparent hover:border-gray-300 transition-all duration-200">
+              <a
+                href="#"
+                class="block text-gray-700 hover:text-gray-900 font-eina03 border-b border-transparent hover:border-gray-300 transition-all duration-200"
+              >
                 Link with underline
               </a>
-              <a href="#" class="block text-gray-700 hover:text-gray-900 font-eina03 relative overflow-hidden transition-colors duration-200 hover:bg-gray-50 px-2 py-1 rounded">
+              <a
+                href="#"
+                class="block text-gray-700 hover:text-gray-900 font-eina03 relative overflow-hidden transition-colors duration-200 hover:bg-gray-50 px-2 py-1 rounded"
+              >
                 Background hover
               </a>
             </div>
@@ -639,30 +1039,44 @@ import Layout from "../../layouts/Layout.astro"
         <div class="max-w-4xl">
           <div class="mb-6">
             <p class="text-gray-600 font-eina03 mb-4">
-              Focus states use our single accent color (gray-900) to create clear accessibility indicators. 
-              All interactive elements have visible focus rings that meet WCAG guidelines.
+              Focus states use our single accent color (gray-900) to create
+              clear accessibility indicators. All interactive elements have
+              visible focus rings that meet WCAG guidelines.
             </p>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h4 class="text-lg font-semibold mb-4">Form Focus</h4>
               <div class="space-y-4">
-                <input type="text" placeholder="Click to focus" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03 transition-all duration-200">
-                <textarea placeholder="Focus state example" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03 transition-all duration-200"></textarea>
+                <input
+                  type="text"
+                  placeholder="Click to focus"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03 transition-all duration-200"
+                />
+                <textarea
+                  placeholder="Focus state example"
+                  rows="3"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none font-eina03 transition-all duration-200"
+                ></textarea>
                 <div class="text-sm font-mono text-gray-600">
-                  focus:ring-2 focus:ring-gray-900 focus:border-gray-900 focus:outline-none
+                  focus:ring-2 focus:ring-gray-900 focus:border-gray-900
+                  focus:outline-none
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h4 class="text-lg font-semibold mb-4">Button Focus</h4>
               <div class="space-y-4">
-                <button class="bg-gray-900 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                <button
+                  class="bg-gray-900 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200"
+                >
                   Primary Focus
                 </button>
-                <button class="border-2 border-gray-300 hover:border-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200">
+                <button
+                  class="border-2 border-gray-300 hover:border-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-gray-700 font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-200"
+                >
                   Secondary Focus
                 </button>
                 <div class="text-sm font-mono text-gray-600">
@@ -681,7 +1095,9 @@ import Layout from "../../layouts/Layout.astro"
           <div>
             <h4 class="text-lg font-semibold mb-4">Button Active</h4>
             <div class="space-y-4">
-              <button class="bg-gray-900 hover:bg-gray-800 active:bg-gray-950 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-150 active:scale-95">
+              <button
+                class="bg-gray-900 hover:bg-gray-800 active:bg-gray-950 text-white font-eina04 font-semibold py-3 px-6 rounded-lg transition-all duration-150 active:scale-95"
+              >
                 Press Me
               </button>
               <div class="text-sm font-mono text-gray-600">
@@ -689,17 +1105,26 @@ import Layout from "../../layouts/Layout.astro"
               </div>
             </div>
           </div>
-          
+
           <div>
             <h4 class="text-lg font-semibold mb-4">Navigation Active</h4>
             <nav class="space-y-2">
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200">
+              <a
+                href="#"
+                class="block px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+              >
                 Normal Link
               </a>
-              <a href="#" class="block px-4 py-2 bg-gray-100 text-gray-900 font-medium rounded-lg border-l-4 border-gray-900">
+              <a
+                href="#"
+                class="block px-4 py-2 bg-gray-100 text-gray-900 font-medium rounded-lg border-l-4 border-gray-900"
+              >
                 Active Link
               </a>
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200">
+              <a
+                href="#"
+                class="block px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+              >
                 Another Link
               </a>
             </nav>
@@ -714,10 +1139,16 @@ import Layout from "../../layouts/Layout.astro"
           <div>
             <h4 class="text-lg font-semibold mb-4">Disabled Buttons</h4>
             <div class="space-y-4">
-              <button disabled class="bg-gray-300 text-gray-500 font-eina04 font-semibold py-3 px-6 rounded-lg cursor-not-allowed">
+              <button
+                disabled
+                class="bg-gray-300 text-gray-500 font-eina04 font-semibold py-3 px-6 rounded-lg cursor-not-allowed"
+              >
                 Disabled Primary
               </button>
-              <button disabled class="border-2 border-gray-200 text-gray-400 font-eina04 font-semibold py-3 px-6 rounded-lg cursor-not-allowed">
+              <button
+                disabled
+                class="border-2 border-gray-200 text-gray-400 font-eina04 font-semibold py-3 px-6 rounded-lg cursor-not-allowed"
+              >
                 Disabled Secondary
               </button>
               <div class="text-sm font-mono text-gray-600">
@@ -725,12 +1156,20 @@ import Layout from "../../layouts/Layout.astro"
               </div>
             </div>
           </div>
-          
+
           <div>
             <h4 class="text-lg font-semibold mb-4">Disabled Form</h4>
             <div class="space-y-4">
-              <input type="text" disabled placeholder="Disabled input" class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-400 cursor-not-allowed focus:outline-none font-eina03">
-              <select disabled class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-400 cursor-not-allowed focus:outline-none font-eina03">
+              <input
+                type="text"
+                disabled
+                placeholder="Disabled input"
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-400 cursor-not-allowed focus:outline-none font-eina03"
+              />
+              <select
+                disabled
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-400 cursor-not-allowed focus:outline-none font-eina03"
+              >
                 <option>Disabled select</option>
               </select>
             </div>
@@ -745,8 +1184,13 @@ import Layout from "../../layouts/Layout.astro"
           <div>
             <h4 class="text-lg font-semibold mb-4">Loading Buttons</h4>
             <div class="space-y-4">
-              <button class="bg-gray-900 text-white font-eina04 font-semibold py-3 px-6 rounded-lg flex items-center gap-3">
-                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <button
+                class="bg-gray-900 text-white font-eina04 font-semibold py-3 px-6 rounded-lg flex items-center gap-3"
+              >
+                <div
+                  class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
+                >
+                </div>
                 Loading...
               </button>
               <div class="text-sm font-mono text-gray-600">
@@ -754,7 +1198,7 @@ import Layout from "../../layouts/Layout.astro"
               </div>
             </div>
           </div>
-          
+
           <div>
             <h4 class="text-lg font-semibold mb-4">Content Loading</h4>
             <div class="space-y-3">
@@ -771,23 +1215,53 @@ import Layout from "../../layouts/Layout.astro"
 
       <!-- Interaction Guidelines -->
       <div class="mb-12">
-        <h3 class="text-3xl font-eina03 font-medium mb-8">Interaction Guidelines</h3>
+        <h3 class="text-3xl font-eina03 font-medium mb-8">
+          Interaction Guidelines
+        </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="p-6 bg-white border border-gray-100 rounded-lg">
-            <h4 class="text-lg font-semibold mb-4 text-gray-900">Timing & Easing</h4>
+            <h4 class="text-lg font-semibold mb-4 text-gray-900">
+              Timing & Easing
+            </h4>
             <ul class="text-sm space-y-2 text-gray-700 font-eina03">
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">duration-200</code> - Quick interactions (hover, focus)</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">duration-300</code> - Card hovers, layout shifts</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">duration-150</code> - Active/pressed states</li>
-              <li>• <code class="text-xs bg-gray-100 px-1 rounded">ease-in-out</code> - Default easing</li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded"
+                  >duration-200</code
+                > - Quick interactions (hover, focus)
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded"
+                  >duration-300</code
+                > - Card hovers, layout shifts
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded"
+                  >duration-150</code
+                > - Active/pressed states
+              </li>
+              <li>
+                • <code class="text-xs bg-gray-100 px-1 rounded"
+                  >ease-in-out</code
+                > - Default easing
+              </li>
             </ul>
           </div>
           <div class="p-6 bg-white border border-gray-100 rounded-lg">
-            <h4 class="text-lg font-semibold mb-4 text-gray-900">Accessibility</h4>
+            <h4 class="text-lg font-semibold mb-4 text-gray-900">
+              Accessibility
+            </h4>
             <ul class="text-sm space-y-2 text-gray-700 font-eina03">
               <li>• Always include focus states with visible rings</li>
-              <li>• Use <code class="text-xs bg-gray-100 px-1 rounded">focus:ring-offset-2</code> for buttons</li>
-              <li>• Respect <code class="text-xs bg-gray-100 px-1 rounded">prefers-reduced-motion</code></li>
+              <li>
+                • Use <code class="text-xs bg-gray-100 px-1 rounded"
+                  >focus:ring-offset-2</code
+                > for buttons
+              </li>
+              <li>
+                • Respect <code class="text-xs bg-gray-100 px-1 rounded"
+                  >prefers-reduced-motion</code
+                >
+              </li>
               <li>• Maintain minimum 44px touch targets</li>
             </ul>
           </div>
@@ -798,10 +1272,12 @@ import Layout from "../../layouts/Layout.astro"
     <!-- Usage Guidelines -->
     <section class="mb-20">
       <h2 class="text-5xl font-eina02 font-semibold mb-12">Usage Guidelines</h2>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="p-8 bg-gray-50 rounded-lg border border-gray-200 shadow-sm">
-          <h3 class="text-2xl font-eina03 font-semibold text-gray-900 mb-6">✅ White Canvas Principles</h3>
+          <h3 class="text-2xl font-eina03 font-semibold text-gray-900 mb-6">
+            ✅ White Canvas Principles
+          </h3>
           <ul class="space-y-3 text-gray-700 font-eina03">
             <li>• Use Eina01 for hero headlines and display text</li>
             <li>• Use Eina03 for body text and content</li>
@@ -811,9 +1287,13 @@ import Layout from "../../layouts/Layout.astro"
             <li>• Let artist content be the primary visual element</li>
           </ul>
         </div>
-        
-        <div class="p-8 bg-gray-100 rounded-lg border border-gray-300 shadow-sm">
-          <h3 class="text-2xl font-eina03 font-semibold text-gray-900 mb-6">❌ Avoid</h3>
+
+        <div
+          class="p-8 bg-gray-100 rounded-lg border border-gray-300 shadow-sm"
+        >
+          <h3 class="text-2xl font-eina03 font-semibold text-gray-900 mb-6">
+            ❌ Avoid
+          </h3>
           <ul class="space-y-3 text-gray-700 font-eina03">
             <li>• Competing with artist content visually</li>
             <li>• Using multiple bright colors</li>
