@@ -78,9 +78,7 @@ const artists = [
 ---
 
 <Layout title="e29 | Artistes">
-  <main
-    class="min-h-full w-full flex flex-col items-start"
-  >
+  <main class="min-h-full w-full flex flex-col items-start">
     <div class="p-2 sm:px-10 sm:pt-10 sm:pb-0">
       <!-- Header -->
       <h1
@@ -114,24 +112,265 @@ const artists = [
       </section>
     </div>
 
-    <!-- Artists Carousel -->
+    <!-- Horizontal Scroll Section -->
     <section
-      class="grow w-full h-screen flex items-center justify-start overflow-x-scroll"
+      id="horizontal-scroll-section"
+      class="grow w-full h-screen overflow-hidden"
     >
-      {
-        artists.map((artist) => (
-          <Card
-            title={artist.title}
-            subtitle={artist.subtitle}
-            description={artist.description}
-            imageUrl={artist.imageUrl}
-            imageAlt={artist.imageAlt}
-            href={artist.href}
-            ariaLabel={artist.ariaLabel}
-            grayscale={true}
-          />
-        ))
-      }
+      <div id="artist-cards-wrapper" class="flex flex-row flex-nowrap h-full">
+        <div class="h-full min-w-2 sm:min-w-10"></div>
+        {
+          artists.map((artist) => (
+            <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0">
+              <Card
+                title={artist.title}
+                subtitle={artist.subtitle}
+                description={artist.description}
+                imageUrl={artist.imageUrl}
+                imageAlt={artist.imageAlt}
+                href={artist.href}
+                ariaLabel={artist.ariaLabel}
+                grayscale={true}
+              />
+            </div>
+          ))
+        }
+        <div class="h-full min-w-2 sm:min-w-10"></div>
+      </div>
     </section>
   </main>
+
+  <script>
+    import { gsap } from "gsap"
+    import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+    function initializeScrollAnimation() {
+      // Cleanup previous instances
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+
+      // Register GSAP plugin
+      gsap.registerPlugin(ScrollTrigger)
+
+      const section = document.getElementById("horizontal-scroll-section")
+      const wrapper = document.getElementById("artist-cards-wrapper")
+
+      if (!section || !wrapper) {
+        console.warn("Horizontal scroll elements not found")
+        return () => {} // Return empty cleanup function
+      }
+
+      // Calculate scroll distance
+      const scrollDistance = wrapper.scrollWidth - section.offsetWidth
+      let manualProgress = 0
+      let isManualControl = false
+      const sensitivity = 0.0003
+
+      // Dead zone configuration
+      const deadZoneThreshold = 200 // Amount of scroll needed to start horizontal movement
+      let scrollAccumulator = 0 // Tracks scroll in dead zone
+      let isInDeadZone = true // Starts in dead zone when first entering section
+
+      if (scrollDistance > 0) {
+        // Create ScrollTrigger for pinning and basic behavior
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: `+=${scrollDistance}`,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            // Only update if not in manual control mode
+            if (!isManualControl) {
+              manualProgress = self.progress
+              gsap.set(wrapper, { x: -scrollDistance * self.progress })
+            }
+          },
+        })
+      }
+
+      // Manual scroll control
+      function handleWheel(e: WheelEvent) {
+        if (!section || !wrapper) return
+
+        const rect = section.getBoundingClientRect()
+        const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight
+
+        if (isInView) {
+          const delta = e.deltaY || e.deltaX
+          const scrollingUp = delta < 0
+          const scrollingDown = delta > 0
+
+          // Allow exit at boundaries
+          if (
+            (manualProgress <= 0.01 && scrollingUp) ||
+            (manualProgress >= 0.99 && scrollingDown)
+          ) {
+            isManualControl = false
+            // Reset dead zone when exiting
+            isInDeadZone = true
+            scrollAccumulator = 0
+            return // Allow normal page scroll
+          }
+
+          // Take manual control
+          e.preventDefault()
+          isManualControl = true
+
+          // Handle dead zone logic
+          if (isInDeadZone && manualProgress <= 0.01) {
+            // Accumulate scroll in dead zone
+            if (scrollingDown) {
+              scrollAccumulator += Math.abs(delta)
+
+              // Exit dead zone when threshold is reached
+              if (scrollAccumulator >= deadZoneThreshold) {
+                isInDeadZone = false
+                scrollAccumulator = 0
+              } else {
+                // Still in dead zone - don't move horizontally
+                setTimeout(() => {
+                  isManualControl = false
+                }, 50)
+                return
+              }
+            } else {
+              // Reset accumulator when scrolling up in dead zone
+              scrollAccumulator = 0
+              setTimeout(() => {
+                isManualControl = false
+              }, 50)
+              return
+            }
+          }
+
+          // Normal horizontal scrolling (outside dead zone)
+          const newProgress = Math.max(
+            0,
+            Math.min(1, manualProgress + delta * sensitivity)
+          )
+          manualProgress = newProgress
+
+          // Reset dead zone if we move back to start
+          if (newProgress <= 0.01) {
+            isInDeadZone = true
+            scrollAccumulator = 0
+          }
+
+          // Animate to new position
+          gsap.to(wrapper, {
+            x: -scrollDistance * newProgress,
+            duration: 0.1,
+            ease: "none",
+          })
+
+          // Release manual control after a short delay
+          setTimeout(() => {
+            isManualControl = false
+          }, 100)
+        }
+      }
+
+      // Touch support
+      let touchStartX = 0
+      let touchStartY = 0
+      let initialProgress = 0
+
+      function handleTouchStart(e: TouchEvent) {
+        if (!section) return
+
+        const rect = section.getBoundingClientRect()
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          touchStartX = e.touches[0].clientX
+          touchStartY = e.touches[0].clientY
+          initialProgress = manualProgress
+        }
+      }
+
+      function handleTouchMove(e: TouchEvent) {
+        if (!section || !wrapper) return
+
+        const rect = section.getBoundingClientRect()
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          const deltaX = touchStartX - e.touches[0].clientX
+          const deltaY = Math.abs(touchStartY - e.touches[0].clientY)
+
+          // Only handle pronounced horizontal swipes
+          if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 10) {
+            e.preventDefault()
+            isManualControl = true
+
+            const swipeProgress = deltaX / window.innerWidth
+            const newProgress = Math.max(
+              0,
+              Math.min(1, initialProgress + swipeProgress)
+            )
+            manualProgress = newProgress
+
+            gsap.set(wrapper, { x: -scrollDistance * newProgress })
+          }
+        }
+      }
+
+      function handleTouchEnd() {
+        setTimeout(() => {
+          isManualControl = false
+        }, 100)
+      }
+
+      // Add event listeners
+      document.addEventListener("wheel", handleWheel, { passive: false })
+      if (section) {
+        section.addEventListener("touchstart", handleTouchStart, {
+          passive: true,
+        })
+        section.addEventListener("touchmove", handleTouchMove, {
+          passive: false,
+        })
+        section.addEventListener("touchend", handleTouchEnd, { passive: true })
+      }
+
+      // Return cleanup function
+      return () => {
+        document.removeEventListener("wheel", handleWheel)
+        if (section) {
+          section.removeEventListener("touchstart", handleTouchStart)
+          section.removeEventListener("touchmove", handleTouchMove)
+          section.removeEventListener("touchend", handleTouchEnd)
+        }
+      }
+    }
+
+    // Handle window resize with debouncing
+    let resizeTimeout: ReturnType<typeof setTimeout>
+    let cleanup: (() => void) | null = null
+
+    function handleResize() {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        if (cleanup) cleanup()
+        cleanup = initializeScrollAnimation()
+      }, 250)
+    }
+
+    // Initialize on DOM load
+    document.addEventListener("DOMContentLoaded", () => {
+      cleanup = initializeScrollAnimation()
+    })
+
+    // Handle Astro navigation (View Transitions API)
+    document.addEventListener("astro:page-load", () => {
+      cleanup = initializeScrollAnimation()
+    })
+
+    // Handle window resize
+    window.addEventListener("resize", handleResize)
+
+    // Cleanup on page unload
+    document.addEventListener("astro:before-preparation", () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      if (cleanup) cleanup()
+      window.removeEventListener("resize", handleResize)
+    })
+  </script>
 </Layout>
