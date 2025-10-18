@@ -1,61 +1,137 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import Card from "@components/ui/card/Card.astro"
+
+// Artist data
+const artists = [
+  {
+    title: "MARIE DUBOIS",
+    subtitle: "Artiste Plasticienne",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    imageUrl: "https://picsum.photos/800/600?random=1&grayscale",
+    imageAlt: "Portrait d'artiste dans son atelier",
+    href: "#",
+    ariaLabel: "Découvrir le profil de Marie Dubois",
+  },
+  {
+    title: "ANTOINE MARTIN",
+    subtitle: "Sculpteur",
+    description:
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
+    imageUrl: "https://picsum.photos/800/600?random=2&grayscale",
+    imageAlt: "Sculpteur travaillant dans son atelier",
+    href: "#",
+    ariaLabel: "Découvrir le profil d'Antoine Martin",
+  },
+  {
+    title: "SOPHIE BERNARD",
+    subtitle: "Peintre Contemporaine",
+    description:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    imageUrl: "https://picsum.photos/800/600?random=3&grayscale",
+    imageAlt: "Peintre dans son atelier",
+    href: "#",
+    ariaLabel: "Découvrir le profil de Sophie Bernard",
+  },
+  {
+    title: "LUCAS MOREAU",
+    subtitle: "Photographe",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
+    imageUrl: "https://picsum.photos/800/600?random=4&grayscale",
+    imageAlt: "Photographe préparant une installation",
+    href: "#",
+    ariaLabel: "Découvrir le profil de Lucas Moreau",
+  },
+  {
+    title: "ANTOINE MARTIN",
+    subtitle: "Sculpteur",
+    description:
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
+    imageUrl: "https://picsum.photos/800/600?random=2&grayscale",
+    imageAlt: "Sculpteur travaillant dans son atelier",
+    href: "#",
+    ariaLabel: "Découvrir le profil d'Antoine Martin",
+  },
+  {
+    title: "SOPHIE BERNARD",
+    subtitle: "Peintre Contemporaine",
+    description:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    imageUrl: "https://picsum.photos/800/600?random=3&grayscale",
+    imageAlt: "Peintre dans son atelier",
+    href: "#",
+    ariaLabel: "Découvrir le profil de Sophie Bernard",
+  },
+  {
+    title: "LUCAS MOREAU",
+    subtitle: "Photographe",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
+    imageUrl: "https://picsum.photos/800/600?random=4&grayscale",
+    imageAlt: "Photographe préparant une installation",
+    href: "#",
+    ariaLabel: "Découvrir le profil de Lucas Moreau",
+  },
+]
 ---
 
 <Layout title="e29 | Artistes">
-  <main class="min-h-full p-2 sm:p-10 w-full flex flex-col items-start">
-    <!-- Header -->
-    <h1
-      class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
-    >
-      Artistes
-    </h1>
-    
-    <!-- Introduction Text -->
-    <section class="w-full mb-12">
-      <div class="max-w-4xl">
-        <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
-          Les ateliers et studios d'artistes résidents de l'Espace29 forment un lieu de travail communautaire unique, où la créativité et l'échange sont au cœur de la démarche artistique. Ces espaces, partagés ou individuels, offrent aux artistes un environnement propice à la réflexion et à la production, tout en favorisant la collaboration et le dialogue entre créateur-ices de diverses disciplines.
-        </p>
-        <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
-          L'Espace29 se veut ainsi un véritable laboratoire de création, où le collectif et le partage enrichissent les pratiques artistiques et permettent l'émergence de projets communs.
-        </p>
-        <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-          Le site de l'Espace29 est encore en cours de construction. Revenez bientôt pour découvrir les artistes qui habitent ce lieu.
-        </p>
-      </div>
-    </section>
+  <main
+    class="min-h-full w-full flex flex-col items-start"
+  >
+    <div class="p-2 sm:px-10 sm:pt-10 sm:pb-0">
+      <!-- Header -->
+      <h1
+        class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
+      >
+        Artistes
+      </h1>
 
-    <!-- Artists -->
-    <section class="grow w-full">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Artist 1 -->
-        <Card 
-          variant="artist"
-          title="MARIE DUBOIS"
-          subtitle="Artiste Plasticienne"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-          imageUrl="https://picsum.photos/800/600?random=1&grayscale"
-          imageAlt="Portrait d'artiste dans son atelier"
-          grayscale={true}
-          href="#"
-          ariaLabel="Découvrir le profil de Marie Dubois"
-        />
-        
-        <!-- Artist 2 -->
-        <Card 
-          variant="artist"
-          title="ANTOINE MARTIN"
-          subtitle="Sculpteur"
-          description="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt."
-          imageUrl="https://picsum.photos/800/600?random=2&grayscale"
-          imageAlt="Sculpteur travaillant dans son atelier"
-          grayscale={true}
-          href="#"
-          ariaLabel="Découvrir le profil d'Antoine Martin"
-        />
-      </div>
+      <!-- Introduction Text -->
+      <section class="w-full mb-12">
+        <div class="max-w-4xl">
+          <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
+            Les ateliers et studios d'artistes résidents de l'Espace29 forment
+            un lieu de travail communautaire unique, où la créativité et
+            l'échange sont au cœur de la démarche artistique. Ces espaces,
+            partagés ou individuels, offrent aux artistes un environnement
+            propice à la réflexion et à la production, tout en favorisant la
+            collaboration et le dialogue entre créateur-ices de diverses
+            disciplines.
+          </p>
+          <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
+            L'Espace29 se veut ainsi un véritable laboratoire de création, où le
+            collectif et le partage enrichissent les pratiques artistiques et
+            permettent l'émergence de projets communs.
+          </p>
+          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+            Le site de l'Espace29 est encore en cours de construction. Revenez
+            bientôt pour découvrir les artistes qui habitent ce lieu.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Artists Carousel -->
+    <section
+      class="grow w-full h-screen flex items-center justify-start overflow-x-scroll"
+    >
+      {
+        artists.map((artist) => (
+          <Card
+            title={artist.title}
+            subtitle={artist.subtitle}
+            description={artist.description}
+            imageUrl={artist.imageUrl}
+            imageAlt={artist.imageAlt}
+            href={artist.href}
+            ariaLabel={artist.ariaLabel}
+            grayscale={true}
+          />
+        ))
+      }
     </section>
   </main>
 </Layout>
