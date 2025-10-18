@@ -13,6 +13,8 @@ export default [
       "**/out/**",
       "**/cache/**",
       "**/eslint.config.js",
+      "**/astro.config.mjs",
+      "**/pnpm-lock.yaml",
     ],
   },
 

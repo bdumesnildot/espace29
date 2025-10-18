@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField } from "astro/config"
 import tailwindcss from "@tailwindcss/vite"
 
 const { APP_BASE_URL } = process.env
@@ -19,7 +19,7 @@ export default defineConfig({
   },
   env: {
     schema: {
-      APP_BASE_URL: envField.string({ context: "server", access: "public"}),
-    }
-  }
+      APP_BASE_URL: envField.string({ context: "server", access: "public" }),
+    },
+  },
 })
