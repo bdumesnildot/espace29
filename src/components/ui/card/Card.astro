@@ -7,7 +7,7 @@ export interface Props {
   imageAlt?: string
   href?: string
   className?: string
-  grayscale?: boolean
+  grayscale?: 'always' | 'notHover' | false
   onClick?: string
   ariaLabel?: string
   id?: string
@@ -32,10 +32,14 @@ const isInteractive = href || onClick
 
 // Base classes following design system philosophy
 const baseClasses = "bg-white border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col bg-blue-600 w-[650px] min-w-[650px]"
-const interactiveClasses = isInteractive ? "hover:shadow-lg hover:-translate-y-1 cursor-pointer" : ""
-const grayscaleClasses = grayscale ? "filter grayscale hover:grayscale-0" : ""
+const interactiveClasses = isInteractive ? "cursor-pointer" : ""
+const grayscaleClasses = (() => {
+  if (grayscale === 'always') return "filter grayscale"
+  if (grayscale === 'notHover') return "filter grayscale hover:grayscale-0"
+  return ""
+})()
 
-const finalClasses = `${baseClasses} ${interactiveClasses} ${className}`
+const finalClasses = `${baseClasses} ${interactiveClasses} ${grayscaleClasses} ${className}`
 ---
 
 <Component
@@ -50,7 +54,7 @@ const finalClasses = `${baseClasses} ${interactiveClasses} ${className}`
       <img 
         src={imageUrl} 
         alt={imageAlt}
-        class={`w-full h-full object-cover transition-all duration-300 ${grayscaleClasses}`}
+        class="w-full h-full object-cover transition-all duration-300"
         loading="lazy"
       />
     </div>

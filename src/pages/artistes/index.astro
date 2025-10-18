@@ -9,7 +9,7 @@ const artists = [
     subtitle: "Artiste Plasticienne",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    imageUrl: "https://picsum.photos/800/600?random=1&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=1",
     imageAlt: "Portrait d'artiste dans son atelier",
     href: "#",
     ariaLabel: "Découvrir le profil de Marie Dubois",
@@ -19,7 +19,7 @@ const artists = [
     subtitle: "Sculpteur",
     description:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
-    imageUrl: "https://picsum.photos/800/600?random=2&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=2",
     imageAlt: "Sculpteur travaillant dans son atelier",
     href: "#",
     ariaLabel: "Découvrir le profil d'Antoine Martin",
@@ -29,7 +29,7 @@ const artists = [
     subtitle: "Peintre Contemporaine",
     description:
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
-    imageUrl: "https://picsum.photos/800/600?random=3&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=3",
     imageAlt: "Peintre dans son atelier",
     href: "#",
     ariaLabel: "Découvrir le profil de Sophie Bernard",
@@ -39,7 +39,7 @@ const artists = [
     subtitle: "Photographe",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
-    imageUrl: "https://picsum.photos/800/600?random=4&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=4",
     imageAlt: "Photographe préparant une installation",
     href: "#",
     ariaLabel: "Découvrir le profil de Lucas Moreau",
@@ -49,7 +49,7 @@ const artists = [
     subtitle: "Sculpteur",
     description:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
-    imageUrl: "https://picsum.photos/800/600?random=2&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=2",
     imageAlt: "Sculpteur travaillant dans son atelier",
     href: "#",
     ariaLabel: "Découvrir le profil d'Antoine Martin",
@@ -59,7 +59,7 @@ const artists = [
     subtitle: "Peintre Contemporaine",
     description:
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
-    imageUrl: "https://picsum.photos/800/600?random=3&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=3",
     imageAlt: "Peintre dans son atelier",
     href: "#",
     ariaLabel: "Découvrir le profil de Sophie Bernard",
@@ -69,7 +69,7 @@ const artists = [
     subtitle: "Photographe",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
-    imageUrl: "https://picsum.photos/800/600?random=4&grayscale",
+    imageUrl: "https://picsum.photos/800/600?random=4",
     imageAlt: "Photographe préparant une installation",
     href: "#",
     ariaLabel: "Découvrir le profil de Lucas Moreau",
@@ -122,7 +122,7 @@ const artists = [
         <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
         {
           artists.map((artist) => (
-            <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0 pr-4 md:pr-8">
+            <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0">
               <Card
                 title={artist.title}
                 subtitle={artist.subtitle}
@@ -131,7 +131,7 @@ const artists = [
                 imageAlt={artist.imageAlt}
                 href={artist.href}
                 ariaLabel={artist.ariaLabel}
-                grayscale={true}
+                grayscale={"notHover"}
               />
             </div>
           ))
@@ -141,29 +141,34 @@ const artists = [
     </section>
 
     <!-- Vertical Content Section After Horizontal Scroll -->
-    <section id="vertical-content" class="w-full py-20 px-2 sm:px-10 bg-white relative z-10">
+    <section
+      id="vertical-content"
+      class="w-full py-20 px-2 sm:px-10 bg-white relative z-10"
+    >
       <div class="">
-        <h2 class="text-4xl sm:text-6xl text-gray-900 font-eina01 font-semibold mb-8">
+        <h2
+          class="text-4xl sm:text-6xl text-gray-900 font-eina01 font-semibold mb-8"
+        >
           À propos de nos artistes
         </h2>
         <div class="space-y-6">
           <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-            Chaque artiste résident apporte sa vision unique et sa pratique 
-            personnelle à l'Espace29. Nos ateliers accueillent des créateurs 
-            de diverses disciplines : arts plastiques, sculpture, photographie, 
+            Chaque artiste résident apporte sa vision unique et sa pratique
+            personnelle à l'Espace29. Nos ateliers accueillent des créateurs de
+            diverses disciplines : arts plastiques, sculpture, photographie,
             design, et bien d'autres formes d'expression contemporaine.
           </p>
           <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-            La richesse de ce lieu réside dans la diversité des approches 
-            artistiques et la dynamique collaborative qui se crée naturellement 
-            entre les résidents. Les espaces de travail, conçus pour favoriser 
-            les échanges, permettent l'émergence de projets transversaux et de 
+            La richesse de ce lieu réside dans la diversité des approches
+            artistiques et la dynamique collaborative qui se crée naturellement
+            entre les résidents. Les espaces de travail, conçus pour favoriser
+            les échanges, permettent l'émergence de projets transversaux et de
             collaborations inattendues.
           </p>
           <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-            Découvrez les profils de nos artistes résidents, leurs démarches 
-            créatives, et les projets qu'ils développent au sein de l'Espace29. 
-            Chaque carte présente un aperçu de leur univers artistique et de 
+            Découvrez les profils de nos artistes résidents, leurs démarches
+            créatives, et les projets qu'ils développent au sein de l'Espace29.
+            Chaque carte présente un aperçu de leur univers artistique et de
             leur contribution à la vie culturelle de notre communauté créative.
           </p>
         </div>
@@ -179,41 +184,43 @@ const artists = [
   gsap.registerPlugin(ScrollTrigger)
 
   document.addEventListener("DOMContentLoaded", () => {
-    const horizontalSection = document.getElementById("horizontal-scroll-section")
+    const horizontalSection = document.getElementById(
+      "horizontal-scroll-section"
+    )
     const cardsWrapper = document.getElementById("artist-cards-wrapper")
     const verticalContent = document.getElementById("vertical-content")
-    
+
     if (!horizontalSection || !cardsWrapper || !verticalContent) return
 
     // Calculate scroll distance and deadzones
     const totalWidth = cardsWrapper.scrollWidth
     const viewportWidth = window.innerWidth
     const scrollDistance = totalWidth - viewportWidth
-    
+
     // Add deadzones for comfortable reading
     const deadZone = viewportWidth * 0.25
-    const totalScrollDistance = scrollDistance + (deadZone * 2)
+    const totalScrollDistance = scrollDistance + deadZone * 2
 
     // Create timeline with deadzones
     const tl = gsap.timeline()
-    
+
     // Deadzone before first card (no movement - user can read first card)
     tl.to(cardsWrapper, {
       duration: deadZone,
-      ease: "none"
+      ease: "none",
     })
-    
+
     // Actual horizontal scroll between cards
     tl.to(cardsWrapper, {
       x: -scrollDistance,
       duration: scrollDistance,
-      ease: "none"
+      ease: "none",
     })
-    
+
     // Deadzone after last card (no movement - user can read last card)
     tl.to(cardsWrapper, {
       duration: deadZone,
-      ease: "none"
+      ease: "none",
     })
 
     // Create ScrollTrigger for horizontal scroll with proper spacing
@@ -225,12 +232,12 @@ const artists = [
       pin: true,
       animation: tl,
       invalidateOnRefresh: true,
-      anticipatePin: 1
+      anticipatePin: 1,
     })
 
     // Push vertical content down to prevent overlap
     gsap.set(verticalContent, {
-      marginTop: totalScrollDistance
+      marginTop: totalScrollDistance,
     })
 
     // Refresh ScrollTrigger on window resize
