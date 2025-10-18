@@ -1,0 +1,87 @@
+---
+export interface Props {
+  className?: string
+  disabled?: boolean
+  onClick?: string
+  intent?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | "destructive"
+    | "error"
+  size?: "small" | "medium" | "large"
+  type?: "button" | "submit" | "reset"
+  id?: string
+  ariaLabel?: string
+}
+
+const {
+  className = "",
+  disabled = false,
+  onClick,
+  intent = "default",
+  size = "medium",
+  type = "button",
+  id,
+  ariaLabel,
+} = Astro.props
+
+const getIntentClasses = (intent: string) => {
+  switch (intent) {
+    case "primary":
+      return "bg-gray-900 hover:bg-gray-800 focus:bg-gray-800 active:bg-gray-950 text-white"
+    case "secondary":
+      return "border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 focus:border-gray-900 text-gray-700 bg-transparent"
+    case "ghost":
+      return "text-gray-700 hover:text-gray-900 bg-transparent border-none shadow-none hover:bg-gray-50"
+    case "link":
+      return "text-gray-700 hover:text-gray-900 underline hover:no-underline bg-transparent border-none shadow-none p-0 rounded-none focus:ring-1"
+    case "destructive":
+      return "bg-red-600 hover:bg-red-700 focus:bg-red-700 active:bg-red-800 text-white"
+    case "error":
+      return "border-2 border-red-300 hover:border-red-400 focus:border-red-600 text-red-700 bg-transparent"
+    default:
+      return "bg-gray-900 hover:bg-gray-800 focus:bg-gray-800 active:bg-gray-950 text-white"
+  }
+}
+
+const getSizeClasses = (size: string) => {
+  switch (size) {
+    case "small":
+      return "py-2 px-4 text-sm"
+    case "large":
+      return "py-4 px-8 text-lg"
+    default: // medium
+      return "py-3 px-6"
+  }
+}
+
+const baseClasses =
+  "font-eina04 font-semibold rounded-lg transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none inline-flex items-center gap-3"
+
+const sizeClasses = getSizeClasses(size)
+
+const disabledClasses = disabled
+  ? "bg-gray-300 text-gray-500 cursor-not-allowed border-gray-200 hover:bg-gray-300 hover:border-gray-200 focus:ring-0"
+  : ""
+
+const intentClasses = disabled ? "" : getIntentClasses(intent)
+
+const finalClasses =
+  `${baseClasses} ${sizeClasses} ${intentClasses} ${disabledClasses} ${className}`.trim()
+---
+
+<button
+  type={type}
+  class={finalClasses}
+  disabled={disabled}
+  onclick={onClick}
+  id={id}
+  aria-label={ariaLabel}
+>
+  <div class="flex items-center justify-center">
+    <slot />
+  </div>
+</button>
