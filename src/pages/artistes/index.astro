@@ -141,10 +141,7 @@ const artists = [
     </section>
 
     <!-- Mobile Vertical Cards Section -->
-    <section
-      id="mobile-cards-section"
-      class="block sm:hidden w-full px-2 pb-8"
-    >
+    <section id="mobile-cards-section" class="block sm:hidden w-full px-2 pb-8">
       <div class="flex flex-col gap-4">
         {
           artists.map((artist) => (
@@ -178,6 +175,9 @@ const artists = [
   gsap.registerPlugin(ScrollTrigger)
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Only run on desktop (same breakpoint as the CSS)
+    if (window.innerWidth < 640) return
+
     const horizontalSection = document.getElementById(
       "horizontal-scroll-section"
     )
@@ -187,9 +187,8 @@ const artists = [
     if (!horizontalSection || !cardsWrapper || !verticalContent) return
 
     // Calculate scroll distance and deadzones
-    const totalWidth = cardsWrapper.scrollWidth
     const viewportWidth = window.innerWidth
-    const scrollDistance = totalWidth - viewportWidth
+    const scrollDistance = cardsWrapper.scrollWidth - viewportWidth
 
     // Add deadzones for comfortable reading
     const deadZone = viewportWidth * 0.25
