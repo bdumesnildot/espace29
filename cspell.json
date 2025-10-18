@@ -1,9 +1,10 @@
 {
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "words": ["eina", " e29", "grayscale", "mdx", "jsonc"],
+  "words": ["eina", " e29", "grayscale", "gsap", "mdx", "jsonc"],
   "dictionaryDefinitions": [],
   "enableFiletypes": [
+    "astro",
     "javascript",
     "javascriptreact",
     "typescript",
