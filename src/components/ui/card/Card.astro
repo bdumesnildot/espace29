@@ -7,7 +7,6 @@ export interface Props {
   imageAlt?: string
   href?: string
   className?: string
-  variant?: "default" | "event" | "artist"
   grayscale?: boolean
   onClick?: string
   ariaLabel?: string
@@ -22,7 +21,6 @@ const {
   imageAlt = "",
   href,
   className = "",
-  variant = "default",
   grayscale = false,
   onClick,
   ariaLabel,
@@ -32,19 +30,12 @@ const {
 const Component = href ? "a" : "div"
 const isInteractive = href || onClick
 
-// Base classes following design system
-const baseClasses = "bg-white border border-gray-200 overflow-hidden transition-all duration-300"
+// Base classes following design system philosophy
+const baseClasses = "bg-white border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col bg-blue-600 w-[650px] min-w-[650px]"
 const interactiveClasses = isInteractive ? "hover:shadow-lg hover:-translate-y-1 cursor-pointer" : ""
 const grayscaleClasses = grayscale ? "filter grayscale hover:grayscale-0" : ""
 
-// Variant-specific styling
-const variantClasses = {
-  default: "rounded-lg shadow-md",
-  event: "rounded-none shadow-none border-gray-900", // Legacy event style
-  artist: "rounded-none shadow-none border-gray-900"  // Legacy artist style
-}
-
-const finalClasses = `${baseClasses} ${interactiveClasses} ${variantClasses[variant]} ${className}`
+const finalClasses = `${baseClasses} ${interactiveClasses} ${className}`
 ---
 
 <Component
@@ -55,57 +46,29 @@ const finalClasses = `${baseClasses} ${interactiveClasses} ${variantClasses[vari
   id={id}
 >
   {imageUrl && (
-    <div class="relative overflow-hidden">
+    <div class="flex-3">
       <img 
         src={imageUrl} 
         alt={imageAlt}
-        class={`w-full h-64 md:h-80 object-cover transition-all duration-300 ${grayscaleClasses}`}
+        class={`w-full h-full object-cover transition-all duration-300 ${grayscaleClasses}`}
         loading="lazy"
       />
     </div>
   )}
   
-  <div class="relative bg-white z-10">
-    {/* Title section with legacy-style dividers for event/artist variants */}
-    {(variant === "event" || variant === "artist") ? (
-      <div class="p-0">
-        <div class="px-5 py-2">
-          <h3 class="text-2xl md:text-3xl font-eina01 font-bold text-gray-900 mb-0">
-            {title}
-          </h3>
-        </div>
-        <div class="w-full h-px bg-gray-900"></div>
-        {subtitle && (
-          <>
-            <div class="px-5 py-2">
-              <p class="text-lg font-eina01 text-gray-900 mb-0">
-                {subtitle}
-              </p>
-            </div>
-            <div class="w-full h-px bg-gray-900"></div>
-          </>
-        )}
-      </div>
-    ) : (
-      <div class="p-6">
-        <h3 class="text-2xl font-eina03 font-semibold text-gray-900 mb-3">
-          {title}
-        </h3>
-        {subtitle && (
-          <p class="text-lg font-eina03 font-medium text-gray-700 mb-2">
-            {subtitle}
-          </p>
-        )}
-      </div>
+  <div class="flex-1 p-6">
+    <h3 class="text-2xl font-eina03 font-semibold text-gray-900 mb-3">
+      {title}
+    </h3>
+    {subtitle && (
+      <p class="text-lg font-eina03 font-medium text-gray-700 mb-2">
+        {subtitle}
+      </p>
     )}
-    
-    {/* Description section */}
     {description && (
-      <div class={variant === "default" ? "px-6 pb-6" : "p-5"}>
-        <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-          {description}
-        </p>
-      </div>
+      <p class="text-lg font-eina03 leading-relaxed text-gray-700 line-clamp-6">
+        {description}
+      </p>
     )}
   </div>
 </Component>
