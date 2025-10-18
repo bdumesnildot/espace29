@@ -37,7 +37,7 @@ const interactiveClasses = isInteractive ? "cursor-pointer" : ""
 const grayscaleClasses = (() => {
   if (grayscale === "always") return "filter grayscale"
   if (grayscale === "notHover")
-    return "filter grayscale hover:grayscale-0 transition-all duration-300"
+    return "filter grayscale hover:grayscale-0"
   return ""
 })()
 

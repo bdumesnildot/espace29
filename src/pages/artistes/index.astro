@@ -11,7 +11,7 @@ const artists = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
     imageUrl: "https://picsum.photos/800/600?random=1",
     imageAlt: "Portrait d'artiste dans son atelier",
-    href: "#",
+    href: "/artistes/marie-dubois",
     ariaLabel: "Découvrir le profil de Marie Dubois",
   },
   {
@@ -21,7 +21,7 @@ const artists = [
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
     imageUrl: "https://picsum.photos/800/600?random=2",
     imageAlt: "Sculpteur travaillant dans son atelier",
-    href: "#",
+    href: "/artistes/antoine-martin",
     ariaLabel: "Découvrir le profil d'Antoine Martin",
   },
   {
@@ -116,7 +116,7 @@ const artists = [
     <!-- Horizontal Scroll Section -->
     <section
       id="horizontal-scroll-section"
-      class="w-full h-screen overflow-hidden"
+      class="hidden sm:block w-full h-screen overflow-hidden"
     >
       <div id="artist-cards-wrapper" class="flex flex-row flex-nowrap h-full">
         <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
@@ -140,40 +140,34 @@ const artists = [
       </div>
     </section>
 
-    <!-- Vertical Content Section After Horizontal Scroll -->
+    <!-- Mobile Vertical Cards Section -->
     <section
-      id="vertical-content"
-      class="w-full py-20 px-2 sm:px-10 bg-white relative z-10"
+      id="mobile-cards-section"
+      class="block sm:hidden w-full px-2 pb-8"
     >
-      <div class="">
-        <h2
-          class="text-4xl sm:text-6xl text-gray-900 font-eina01 font-semibold mb-8"
-        >
-          À propos de nos artistes
-        </h2>
-        <div class="space-y-6">
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-            Chaque artiste résident apporte sa vision unique et sa pratique
-            personnelle à l'Espace29. Nos ateliers accueillent des créateurs de
-            diverses disciplines : arts plastiques, sculpture, photographie,
-            design, et bien d'autres formes d'expression contemporaine.
-          </p>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-            La richesse de ce lieu réside dans la diversité des approches
-            artistiques et la dynamique collaborative qui se crée naturellement
-            entre les résidents. Les espaces de travail, conçus pour favoriser
-            les échanges, permettent l'émergence de projets transversaux et de
-            collaborations inattendues.
-          </p>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-            Découvrez les profils de nos artistes résidents, leurs démarches
-            créatives, et les projets qu'ils développent au sein de l'Espace29.
-            Chaque carte présente un aperçu de leur univers artistique et de
-            leur contribution à la vie culturelle de notre communauté créative.
-          </p>
-        </div>
+      <div class="flex flex-col gap-4">
+        {
+          artists.map((artist) => (
+            <div class="w-full">
+              <Card
+                title={artist.title}
+                subtitle={artist.subtitle}
+                description={artist.description}
+                imageUrl={artist.imageUrl}
+                imageAlt={artist.imageAlt}
+                href={artist.href}
+                ariaLabel={artist.ariaLabel}
+                grayscale={"notHover"}
+                className="w-full min-w-full"
+              />
+            </div>
+          ))
+        }
       </div>
     </section>
+
+    <!-- Vertical Content Section After Horizontal Scroll -->
+    <section id="vertical-content" class="w-full"></section>
   </main>
 </Layout>
 
