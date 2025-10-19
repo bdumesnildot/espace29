@@ -1,0 +1,315 @@
+---
+import Layout from "@layouts/Layout.astro"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
+import { events, type Event } from "@lib/events-helper"
+
+export function getStaticPaths() {
+  return events.map((event) => ({
+    params: { slug: event.slug },
+    props: { event },
+  }))
+}
+
+const { event } = Astro.props
+
+if (!event) {
+  return Astro.redirect("/404")
+}
+
+// Helper function to format date for display
+const formatDate = (dateStart: string, dateEnd?: string) => {
+  const start = new Date(dateStart)
+  const startFormatted = start.toLocaleDateString('fr-FR', { 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric' 
+  })
+  
+  if (dateEnd) {
+    const end = new Date(dateEnd)
+    const endFormatted = end.toLocaleDateString('fr-FR', { 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    })
+    return `${startFormatted} - ${endFormatted}`
+  }
+  
+  return startFormatted
+}
+---
+
+<Layout title={`e29 | ${event.title}`}>
+  <main class="min-h-full w-full flex flex-col items-start">
+    <PageTopLayout title={event.title} />
+    <section class="w-full h-screen flex flex-col md:flex-row">
+      <!-- Mobile: Event Details First -->
+      <div class="md:hidden w-full p-4 flex flex-col space-y-4">
+        <!-- Event Date -->
+        <div class="border-b border-gray-400 pb-4">
+          <h2 class="text-2xl font-eina02 font-semibold text-gray-900">
+            {formatDate(event.dateStart, event.dateEnd)}
+          </h2>
+        </div>
+
+        <!-- Description -->
+        <div class="border-b border-gray-400 pb-4">
+          <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-3">
+            Description
+          </h3>
+          <div class="space-y-3">
+            {
+              event.Description
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p class="text-sm font-eina03 leading-relaxed text-gray-700">
+                    {paragraph.trim()}
+                  </p>
+                ))
+            }
+          </div>
+        </div>
+
+        <!-- Practical Information -->
+        <div>
+          <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-3">
+            Informations pratiques
+          </h3>
+          <div class="space-y-3">
+            {
+              event.practicalInfo
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p class="text-sm font-eina03 leading-relaxed text-gray-700">
+                    {paragraph.trim()}
+                  </p>
+                ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile: Images Grid -->
+      <div class="md:hidden w-full bg-gray-50 p-4">
+        <div class="grid grid-cols-1 gap-4">
+          {event.ImageUrlList.map((image, index) => (
+            <img
+              src={image.url}
+              alt={image.alt}
+              class="w-full h-64 object-cover rounded-lg shadow-sm"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Desktop: Image Carousel -->
+      <div class="hidden md:flex flex-1 bg-gray-50 relative overflow-hidden">
+        <div class="w-full h-full relative">
+          <!-- Images -->
+          <div class="carousel-container w-full h-full relative">
+            {
+              event.ImageUrlList.map((image, index) => (
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  class={`carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    index === 0 ? "opacity-100" : "opacity-0"
+                  }`}
+                  data-index={index}
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              ))
+            }
+          </div>
+
+          <!-- Navigation Buttons -->
+          {
+            event.ImageUrlList.length > 1 && (
+              <>
+                <button
+                  id="prev-btn"
+                  class="carousel-btn absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                  aria-label="Image précédente"
+                >
+                  <svg
+                    class="w-6 h-6 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  id="next-btn"
+                  class="carousel-btn absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                  aria-label="Image suivante"
+                >
+                  <svg
+                    class="w-6 h-6 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )
+          }
+
+          <!-- Image navigation dots (if multiple images) -->
+          {
+            event.ImageUrlList.length > 1 && (
+              <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+                {event.ImageUrlList.map((_, index) => (
+                  <button
+                    class={`carousel-dot w-3 h-3 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
+                    }`}
+                    data-index={index}
+                    aria-label={`Image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Desktop: Event Details -->
+      <div class="hidden md:flex flex-1 h-full flex-col">
+        <div class="p-8 pt-12 h-full flex flex-col space-y-8">
+                    
+          <!-- Event Date -->
+          <div class="border-b border-gray-400 pb-6">
+            <h2 class="text-4xl font-eina02 font-semibold text-gray-900">
+              {formatDate(event.dateStart, event.dateEnd)}
+            </h2>
+          </div>
+
+          <!-- Description -->
+          <div class="border-b border-gray-400 pb-6">
+            <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-4">
+              Description
+            </h3>
+            <div class="space-y-4">
+              {
+                event.Description
+                  .split("\n\n")
+                  .map((paragraph) => (
+                    <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+                      {paragraph.trim()}
+                    </p>
+                  ))
+              }
+            </div>
+          </div>
+
+          <!-- Practical Information -->
+          <div class="flex-1 flex flex-col">
+            <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-4">
+              Informations pratiques
+            </h3>
+            <div class="space-y-4 flex-1 overflow-y-auto">
+              {
+                event.practicalInfo
+                  .split("\n\n")
+                  .map((paragraph) => (
+                    <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+                      {paragraph.trim()}
+                    </p>
+                  ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(
+      ".carousel-image"
+    ) as NodeListOf<HTMLImageElement>
+    const dots = document.querySelectorAll(
+      ".carousel-dot"
+    ) as NodeListOf<HTMLButtonElement>
+    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
+    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
+
+    if (images.length <= 1) return
+
+    let currentIndex = 0
+
+    function showImage(index: number) {
+      // Hide all images
+      images.forEach((img, i) => {
+        img.classList.toggle("opacity-100", i === index)
+        img.classList.toggle("opacity-0", i !== index)
+      })
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove("bg-white/50", "hover:bg-white/75")
+          dot.classList.add("bg-white")
+        } else {
+          dot.classList.remove("bg-white")
+          dot.classList.add("bg-white/50", "hover:bg-white/75")
+        }
+      })
+
+      currentIndex = index
+    }
+
+    function nextImage() {
+      const newIndex = (currentIndex + 1) % images.length
+      showImage(newIndex)
+    }
+
+    function prevImage() {
+      const newIndex = (currentIndex - 1 + images.length) % images.length
+      showImage(newIndex)
+    }
+
+    // Event listeners
+    if (prevBtn) {
+      prevBtn.addEventListener("click", prevImage)
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", nextImage)
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showImage(index))
+    })
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        prevImage()
+      } else if (e.key === "ArrowRight") {
+        nextImage()
+      }
+    })
+
+    // Auto-play (optional - uncomment to enable)
+    // setInterval(nextImage, 5000);
+  })
+</script>
