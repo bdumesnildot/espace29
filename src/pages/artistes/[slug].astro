@@ -23,8 +23,86 @@ const formattedName = formatArtistName(artist)
   <main class="min-h-full w-full flex flex-col items-start">
     <PageTopLayout title={formattedName} />
     <section class="w-full h-screen flex flex-col md:flex-row">
-      <!-- Left side - Image Carousel -->
-      <div class="flex-1 relative overflow-hidden">
+      <!-- Mobile: Artist Details First -->
+      <div class="md:hidden w-full p-4 flex flex-col space-y-4">
+        <!-- Artist Title -->
+        <div class="border-b border-gray-400 pb-4">
+          <h2 class="text-2xl font-eina02 font-semibold text-gray-900">
+            {artist.title}
+          </h2>
+        </div>
+
+        <!-- Website Link -->
+        {
+          artist.websiteUrl && (
+            <div class="border-b border-gray-400 pb-4">
+              <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-2">
+                Site Web
+              </h3>
+              <a
+                href={artist.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300 text-sm"
+              >
+                {artist.websiteUrl}
+              </a>
+            </div>
+          )
+        }
+
+        <!-- Email -->
+        {
+          artist.email && (
+            <div class="border-b border-gray-400 pb-4">
+              <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-2">
+                Contact
+              </h3>
+              <a
+                href={`mailto:${artist.email}`}
+                class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300 text-sm"
+              >
+                {artist.email}
+              </a>
+            </div>
+          )
+        }
+
+        <!-- Description -->
+        <div>
+          <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-3">
+            À propos
+          </h3>
+          <div class="space-y-3">
+            {
+              artist.profileDescription
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p class="text-sm font-eina03 leading-relaxed text-gray-700">
+                    {paragraph.trim()}
+                  </p>
+                ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile: Images Grid -->
+      <div class="md:hidden w-full bg-gray-50 p-4">
+        <div class="grid grid-cols-1 gap-4">
+          {artist.profileImageUrlList.map((image, index) => (
+            <img
+              src={image.url}
+              alt={image.alt}
+              class="w-full h-64 object-cover rounded-lg shadow-sm"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Desktop: Image Carousel -->
+      <div class="hidden md:flex flex-1 bg-gray-50 relative overflow-hidden">
         <div class="w-full h-full relative">
           <!-- Images -->
           <div class="carousel-container w-full h-full relative">
@@ -109,9 +187,10 @@ const formattedName = formatArtistName(artist)
         </div>
       </div>
 
-      <!-- Right side - Artist Details -->
-      <div class="flex-1 h-full flex flex-col">
+      <!-- Desktop: Artist Details -->
+      <div class="hidden md:flex flex-1 h-full flex-col">
         <div class="p-8 pt-12 h-full flex flex-col space-y-8">
+                    
           <!-- Artist Title -->
           <div class="border-b border-gray-400 pb-6">
             <h2 class="text-4xl font-eina02 font-semibold text-gray-900">
