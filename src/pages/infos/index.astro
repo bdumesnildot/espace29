@@ -1,16 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
 ---
 
 <Layout title="e29 | Infos">
-  <main class="min-h-full p-2 sm:p-10 w-full flex flex-col items-start">
-    <!-- Header -->
-    <h1
-      class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
-    >
-      Infos
-    </h1>
-    <section class="grow w-full flex flex-col sm:flex-row gap-6">
+  <main class="min-h-full w-full flex flex-col items-start">
+    <PageTopLayout title="Infos" />
+    <section class="grow w-full flex flex-col sm:flex-row gap-6 px-2 sm:px-10">
       <div class="flex-3">
         <!-- L'Espace29 -->
         <div class="p-6 bg-gray-50 border border-gray-200">

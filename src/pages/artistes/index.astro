@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro"
 import Card from "@components/ui/card/Card.astro"
 import { artists } from "@lib/artists-helper"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
 
 // Helper function to format artist name
 const formatArtistName = (artist: any) => {
@@ -14,14 +15,9 @@ const formatArtistName = (artist: any) => {
 
 <Layout title="e29 | Artistes">
   <main class="min-h-full w-full flex flex-col items-start">
+    <PageTopLayout title="Artistes" />
     <!-- With padding container -->
-    <div class="p-2 sm:px-10 sm:pt-10 sm:pb-0">
-      <!-- Header -->
-      <h1
-        class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
-      >
-        Artistes
-      </h1>
+    <div class="px-2 pb-2 sm:px-10 sm:pb-0">
 
       <!-- Introduction Text -->
       <section class="w-full mb-12">
@@ -48,7 +44,7 @@ const formatArtistName = (artist: any) => {
       </section>
     </div>
 
-    <!-- Horizontal Scroll Section -->
+    <!-- Horizontal Scroll Section (no padding) -->
     <section
       id="horizontal-scroll-section"
       class="hidden sm:block w-full h-screen overflow-hidden"
