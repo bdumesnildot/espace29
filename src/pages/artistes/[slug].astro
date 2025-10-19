@@ -24,38 +24,94 @@ const formattedName = formatArtistName(artist)
     <PageTopLayout title={formattedName} />
     <section class="w-full h-screen flex flex-col md:flex-row">
       <!-- Left side - Image Carousel -->
-      <div class="flex-1 bg-gray-50 flex items-center justify-center p-8">
-        <div class="w-full h-full max-w-2xl max-h-[80vh] relative">
-          {artist.profileImageUrlList[0] && (
-            <img
-              src={artist.profileImageUrlList[0].url}
-              alt={artist.profileImageUrlList[0].alt}
-              class="w-full h-full object-cover rounded-lg shadow-md transition-all duration-300"
-              loading="lazy"
-            />
-          )}
-          
-          <!-- Image navigation dots (if multiple images) -->
-          {artist.profileImageUrlList.length > 1 && (
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {artist.profileImageUrlList.map((_, index) => (
-                <button
-                  class="w-3 h-3 rounded-full transition-all duration-200"
-                  class:list={[
-                    index === 0 ? 'bg-gray-900' : 'bg-gray-400 hover:bg-gray-600'
-                  ]}
-                  aria-label={`Image ${index + 1}`}
+      <div class="flex-1 bg-gray-50 relative overflow-hidden">
+        <div class="w-full h-full relative">
+          <!-- Images -->
+          <div class="carousel-container w-full h-full relative">
+            {
+              artist.profileImageUrlList.map((image, index) => (
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  class={`carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    index === 0 ? "opacity-100" : "opacity-0"
+                  }`}
+                  data-index={index}
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
-              ))}
-            </div>
-          )}
+              ))
+            }
+          </div>
+
+          <!-- Navigation Buttons -->
+          {
+            artist.profileImageUrlList.length > 1 && (
+              <>
+                <button
+                  id="prev-btn"
+                  class="carousel-btn absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                  aria-label="Image précédente"
+                >
+                  <svg
+                    class="w-6 h-6 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  id="next-btn"
+                  class="carousel-btn absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                  aria-label="Image suivante"
+                >
+                  <svg
+                    class="w-6 h-6 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )
+          }
+
+          <!-- Image navigation dots (if multiple images) -->
+          {
+            artist.profileImageUrlList.length > 1 && (
+              <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+                {artist.profileImageUrlList.map((_, index) => (
+                  <button
+                    class={`carousel-dot w-3 h-3 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
+                    }`}
+                    data-index={index}
+                    aria-label={`Image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )
+          }
         </div>
       </div>
 
       <!-- Right side - Artist Details -->
       <div class="flex-1 bg-white p-8 flex flex-col justify-center">
         <div class="max-w-lg space-y-8">
-          
           <!-- Artist Title -->
           <div class="border-b border-gray-200 pb-6">
             <h2 class="text-4xl font-eina02 font-semibold text-gray-900 mb-3">
@@ -67,36 +123,40 @@ const formattedName = formatArtistName(artist)
           </div>
 
           <!-- Website Link -->
-          {artist.websiteUrl && (
-            <div class="border-b border-gray-200 pb-6">
-              <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
-                Site Web
-              </h3>
-              <a 
-                href={artist.websiteUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300"
-              >
-                {artist.websiteUrl}
-              </a>
-            </div>
-          )}
+          {
+            artist.websiteUrl && (
+              <div class="border-b border-gray-200 pb-6">
+                <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
+                  Site Web
+                </h3>
+                <a
+                  href={artist.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300"
+                >
+                  {artist.websiteUrl}
+                </a>
+              </div>
+            )
+          }
 
           <!-- Email -->
-          {artist.email && (
-            <div class="border-b border-gray-200 pb-6">
-              <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
-                Contact
-              </h3>
-              <a 
-                href={`mailto:${artist.email}`}
-                class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300"
-              >
-                {artist.email}
-              </a>
-            </div>
-          )}
+          {
+            artist.email && (
+              <div class="border-b border-gray-200 pb-6">
+                <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
+                  Contact
+                </h3>
+                <a
+                  href={`mailto:${artist.email}`}
+                  class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300"
+                >
+                  {artist.email}
+                </a>
+              </div>
+            )
+          }
 
           <!-- Description -->
           <div>
@@ -104,16 +164,92 @@ const formattedName = formatArtistName(artist)
               À propos
             </h3>
             <div class="space-y-4 max-h-64 overflow-y-auto">
-              {artist.profileDescription.split('\n\n').map((paragraph) => (
-                <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-                  {paragraph.trim()}
-                </p>
-              ))}
+              {
+                artist.profileDescription
+                  .split("\n\n")
+                  .map((paragraph) => (
+                    <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+                      {paragraph.trim()}
+                    </p>
+                  ))
+              }
             </div>
           </div>
-
         </div>
       </div>
     </section>
   </main>
 </Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(
+      ".carousel-image"
+    ) as NodeListOf<HTMLImageElement>
+    const dots = document.querySelectorAll(
+      ".carousel-dot"
+    ) as NodeListOf<HTMLButtonElement>
+    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
+    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
+
+    if (images.length <= 1) return
+
+    let currentIndex = 0
+
+    function showImage(index: number) {
+      // Hide all images
+      images.forEach((img, i) => {
+        img.classList.toggle("opacity-100", i === index)
+        img.classList.toggle("opacity-0", i !== index)
+      })
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove("bg-white/50", "hover:bg-white/75")
+          dot.classList.add("bg-white")
+        } else {
+          dot.classList.remove("bg-white")
+          dot.classList.add("bg-white/50", "hover:bg-white/75")
+        }
+      })
+
+      currentIndex = index
+    }
+
+    function nextImage() {
+      const newIndex = (currentIndex + 1) % images.length
+      showImage(newIndex)
+    }
+
+    function prevImage() {
+      const newIndex = (currentIndex - 1 + images.length) % images.length
+      showImage(newIndex)
+    }
+
+    // Event listeners
+    if (prevBtn) {
+      prevBtn.addEventListener("click", prevImage)
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", nextImage)
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showImage(index))
+    })
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        prevImage()
+      } else if (e.key === "ArrowRight") {
+        nextImage()
+      }
+    })
+
+    // Auto-play (optional - uncomment to enable)
+    // setInterval(nextImage, 5000);
+  })
+</script>

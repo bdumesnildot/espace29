@@ -33,8 +33,7 @@ export const artists: Artist[] = [
     cardImageUrl: "https://picsum.photos/800/600?random=1",
     cardImageAlt: "Portrait d'artiste dans son atelier",
     profileAriaLabel: "Découvrir le profil de Marie Dubois",
-    profileDescription:
-      `Marie Dubois est une artiste plasticienne renommée, connue pour ses œuvres innovantes qui explorent les thèmes de l'identité et de la mémoire. Son travail a été exposé dans de nombreuses galeries à travers le monde, et elle continue de repousser les limites de l'art contemporain avec chaque nouvelle création. 
+    profileDescription: `Marie Dubois est une artiste plasticienne renommée, connue pour ses œuvres innovantes qui explorent les thèmes de l'identité et de la mémoire. Son travail a été exposé dans de nombreuses galeries à travers le monde, et elle continue de repousser les limites de l'art contemporain avec chaque nouvelle création. 
 
       Elle utilise une variété de médiums, y compris la peinture, la sculpture et les installations multimédias, pour créer des expériences immersives qui captivent et inspirent les spectateurs. Marie est également engagée dans des projets communautaires visant à promouvoir l'art et la culture dans les espaces publics.
       
