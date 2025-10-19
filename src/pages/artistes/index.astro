@@ -1,80 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import Card from "@components/ui/card/Card.astro"
-
-// Artist data
-const artists = [
-  {
-    title: "MARIE DUBOIS",
-    subtitle: "Artiste Plasticienne",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    imageUrl: "https://picsum.photos/800/600?random=1",
-    imageAlt: "Portrait d'artiste dans son atelier",
-    href: "/artistes/marie-dubois",
-    ariaLabel: "Découvrir le profil de Marie Dubois",
-  },
-  {
-    title: "ANTOINE MARTIN",
-    subtitle: "Sculpteur",
-    description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
-    imageUrl: "https://picsum.photos/800/600?random=2",
-    imageAlt: "Sculpteur travaillant dans son atelier",
-    href: "/artistes/antoine-martin",
-    ariaLabel: "Découvrir le profil d'Antoine Martin",
-  },
-  {
-    title: "SOPHIE BERNARD",
-    subtitle: "Peintre Contemporaine",
-    description:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
-    imageUrl: "https://picsum.photos/800/600?random=3",
-    imageAlt: "Peintre dans son atelier",
-    href: "#",
-    ariaLabel: "Découvrir le profil de Sophie Bernard",
-  },
-  {
-    title: "LUCAS MOREAU",
-    subtitle: "Photographe",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
-    imageUrl: "https://picsum.photos/800/600?random=4",
-    imageAlt: "Photographe préparant une installation",
-    href: "#",
-    ariaLabel: "Découvrir le profil de Lucas Moreau",
-  },
-  {
-    title: "ANTOINE MARTIN",
-    subtitle: "Sculpteur",
-    description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
-    imageUrl: "https://picsum.photos/800/600?random=2",
-    imageAlt: "Sculpteur travaillant dans son atelier",
-    href: "#",
-    ariaLabel: "Découvrir le profil d'Antoine Martin",
-  },
-  {
-    title: "SOPHIE BERNARD",
-    subtitle: "Peintre Contemporaine",
-    description:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
-    imageUrl: "https://picsum.photos/800/600?random=3",
-    imageAlt: "Peintre dans son atelier",
-    href: "#",
-    ariaLabel: "Découvrir le profil de Sophie Bernard",
-  },
-  {
-    title: "LUCAS MOREAU",
-    subtitle: "Photographe",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
-    imageUrl: "https://picsum.photos/800/600?random=4",
-    imageAlt: "Photographe préparant une installation",
-    href: "#",
-    ariaLabel: "Découvrir le profil de Lucas Moreau",
-  },
-]
+import { artists } from "@lib/artists-helper"
 ---
 
 <Layout title="e29 | Artistes">
@@ -124,13 +51,13 @@ const artists = [
           artists.map((artist) => (
             <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0">
               <Card
-                title={artist.title}
-                subtitle={artist.subtitle}
-                description={artist.description}
-                imageUrl={artist.imageUrl}
-                imageAlt={artist.imageAlt}
-                href={artist.href}
-                ariaLabel={artist.ariaLabel}
+                title={`${artist.firstName} ${artist.lastName}`.toLocaleUpperCase()}
+                subtitle={artist.title}
+                description={artist.cardDescription}
+                imageUrl={artist.cardImageUrl}
+                imageAlt={artist.cardImageAlt}
+                href={artist.profileHref}
+                ariaLabel={artist.profileAriaLabel}
                 grayscale={"notHover"}
               />
             </div>
@@ -147,13 +74,13 @@ const artists = [
           artists.map((artist) => (
             <div class="w-full">
               <Card
-                title={artist.title}
-                subtitle={artist.subtitle}
-                description={artist.description}
-                imageUrl={artist.imageUrl}
-                imageAlt={artist.imageAlt}
-                href={artist.href}
-                ariaLabel={artist.ariaLabel}
+                title={`${artist.firstName} ${artist.lastName}`.toLocaleUpperCase()}
+                subtitle={artist.title}
+                description={artist.cardDescription}
+                imageUrl={artist.cardImageUrl}
+                imageAlt={artist.cardImageAlt}
+                href={artist.profileHref}
+                ariaLabel={artist.profileAriaLabel}
                 grayscale={"notHover"}
                 className="w-full min-w-full"
               />
