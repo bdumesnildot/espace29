@@ -24,7 +24,7 @@ const formattedName = formatArtistName(artist)
     <PageTopLayout title={formattedName} />
     <section class="w-full h-screen flex flex-col md:flex-row">
       <!-- Left side - Image Carousel -->
-      <div class="flex-1 bg-gray-50 relative overflow-hidden">
+      <div class="flex-1 relative overflow-hidden">
         <div class="w-full h-full relative">
           <!-- Images -->
           <div class="carousel-container w-full h-full relative">
@@ -110,22 +110,19 @@ const formattedName = formatArtistName(artist)
       </div>
 
       <!-- Right side - Artist Details -->
-      <div class="flex-1 bg-white p-8 flex flex-col justify-center">
-        <div class="max-w-lg space-y-8">
+      <div class="flex-1 h-full flex flex-col">
+        <div class="p-8 pt-12 h-full flex flex-col space-y-8">
           <!-- Artist Title -->
-          <div class="border-b border-gray-200 pb-6">
-            <h2 class="text-4xl font-eina02 font-semibold text-gray-900 mb-3">
+          <div class="border-b border-gray-400 pb-6">
+            <h2 class="text-4xl font-eina02 font-semibold text-gray-900">
               {artist.title}
             </h2>
-            <p class="text-xl font-eina03 text-gray-600">
-              {formattedName}
-            </p>
           </div>
 
           <!-- Website Link -->
           {
             artist.websiteUrl && (
-              <div class="border-b border-gray-200 pb-6">
+              <div class="border-b border-gray-400 pb-6">
                 <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
                   Site Web
                 </h3>
@@ -144,7 +141,7 @@ const formattedName = formatArtistName(artist)
           <!-- Email -->
           {
             artist.email && (
-              <div class="border-b border-gray-200 pb-6">
+              <div class="border-b border-gray-400 pb-6">
                 <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
                   Contact
                 </h3>
@@ -159,11 +156,11 @@ const formattedName = formatArtistName(artist)
           }
 
           <!-- Description -->
-          <div>
+          <div class="flex-1 flex flex-col">
             <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-4">
               À propos
             </h3>
-            <div class="space-y-4 max-h-64 overflow-y-auto">
+            <div class="space-y-4 flex-1 overflow-y-auto">
               {
                 artist.profileDescription
                   .split("\n\n")
