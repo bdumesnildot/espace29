@@ -8,7 +8,6 @@ export type Artist = {
   cardDescription: string
   cardImageUrl: string
   cardImageAlt: string
-  profileAriaLabel: string
   profileDescription: string
   profileImageUrlList: { url: string; alt: string }[]
 }
@@ -32,7 +31,6 @@ export const artists: Artist[] = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
     cardImageUrl: "https://picsum.photos/800/600?random=1",
     cardImageAlt: "Portrait d'artiste dans son atelier",
-    profileAriaLabel: "Découvrir le profil de Marie Dubois",
     profileDescription: `Marie Dubois est une artiste plasticienne renommée, connue pour ses œuvres innovantes qui explorent les thèmes de l'identité et de la mémoire. Son travail a été exposé dans de nombreuses galeries à travers le monde, et elle continue de repousser les limites de l'art contemporain avec chaque nouvelle création. 
 
       Elle utilise une variété de médiums, y compris la peinture, la sculpture et les installations multimédias, pour créer des expériences immersives qui captivent et inspirent les spectateurs. Marie est également engagée dans des projets communautaires visant à promouvoir l'art et la culture dans les espaces publics.
@@ -64,7 +62,6 @@ export const artists: Artist[] = [
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.",
     cardImageUrl: "https://picsum.photos/800/600?random=2",
     cardImageAlt: "Sculpteur travaillant dans son atelier",
-    profileAriaLabel: "Découvrir le profil d'Antoine Martin",
     profileDescription:
       "Antoine Martin est un sculpteur talentueux, dont le travail explore les formes organiques et les matériaux naturels. Ses sculptures ont été exposées dans plusieurs galeries à travers le pays.",
     profileImageUrlList: [
@@ -93,7 +90,6 @@ export const artists: Artist[] = [
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
     cardImageUrl: "https://picsum.photos/800/600?random=3",
     cardImageAlt: "Peintre dans son atelier",
-    profileAriaLabel: "Découvrir le profil de Sophie Bernard",
     profileDescription:
       "Sophie Bernard est une peintre contemporaine dont les œuvres vibrantes et expressives captivent les spectateurs. Son utilisation audacieuse de la couleur et de la texture lui a valu une reconnaissance internationale.",
     profileImageUrlList: [
@@ -122,7 +118,6 @@ export const artists: Artist[] = [
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.",
     cardImageUrl: "https://picsum.photos/800/600?random=4",
     cardImageAlt: "Photographe préparant une installation",
-    profileAriaLabel: "Découvrir le profil de Lucas Moreau",
     profileDescription:
       "Lucas Moreau est un photographe primé, spécialisé dans la photographie de paysage et de portrait. Son travail a été publié dans plusieurs magazines internationaux et il continue de capturer des images époustouflantes à travers le monde.",
     profileImageUrlList: [

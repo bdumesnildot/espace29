@@ -9,7 +9,6 @@ export interface Props {
   className?: string
   grayscale?: "always" | "notHover" | false
   onClick?: string
-  ariaLabel?: string
   id?: string
 }
 
@@ -23,7 +22,6 @@ const {
   className = "",
   grayscale = false,
   onClick,
-  ariaLabel,
   id,
 } = Astro.props
 
@@ -43,13 +41,7 @@ const grayscaleClasses = (() => {
 const finalClasses = `${baseClasses} ${interactiveClasses} ${grayscaleClasses} ${className}`
 ---
 
-<Component
-  class={finalClasses}
-  href={href}
-  onclick={onClick}
-  aria-label={ariaLabel}
-  id={id}
->
+<Component class={finalClasses} href={href} onclick={onClick} id={id}>
   {
     imageUrl && (
       <div class="flex-3">
