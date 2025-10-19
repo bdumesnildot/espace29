@@ -174,9 +174,16 @@ const artists = [
 
   gsap.registerPlugin(ScrollTrigger)
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function initializeScrollAnimation() {
     // Only run on desktop (same breakpoint as the CSS)
-    if (window.innerWidth < 640) return
+    if (window.innerWidth < 640) {
+      // Reset margin on mobile
+      const verticalContent = document.getElementById("vertical-content")
+      if (verticalContent) {
+        gsap.set(verticalContent, { marginTop: 0 })
+      }
+      return
+    }
 
     const horizontalSection = document.getElementById(
       "horizontal-scroll-section"
@@ -232,10 +239,14 @@ const artists = [
     gsap.set(verticalContent, {
       marginTop: totalScrollDistance,
     })
+  }
 
-    // Refresh ScrollTrigger on window resize
-    window.addEventListener("resize", () => {
-      ScrollTrigger.refresh()
-    })
+  document.addEventListener("DOMContentLoaded", initializeScrollAnimation)
+
+  // Refresh ScrollTrigger and reinitialize on window resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    ScrollTrigger.refresh()
+    initializeScrollAnimation()
   })
 </script>

@@ -32,12 +32,11 @@ const isInteractive = href || onClick
 
 // Base classes following design system philosophy
 const baseClasses =
-  "bg-gray-50 border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col bg-blue-600 w-[650px] min-w-[650px]"
+  "bg-transparent border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col bg-blue-600 w-[650px] min-w-[650px]"
 const interactiveClasses = isInteractive ? "cursor-pointer" : ""
 const grayscaleClasses = (() => {
   if (grayscale === "always") return "filter grayscale"
-  if (grayscale === "notHover")
-    return "filter grayscale hover:grayscale-0"
+  if (grayscale === "notHover") return "filter grayscale hover:grayscale-0"
   return ""
 })()
 
