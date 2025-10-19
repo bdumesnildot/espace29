@@ -2,6 +2,14 @@
 import Layout from "@layouts/Layout.astro"
 import Card from "@components/ui/card/Card.astro"
 import { artists } from "@lib/artists-helper"
+
+// Helper function to format artist name
+const formatArtistName = (artist: any) => {
+  if (artist.firstName) {
+    return `${artist.firstName} ${artist.lastName}`
+  }
+  return artist.lastName
+}
 ---
 
 <Layout title="e29 | Artistes">
@@ -51,12 +59,12 @@ import { artists } from "@lib/artists-helper"
           artists.map((artist) => (
             <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0">
               <Card
-                title={`${artist.firstName} ${artist.lastName}`.toLocaleUpperCase()}
+                title={formatArtistName(artist).toLocaleUpperCase()}
                 subtitle={artist.title}
                 description={artist.cardDescription}
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
-                href={artist.profileHref}
+                href={`/artistes/${artist.slug}`}
                 ariaLabel={artist.profileAriaLabel}
                 grayscale={"notHover"}
               />
@@ -74,12 +82,12 @@ import { artists } from "@lib/artists-helper"
           artists.map((artist) => (
             <div class="w-full">
               <Card
-                title={`${artist.firstName} ${artist.lastName}`.toLocaleUpperCase()}
+                title={formatArtistName(artist).toLocaleUpperCase()}
                 subtitle={artist.title}
                 description={artist.cardDescription}
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
-                href={artist.profileHref}
+                href={`/artistes/${artist.slug}`}
                 ariaLabel={artist.profileAriaLabel}
                 grayscale={"notHover"}
                 className="w-full min-w-full"
