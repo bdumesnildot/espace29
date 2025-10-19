@@ -1,0 +1,102 @@
+---
+import Layout from "@layouts/Layout.astro"
+import { artists, type Artist, formatArtistName } from "@lib/artists-helper"
+
+export function getStaticPaths() {
+  return artists.map((artist) => ({
+    params: { slug: artist.slug },
+    props: { artist },
+  }))
+}
+
+const { artist } = Astro.props
+
+if (!artist) {
+  return Astro.redirect("/404")
+}
+---
+
+<Layout title={`e29 | ${formatArtistName(artist)}`}>
+  <main class="min-h-full w-full flex flex-col items-start">
+    <!-- With padding container -->
+    <div class="p-2 sm:px-10 sm:pt-10 sm:pb-8">
+      <!-- Back navigation -->
+      <nav class="mb-8">
+        <a 
+          href="/artistes" 
+          class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-eina03"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Retour aux artistes
+        </a>
+      </nav>
+
+      <!-- Artist Header -->
+      <header class="mb-12">
+        <h1 class="text-4xl sm:text-6xl text-gray-900 font-eina01 font-semibold mb-4">
+          {formatArtistName(artist)}
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-600 font-eina03 mb-6">
+          {artist.title}
+        </p>
+        
+        <!-- Contact Links -->
+        <div class="flex flex-wrap gap-4">
+          {artist.email && (
+            <a 
+              href={`mailto:${artist.email}`}
+              class="inline-flex items-center px-4 py-2 bg-gray-900 text-white hover:bg-gray-700 transition-colors font-eina03 rounded-md"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Contact
+            </a>
+          )}
+          {artist.websiteUrl && (
+            <a 
+              href={artist.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors font-eina03 rounded-md"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              Site web
+            </a>
+          )}
+        </div>
+      </header>
+
+      <!-- Artist Content -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Image -->
+        <div class="order-2 lg:order-1">
+          <img 
+            src={artist.cardImageUrl} 
+            alt={artist.cardImageAlt}
+            class="w-full h-auto rounded-lg shadow-lg"
+          />
+        </div>
+
+        <!-- Description -->
+        <div class="order-1 lg:order-2">
+          <h2 class="text-2xl sm:text-3xl text-gray-900 font-eina01 font-semibold mb-6">
+            À propos
+          </h2>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+              {artist.cardDescription}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Additional sections can be added here in the future -->
+      <!-- For example: Portfolio, Exhibitions, etc. -->
+    </div>
+  </main>
+</Layout>
