@@ -58,8 +58,15 @@ const sortedSeasons = Object.keys(eventsBySeason)
     
     {sortedSeasons.map((season, seasonIndex) => (
       <section class="w-full mb-16">
-        <!-- Season Title -->
-        <div class="px-2 sm:px-10 mb-8">
+        <!-- Season Title (Fixed Above Horizontal Scroll) -->
+        <div class="hidden sm:block sticky top-0 z-10 bg-gray-50 px-2 sm:px-10 py-4">
+          <h2 class="text-3xl font-eina02 font-semibold text-gray-900">
+            {season}
+          </h2>
+        </div>
+
+        <!-- Mobile Season Title -->
+        <div class="block sm:hidden px-2 mb-8">
           <h2 class="text-3xl font-eina02 font-semibold text-gray-900">
             {season}
           </h2>
