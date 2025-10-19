@@ -126,6 +126,46 @@ const sortedSeasons = Object.keys(eventsBySeason)
 
   gsap.registerPlugin(ScrollTrigger)
 
+  function initializeHoverDetection() {
+    // Only run on desktop
+    if (window.innerWidth < 640) return
+
+    const seasonSections = document.querySelectorAll('[id^="season-"]')
+    
+    seasonSections.forEach((seasonSection, index) => {
+      const cards = seasonSection.querySelectorAll('a[class*="grayscale"]')
+      
+      cards.forEach((card) => {
+        let isHovered = false
+
+        const handleMouseMove = (e) => {
+          const rect = card.getBoundingClientRect()
+          const isInBounds = 
+            e.clientX >= rect.left &&
+            e.clientX <= rect.right &&
+            e.clientY >= rect.top &&
+            e.clientY <= rect.bottom
+
+          if (isInBounds && !isHovered) {
+            isHovered = true
+            card.classList.remove('grayscale')
+          } else if (!isInBounds && isHovered) {
+            isHovered = false
+            card.classList.add('grayscale')
+          }
+        }
+
+        seasonSection.addEventListener('mousemove', handleMouseMove)
+        seasonSection.addEventListener('mouseleave', () => {
+          if (isHovered) {
+            isHovered = false
+            card.classList.add('grayscale')
+          }
+        })
+      })
+    })
+  }
+
   function initializeScrollAnimations() {
     // Only run on desktop (same breakpoint as the CSS)
     if (window.innerWidth < 640) {
@@ -186,12 +226,16 @@ const sortedSeasons = Object.keys(eventsBySeason)
     })
   }
 
-  document.addEventListener("DOMContentLoaded", initializeScrollAnimations)
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeScrollAnimations()
+    initializeHoverDetection()
+  })
 
   // Refresh ScrollTrigger and reinitialize on window resize
   window.addEventListener("resize", () => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     ScrollTrigger.refresh()
     initializeScrollAnimations()
+    initializeHoverDetection()
   })
 </script>
