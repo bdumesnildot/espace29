@@ -1,6 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import Card from '../../components/ui/card/Card.astro'
+import Button from '../../components/ui/button/Button.astro'
+import Navbar from '../../components/navigation/Navbar.astro'
+import NavbarMobile from '../../components/navigation/NavbarMobile.astro'
 ---
 
 <Layout title="e29 | Design System">
@@ -46,6 +49,11 @@ import Card from '../../components/ui/card/Card.astro'
         <li>
           <a href="#components" class="transition-colors hover:text-gray-600"
             >Components</a
+          >
+        </li>
+        <li>
+          <a href="#navigation" class="transition-colors hover:text-gray-600"
+            >Navigation</a
           >
         </li>
         <li>
@@ -667,47 +675,175 @@ import Card from '../../components/ui/card/Card.astro'
       <!-- Buttons -->
       <div class="mb-12">
         <h3 class="font-eina03 mb-8 text-3xl font-medium">Buttons</h3>
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <h4 class="mb-4 text-lg font-semibold">Primary Buttons</h4>
-            <div class="space-y-4">
-              <button
-                class="font-eina04 rounded-lg bg-gray-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-800"
-              >
-                Primary Button
-              </button>
-              <div class="font-mono text-sm text-gray-600">
-                bg-gray-900 hover:bg-gray-800 text-white font-eina04
-                font-semibold py-3 px-6 rounded-lg transition-colors
+
+        <!-- Button Variants -->
+        <div class="mb-12">
+          <h4 class="font-eina03 mb-6 text-2xl font-medium">Button Variants</h4>
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div>
+              <h5 class="mb-4 text-lg font-semibold">Primary</h5>
+              <div class="space-y-4">
+                <Button intent="primary">Primary Button</Button>
+                <div class="font-mono text-sm text-gray-600">
+                  &lt;Button intent="primary"&gt;Text&lt;/Button&gt;
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-4 text-lg font-semibold">Secondary</h5>
+              <div class="space-y-4">
+                <Button intent="secondary">Secondary Button</Button>
+                <div class="font-mono text-sm text-gray-600">
+                  &lt;Button intent="secondary"&gt;Text&lt;/Button&gt;
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-4 text-lg font-semibold">Ghost</h5>
+              <div class="space-y-4">
+                <Button intent="ghost">Ghost Button</Button>
+                <div class="font-mono text-sm text-gray-600">
+                  &lt;Button intent="ghost"&gt;Text&lt;/Button&gt;
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-4 text-lg font-semibold">Link</h5>
+              <div class="space-y-4">
+                <Button intent="link">Link Button</Button>
+                <div class="font-mono text-sm text-gray-600">
+                  &lt;Button intent="link"&gt;Text&lt;/Button&gt;
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-4 text-lg font-semibold">Destructive</h5>
+              <div class="space-y-4">
+                <Button intent="destructive">Destructive Button</Button>
+                <div class="font-mono text-sm text-gray-600">
+                  &lt;Button intent="destructive"&gt;Text&lt;/Button&gt;
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-4 text-lg font-semibold">Error</h5>
+              <div class="space-y-4">
+                <Button intent="error">Error Button</Button>
+                <div class="font-mono text-sm text-gray-600">
+                  &lt;Button intent="error"&gt;Text&lt;/Button&gt;
+                </div>
               </div>
             </div>
           </div>
-          <div>
-            <h4 class="mb-4 text-lg font-semibold">Secondary Buttons</h4>
-            <div class="space-y-4">
-              <button
-                class="font-eina04 rounded-lg border-2 border-gray-300 px-6 py-3 font-semibold text-gray-700 transition-colors hover:border-gray-400"
-              >
-                Secondary Button
-              </button>
-              <div class="font-mono text-sm text-gray-600">
-                border-2 border-gray-300 hover:border-gray-400 text-gray-700
-                font-eina04 font-semibold py-3 px-6 rounded-lg transition-colors
-              </div>
-            </div>
+        </div>
+
+        <!-- Button Sizes -->
+        <div class="mb-12">
+          <h4 class="font-eina03 mb-6 text-2xl font-medium">Button Sizes</h4>
+          <div class="flex flex-wrap items-center gap-4">
+            <Button intent="primary" size="sm">Small</Button>
+            <Button intent="primary" size="md">Medium</Button>
+            <Button intent="primary" size="lg">Large</Button>
           </div>
-          <div>
-            <h4 class="mb-4 text-lg font-semibold">Text Buttons</h4>
-            <div class="space-y-4">
-              <button
-                class="font-eina04 px-6 py-3 font-semibold text-gray-700 transition-colors hover:text-gray-900"
-              >
-                Text Button
-              </button>
-              <div class="font-mono text-sm text-gray-600">
-                text-gray-700 hover:text-gray-900 font-eina04 font-semibold py-3
-                px-6 transition-colors
-              </div>
+          <div class="mt-4 font-mono text-sm text-gray-600">
+            size="sm" | size="md" | size="lg"
+          </div>
+        </div>
+
+        <!-- Button States -->
+        <div class="mb-12">
+          <h4 class="font-eina03 mb-6 text-2xl font-medium">Button States</h4>
+          <div class="flex flex-wrap items-center gap-4">
+            <Button intent="primary">Normal</Button>
+            <Button intent="primary" disabled>Disabled</Button>
+          </div>
+          <div class="mt-4 font-mono text-sm text-gray-600">
+            disabled={true}
+          </div>
+        </div>
+
+        <!-- Button Props Documentation -->
+        <div class="mb-12">
+          <h4 class="font-eina03 mb-6 text-2xl font-medium">Button Props</h4>
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-200">
+                    <th class="font-eina04 py-3 text-left font-semibold"
+                      >Prop</th
+                    >
+                    <th class="font-eina04 py-3 text-left font-semibold"
+                      >Type</th
+                    >
+                    <th class="font-eina04 py-3 text-left font-semibold"
+                      >Default</th
+                    >
+                    <th class="font-eina04 py-3 text-left font-semibold"
+                      >Description</th
+                    >
+                  </tr>
+                </thead>
+                <tbody class="font-eina03">
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">intent</td>
+                    <td class="py-3 text-gray-600"
+                      >"primary" | "secondary" | "ghost" | "link" |
+                      "destructive" | "error"</td
+                    >
+                    <td class="py-3 text-gray-500">"primary"</td>
+                    <td class="py-3 text-gray-700"
+                      >Button visual style variant</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">size</td>
+                    <td class="py-3 text-gray-600">"sm" | "md" | "lg"</td>
+                    <td class="py-3 text-gray-500">"md"</td>
+                    <td class="py-3 text-gray-700">Button size variant</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">disabled</td>
+                    <td class="py-3 text-gray-600">boolean</td>
+                    <td class="py-3 text-gray-500">false</td>
+                    <td class="py-3 text-gray-700"
+                      >Disable button interaction</td
+                    >
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">type</td>
+                    <td class="py-3 text-gray-600"
+                      >"button" | "submit" | "reset"</td
+                    >
+                    <td class="py-3 text-gray-500">"button"</td>
+                    <td class="py-3 text-gray-700">HTML button type</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">onClick</td>
+                    <td class="py-3 text-gray-600">function?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">Click event handler</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">className</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">""</td>
+                    <td class="py-3 text-gray-700">Additional CSS classes</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 font-mono text-gray-900">id</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">HTML id attribute</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-mono text-gray-900">ariaLabel</td>
+                    <td class="py-3 text-gray-600">string?</td>
+                    <td class="py-3 text-gray-500">-</td>
+                    <td class="py-3 text-gray-700">Accessibility label</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -861,6 +997,169 @@ import Card from '../../components/ui/card/Card.astro'
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Section -->
+    <section id="navigation" class="mb-20">
+      <h2 class="font-eina02 mb-12 text-5xl font-semibold">Navigation</h2>
+
+      <div class="mb-8">
+        <p class="font-eina03 max-w-3xl text-lg text-gray-600">
+          Navigation components provide consistent wayfinding throughout the
+          application. They maintain the white canvas philosophy with minimal
+          visual weight while ensuring clear hierarchy and accessibility.
+        </p>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="mb-12">
+        <h3 class="font-eina03 mb-8 text-3xl font-medium">
+          Desktop Navigation
+        </h3>
+        <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h4 class="mb-4 text-lg font-semibold">Navbar Component</h4>
+          <div class="mb-6 rounded border border-gray-100 bg-gray-50 p-4">
+            <Navbar />
+          </div>
+          <div class="space-y-4">
+            <div class="font-mono text-sm text-gray-600">&lt;Navbar /&gt;</div>
+            <div class="font-eina03 text-sm text-gray-700">
+              <strong>Features:</strong>
+              <ul class="mt-2 ml-4 space-y-1">
+                <li>• Responsive horizontal layout</li>
+                <li>• Active state detection based on current URL</li>
+                <li>• Hover effects with smooth transitions</li>
+                <li>• Semantic navigation structure</li>
+                <li>• Eina04 typography for consistency</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="mb-12">
+        <h3 class="font-eina03 mb-8 text-3xl font-medium">Mobile Navigation</h3>
+        <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h4 class="mb-4 text-lg font-semibold">NavbarMobile Component</h4>
+          <div class="mb-6 rounded border border-gray-100 bg-gray-50 p-4">
+            <NavbarMobile />
+          </div>
+          <div class="space-y-4">
+            <div class="font-mono text-sm text-gray-600">
+              &lt;NavbarMobile /&gt;
+            </div>
+            <div class="font-eina03 text-sm text-gray-700">
+              <strong>Features:</strong>
+              <ul class="mt-2 ml-4 space-y-1">
+                <li>• Collapsible hamburger menu</li>
+                <li>• Smooth slide-down animation</li>
+                <li>• Touch-friendly navigation items</li>
+                <li>• Automatic hiding on route change</li>
+                <li>• JavaScript-enhanced interaction</li>
+                <li>• Accessible ARIA labels</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Patterns -->
+      <div class="mb-12">
+        <h3 class="font-eina03 mb-8 text-3xl font-medium">
+          Navigation Patterns
+        </h3>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h4 class="mb-4 text-lg font-semibold">Active State Pattern</h4>
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900"
+              >
+                Normal Link
+              </a>
+              <a
+                href="#"
+                class="block rounded-lg border-l-4 border-gray-900 bg-gray-100 px-4 py-2 font-medium text-gray-900"
+              >
+                Active Link
+              </a>
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900"
+              >
+                Another Link
+              </a>
+            </div>
+            <div class="mt-4 font-mono text-sm text-gray-600">
+              Active: bg-gray-100 text-gray-900 font-medium border-l-4
+              border-gray-900
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h4 class="mb-4 text-lg font-semibold">Hover States</h4>
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900"
+              >
+                Hover for subtle background
+              </a>
+              <a
+                href="#"
+                class="block px-4 py-2 text-gray-700 transition-colors duration-200 hover:text-gray-900"
+              >
+                Hover for text color change
+              </a>
+              <a
+                href="#"
+                class="block border-b border-transparent px-4 py-2 text-gray-700 transition-all duration-200 hover:border-gray-300 hover:text-gray-900"
+              >
+                Hover for underline effect
+              </a>
+            </div>
+            <div class="mt-4 font-mono text-sm text-gray-600">
+              hover:bg-gray-50 hover:text-gray-900 transition-colors
+              duration-200
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Usage Guidelines -->
+      <div class="mb-12">
+        <h3 class="font-eina03 mb-8 text-3xl font-medium">Usage Guidelines</h3>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="rounded-lg border border-gray-100 bg-white p-6">
+            <h4 class="mb-4 text-lg font-semibold text-gray-900">
+              ✅ Best Practices
+            </h4>
+            <ul class="font-eina03 space-y-2 text-sm text-gray-700">
+              <li>• Use clear, descriptive link text</li>
+              <li>• Maintain consistent navigation structure</li>
+              <li>• Indicate current page/section clearly</li>
+              <li>• Ensure touch targets are minimum 44px</li>
+              <li>• Provide keyboard navigation support</li>
+              <li>• Use semantic HTML elements</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <h4 class="mb-4 text-lg font-semibold text-gray-900">
+              ⚠️ Considerations
+            </h4>
+            <ul class="font-eina03 space-y-2 text-sm text-gray-700">
+              <li>• Test on various screen sizes</li>
+              <li>• Consider navigation depth carefully</li>
+              <li>• Avoid too many top-level items</li>
+              <li>• Ensure mobile menu doesn't obstruct content</li>
+              <li>• Test with screen readers</li>
+              <li>• Consider breadcrumbs for deep navigation</li>
+            </ul>
           </div>
         </div>
       </div>
