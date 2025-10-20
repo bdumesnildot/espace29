@@ -1,33 +1,37 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Card from "@components/ui/card/Card.astro"
-import { events, eventSeasons } from "@lib/events-helper"
-import PageTopLayout from "@layouts/PageTopLayout.astro"
+import Layout from '@layouts/Layout.astro'
+import Card from '@components/ui/card/Card.astro'
+import { events, eventSeasons } from '@lib/events-helper'
+import PageTopLayout from '@layouts/PageTopLayout.astro'
 
 // Helper function to format date for display
 const formatDate = (dateStart: string, dateEnd?: string) => {
   const start = new Date(dateStart)
-  const startFormatted = start.toLocaleDateString('fr-FR', { 
-    day: 'numeric', 
-    month: 'long', 
-    year: 'numeric' 
+  const startFormatted = start.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
   })
-  
+
   if (dateEnd) {
     const end = new Date(dateEnd)
-    const endFormatted = end.toLocaleDateString('fr-FR', { 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
+    const endFormatted = end.toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
     })
     return `${startFormatted} - ${endFormatted}`
   }
-  
+
   return startFormatted
 }
 
 // Helper function to check if an event belongs to a season
-const isEventInSeason = (eventDate: string, seasonStart: string, seasonEnd: string) => {
+const isEventInSeason = (
+  eventDate: string,
+  seasonStart: string,
+  seasonEnd: string
+) => {
   const event = new Date(eventDate)
   const start = new Date(seasonStart)
   const end = new Date(seasonEnd)
@@ -36,47 +40,85 @@ const isEventInSeason = (eventDate: string, seasonStart: string, seasonEnd: stri
 
 // Group events by season using the eventSeasons data
 const eventsBySeason = eventSeasons
-  .sort((a, b) => new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()) // Most recent season first
-  .reduce((acc, season) => {
-    const eventsInSeason = events
-      .filter(event => isEventInSeason(event.dateStart, season.dateStart, season.dateEnd))
-      .sort((a, b) => new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()) // Most recent events first within season
-    
-    if (eventsInSeason.length > 0) {
-      acc[season.name] = eventsInSeason
-    }
-    
-    return acc
-  }, {} as Record<string, typeof events>)
+  .sort(
+    (a, b) => new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()
+  ) // Most recent season first
+  .reduce(
+    (acc, season) => {
+      const eventsInSeason = events
+        .filter((event) =>
+          isEventInSeason(event.dateStart, season.dateStart, season.dateEnd)
+        )
+        .sort(
+          (a, b) =>
+            new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()
+        ) // Most recent events first within season
+
+      if (eventsInSeason.length > 0) {
+        acc[season.name] = eventsInSeason
+      }
+
+      return acc
+    },
+    {} as Record<string, typeof events>
+  )
 
 const sortedSeasons = Object.keys(eventsBySeason)
 ---
 
 <Layout title="e29 | Agenda">
-  <main class="min-h-full w-full flex flex-col items-start">
+  <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout title="Agenda" showBackToTop={true} />
-    
-    {sortedSeasons.map((season, seasonIndex) => (
-      <section class={`w-full`}>
-        {
-          /* Spacing between seasons */
-          seasonIndex > 0 ? <div class="h-16 sm:h-32 w-full"></div> : null
-        }
 
-        <!-- Season View (full screen height, fix title and horizontal scroll content) -->
-        <div 
-          id={`season-${seasonIndex}`}
-          class="hidden sm:flex sm:flex-col h-screen overflow-hidden"
-        >
-          <h2 class="text-6xl font-eina02 text-gray-900 mb-1 px-2 sm:px-10 py-4 flex-shrink-0">
-            {season}
-          </h2>
+    {
+      sortedSeasons.map((season, seasonIndex) => (
+        <section class={`w-full`}>
+          {
+            /* Spacing between seasons */
+            seasonIndex > 0 ? <div class="h-16 w-full sm:h-32" /> : null
+          }
 
-          <div class="w-full flex-1 overflow-hidden">
-            <div id={`events-wrapper-${seasonIndex}`} class="flex flex-row flex-nowrap h-full">
-              <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
+          {/* Season View (full screen height, fix title and horizontal scroll content) */}
+          <div
+            id={`season-${seasonIndex}`}
+            class="hidden h-screen overflow-hidden sm:flex sm:flex-col"
+          >
+            <h2 class="font-eina02 mb-1 flex-shrink-0 px-2 py-4 text-6xl text-gray-900 sm:px-10">
+              {season}
+            </h2>
+
+            <div class="w-full flex-1 overflow-hidden">
+              <div
+                id={`events-wrapper-${seasonIndex}`}
+                class="flex h-full flex-row flex-nowrap"
+              >
+                <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10" />
+                {eventsBySeason[season].map((event) => (
+                  <div class="h-full min-w-full flex-shrink-0 md:min-w-[40vw] lg:min-w-[30vw]">
+                    <Card
+                      title={event.title.toLocaleUpperCase()}
+                      subtitle={formatDate(event.dateStart, event.dateEnd)}
+                      description={event.cardDescription}
+                      imageUrl={event.cardImageUrl}
+                      imageAlt={event.cardImageAlt}
+                      href={`/agenda/${event.slug}`}
+                      grayscale={'notHover'}
+                    />
+                  </div>
+                ))}
+                <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10" />
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Vertical Cards Section */}
+          <div class="block w-full px-2 pb-8 sm:hidden">
+            <h2 class="font-eina02 mb-8 text-3xl font-semibold text-gray-900">
+              {season}
+            </h2>
+            <div class="flex flex-col gap-4">
               {eventsBySeason[season].map((event) => (
-                <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0 h-full">
+                <div class="w-full">
                   <Card
                     title={event.title.toLocaleUpperCase()}
                     subtitle={formatDate(event.dateStart, event.dateEnd)}
@@ -84,45 +126,22 @@ const sortedSeasons = Object.keys(eventsBySeason)
                     imageUrl={event.cardImageUrl}
                     imageAlt={event.cardImageAlt}
                     href={`/agenda/${event.slug}`}
-                    grayscale={"notHover"}
+                    grayscale={'notHover'}
+                    className="w-full min-w-full"
                   />
                 </div>
               ))}
-              <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
             </div>
           </div>
-        </div>
-
-        <!-- Mobile Vertical Cards Section -->
-        <div class="block sm:hidden w-full px-2 pb-8">
-          <h2 class="text-3xl font-eina02 font-semibold text-gray-900 mb-8">
-            {season}
-          </h2>
-          <div class="flex flex-col gap-4">
-            {eventsBySeason[season].map((event) => (
-              <div class="w-full">
-                <Card
-                  title={event.title.toLocaleUpperCase()}
-                  subtitle={formatDate(event.dateStart, event.dateEnd)}
-                  description={event.cardDescription}
-                  imageUrl={event.cardImageUrl}
-                  imageAlt={event.cardImageAlt}
-                  href={`/agenda/${event.slug}`}
-                  grayscale={"notHover"}
-                  className="w-full min-w-full"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    ))}
+        </section>
+      ))
+    }
   </main>
 </Layout>
 
 <script>
-  import { gsap } from "gsap"
-  import { ScrollTrigger } from "gsap/ScrollTrigger"
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
   gsap.registerPlugin(ScrollTrigger)
 
@@ -130,17 +149,17 @@ const sortedSeasons = Object.keys(eventsBySeason)
     if (window.innerWidth < 640) return
 
     const seasonSections = document.querySelectorAll('[id^="season-"]')
-    
+
     seasonSections.forEach((seasonSection, index) => {
       const cards = seasonSection.querySelectorAll('a[class*="grayscale"]')
-      
+
       cards.forEach((card) => {
         let isHovered = false
 
         const handleMouseMove = (e: Event) => {
           const mouseEvent = e as MouseEvent
           const rect = card.getBoundingClientRect()
-          const isInBounds = 
+          const isInBounds =
             mouseEvent.clientX >= rect.left &&
             mouseEvent.clientX <= rect.right &&
             mouseEvent.clientY >= rect.top &&
@@ -172,10 +191,10 @@ const sortedSeasons = Object.keys(eventsBySeason)
     }
 
     const seasonSections = document.querySelectorAll('[id^="season-"]')
-    
+
     seasonSections.forEach((seasonSection, index) => {
       const cardsWrapper = document.getElementById(`events-wrapper-${index}`)
-      
+
       if (!seasonSection || !cardsWrapper) return
 
       const viewportWidth = window.innerWidth
@@ -190,23 +209,23 @@ const sortedSeasons = Object.keys(eventsBySeason)
 
       tl.to(cardsWrapper, {
         duration: deadZone,
-        ease: "none",
+        ease: 'none',
       })
 
       tl.to(cardsWrapper, {
         x: -scrollDistance,
         duration: scrollDistance,
-        ease: "none",
+        ease: 'none',
       })
 
       tl.to(cardsWrapper, {
         duration: deadZone,
-        ease: "none",
+        ease: 'none',
       })
 
       ScrollTrigger.create({
         trigger: seasonSection,
-        start: "top top",
+        start: 'top top',
         end: () => `+=${totalScrollDistance}`,
         scrub: 1,
         pin: true,
@@ -217,12 +236,12 @@ const sortedSeasons = Object.keys(eventsBySeason)
     })
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', () => {
     initializeScrollAnimations()
     initializeHoverDetection()
   })
 
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     ScrollTrigger.refresh()
     initializeScrollAnimations()

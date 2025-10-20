@@ -1,7 +1,7 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import PageTopLayout from "@layouts/PageTopLayout.astro"
-import { artists, type Artist, formatArtistName } from "@lib/artists-helper"
+import Layout from '@layouts/Layout.astro'
+import PageTopLayout from '@layouts/PageTopLayout.astro'
+import { artists, type Artist, formatArtistName } from '@lib/artists-helper'
 
 export function getStaticPaths() {
   return artists.map((artist) => ({
@@ -13,27 +13,27 @@ export function getStaticPaths() {
 const { artist } = Astro.props
 
 if (!artist) {
-  return Astro.redirect("/404")
+  return Astro.redirect('/404')
 }
 
 const formattedName = formatArtistName(artist)
 ---
 
 <Layout title={`e29 | ${formattedName}`}>
-  <main class="min-h-full w-full flex flex-col items-start">
+  <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout
       title={formattedName}
       backTo={{
-        href: "/artistes",
-        label: "Retour au artistes",
+        href: '/artistes',
+        label: 'Retour au artistes',
       }}
     />
-    <section class="w-full h-screen flex flex-col md:flex-row">
+    <section class="flex h-screen w-full flex-col md:flex-row">
       <!-- Mobile: Artist Details First -->
-      <div class="md:hidden w-full p-4 flex flex-col space-y-4">
+      <div class="flex w-full flex-col space-y-4 p-4 md:hidden">
         <!-- Artist Title -->
         <div class="border-b border-gray-400 pb-4">
-          <h2 class="text-2xl font-eina02 font-semibold text-gray-900">
+          <h2 class="font-eina02 text-2xl font-semibold text-gray-900">
             {artist.title}
           </h2>
         </div>
@@ -42,14 +42,14 @@ const formattedName = formatArtistName(artist)
         {
           artist.websiteUrl && (
             <div class="border-b border-gray-400 pb-4">
-              <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-2">
+              <h3 class="font-eina04 mb-2 text-base font-semibold text-gray-900">
                 Site Web
               </h3>
               <a
                 href={artist.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300 text-sm"
+                class="font-eina03 border-b border-transparent text-sm text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
               >
                 {artist.websiteUrl}
               </a>
@@ -61,12 +61,12 @@ const formattedName = formatArtistName(artist)
         {
           artist.email && (
             <div class="border-b border-gray-400 pb-4">
-              <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-2">
+              <h3 class="font-eina04 mb-2 text-base font-semibold text-gray-900">
                 Contact
               </h3>
               <a
                 href={`mailto:${artist.email}`}
-                class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300 text-sm"
+                class="font-eina03 border-b border-transparent text-sm text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
               >
                 {artist.email}
               </a>
@@ -76,15 +76,15 @@ const formattedName = formatArtistName(artist)
 
         <!-- Description -->
         <div>
-          <h3 class="text-base font-eina04 font-semibold text-gray-900 mb-3">
+          <h3 class="font-eina04 mb-3 text-base font-semibold text-gray-900">
             À propos
           </h3>
           <div class="space-y-3">
             {
               artist.profileDescription
-                .split("\n\n")
+                .split('\n\n')
                 .map((paragraph) => (
-                  <p class="text-sm font-eina03 leading-relaxed text-gray-700">
+                  <p class="font-eina03 text-sm leading-relaxed text-gray-700">
                     {paragraph.trim()}
                   </p>
                 ))
@@ -94,15 +94,15 @@ const formattedName = formatArtistName(artist)
       </div>
 
       <!-- Mobile: Images Grid -->
-      <div class="md:hidden w-full bg-gray-50 p-4">
+      <div class="w-full bg-gray-50 p-4 md:hidden">
         <div class="grid grid-cols-1 gap-4">
           {
             artist.profileImageUrlList.map((image, index) => (
               <img
                 src={image.url}
                 alt={image.alt}
-                class="w-full h-64 object-cover rounded-lg shadow-sm"
-                loading={index === 0 ? "eager" : "lazy"}
+                class="h-64 w-full rounded-lg object-cover shadow-sm"
+                loading={index === 0 ? 'eager' : 'lazy'}
               />
             ))
           }
@@ -110,20 +110,20 @@ const formattedName = formatArtistName(artist)
       </div>
 
       <!-- Desktop: Image Carousel -->
-      <div class="hidden md:flex flex-1 bg-gray-50 relative overflow-hidden">
-        <div class="w-full h-full relative">
+      <div class="relative hidden flex-1 overflow-hidden bg-gray-50 md:flex">
+        <div class="relative h-full w-full">
           <!-- Images -->
-          <div class="carousel-container w-full h-full relative">
+          <div class="carousel-container relative h-full w-full">
             {
               artist.profileImageUrlList.map((image, index) => (
                 <img
                   src={image.url}
                   alt={image.alt}
-                  class={`carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                    index === 0 ? "opacity-100" : "opacity-0"
+                  class={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+                    index === 0 ? 'opacity-100' : 'opacity-0'
                   }`}
                   data-index={index}
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                 />
               ))
             }
@@ -135,11 +135,11 @@ const formattedName = formatArtistName(artist)
               <>
                 <button
                   id="prev-btn"
-                  class="carousel-btn absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                  class="carousel-btn absolute top-1/2 left-6 -translate-y-1/2 transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                   aria-label="Image précédente"
                 >
                   <svg
-                    class="w-6 h-6 text-gray-900"
+                    class="h-6 w-6 text-gray-900"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -155,11 +155,11 @@ const formattedName = formatArtistName(artist)
 
                 <button
                   id="next-btn"
-                  class="carousel-btn absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                  class="carousel-btn absolute top-1/2 right-6 -translate-y-1/2 transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                   aria-label="Image suivante"
                 >
                   <svg
-                    class="w-6 h-6 text-gray-900"
+                    class="h-6 w-6 text-gray-900"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -179,11 +179,11 @@ const formattedName = formatArtistName(artist)
           <!-- Image navigation dots (if multiple images) -->
           {
             artist.profileImageUrlList.length > 1 && (
-              <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+              <div class="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
                 {artist.profileImageUrlList.map((_, index) => (
                   <button
-                    class={`carousel-dot w-3 h-3 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
+                    class={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
+                      index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
                     }`}
                     data-index={index}
                     aria-label={`Image ${index + 1}`}
@@ -196,11 +196,11 @@ const formattedName = formatArtistName(artist)
       </div>
 
       <!-- Desktop: Artist Details -->
-      <div class="hidden md:flex flex-1 h-full flex-col">
-        <div class="p-8 pt-12 h-full flex flex-col space-y-8">
+      <div class="hidden h-full flex-1 flex-col md:flex">
+        <div class="flex h-full flex-col space-y-8 p-8 pt-12">
           <!-- Artist Title -->
           <div class="border-b border-gray-400 pb-6">
-            <h2 class="text-4xl font-eina02 font-semibold text-gray-900">
+            <h2 class="font-eina02 text-4xl font-semibold text-gray-900">
               {artist.title}
             </h2>
           </div>
@@ -209,14 +209,14 @@ const formattedName = formatArtistName(artist)
           {
             artist.websiteUrl && (
               <div class="border-b border-gray-400 pb-6">
-                <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
+                <h3 class="font-eina04 mb-3 text-lg font-semibold text-gray-900">
                   Site Web
                 </h3>
                 <a
                   href={artist.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300"
+                  class="font-eina03 border-b border-transparent text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
                 >
                   {artist.websiteUrl}
                 </a>
@@ -228,12 +228,12 @@ const formattedName = formatArtistName(artist)
           {
             artist.email && (
               <div class="border-b border-gray-400 pb-6">
-                <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-3">
+                <h3 class="font-eina04 mb-3 text-lg font-semibold text-gray-900">
                   Contact
                 </h3>
                 <a
                   href={`mailto:${artist.email}`}
-                  class="text-gray-700 hover:text-gray-900 font-eina03 transition-colors duration-200 border-b border-transparent hover:border-gray-300"
+                  class="font-eina03 border-b border-transparent text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
                 >
                   {artist.email}
                 </a>
@@ -242,16 +242,16 @@ const formattedName = formatArtistName(artist)
           }
 
           <!-- Description -->
-          <div class="flex-1 flex flex-col">
-            <h3 class="text-lg font-eina04 font-semibold text-gray-900 mb-4">
+          <div class="flex flex-1 flex-col">
+            <h3 class="font-eina04 mb-4 text-lg font-semibold text-gray-900">
               À propos
             </h3>
-            <div class="space-y-4 flex-1 overflow-y-auto">
+            <div class="flex-1 space-y-4 overflow-y-auto">
               {
                 artist.profileDescription
-                  .split("\n\n")
+                  .split('\n\n')
                   .map((paragraph) => (
-                    <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+                    <p class="font-eina03 text-lg leading-relaxed text-gray-700">
                       {paragraph.trim()}
                     </p>
                   ))
@@ -265,15 +265,15 @@ const formattedName = formatArtistName(artist)
 </Layout>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     const images = document.querySelectorAll(
-      ".carousel-image"
+      '.carousel-image'
     ) as NodeListOf<HTMLImageElement>
     const dots = document.querySelectorAll(
-      ".carousel-dot"
+      '.carousel-dot'
     ) as NodeListOf<HTMLButtonElement>
-    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
-    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
+    const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement
+    const nextBtn = document.getElementById('next-btn') as HTMLButtonElement
 
     if (images.length <= 1) return
 
@@ -282,18 +282,18 @@ const formattedName = formatArtistName(artist)
     function showImage(index: number) {
       // Hide all images
       images.forEach((img, i) => {
-        img.classList.toggle("opacity-100", i === index)
-        img.classList.toggle("opacity-0", i !== index)
+        img.classList.toggle('opacity-100', i === index)
+        img.classList.toggle('opacity-0', i !== index)
       })
 
       // Update dots
       dots.forEach((dot, i) => {
         if (i === index) {
-          dot.classList.remove("bg-white/50", "hover:bg-white/75")
-          dot.classList.add("bg-white")
+          dot.classList.remove('bg-white/50', 'hover:bg-white/75')
+          dot.classList.add('bg-white')
         } else {
-          dot.classList.remove("bg-white")
-          dot.classList.add("bg-white/50", "hover:bg-white/75")
+          dot.classList.remove('bg-white')
+          dot.classList.add('bg-white/50', 'hover:bg-white/75')
         }
       })
 
@@ -312,22 +312,22 @@ const formattedName = formatArtistName(artist)
 
     // Event listeners
     if (prevBtn) {
-      prevBtn.addEventListener("click", prevImage)
+      prevBtn.addEventListener('click', prevImage)
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener("click", nextImage)
+      nextBtn.addEventListener('click', nextImage)
     }
 
     dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => showImage(index))
+      dot.addEventListener('click', () => showImage(index))
     })
 
     // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
         prevImage()
-      } else if (e.key === "ArrowRight") {
+      } else if (e.key === 'ArrowRight') {
         nextImage()
       }
     })

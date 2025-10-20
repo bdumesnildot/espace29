@@ -1,16 +1,16 @@
 ---
-import { navigationItems } from "@lib/navigation-helper.ts"
+import { navigationItems } from '@lib/navigation-helper.ts'
 
 const currentPath = Astro.url.pathname
 
 const isActiveLink = (href: string) => {
-  if (href === "/") return currentPath === "/"
+  if (href === '/') return currentPath === '/'
   return currentPath.startsWith(href)
 }
 
 const getLinkStyle = (href: string) => {
   const baseStyle =
-    "font-eina03 hover:text-gray-600 transition-colors duration-200 focus:outline-none px-4 py-3 block"
+    'font-eina03 hover:text-gray-600 transition-colors duration-200 focus:outline-none px-4 py-3 block'
 
   if (isActiveLink(href)) {
     return `${baseStyle} text-gray-900 font-medium underline`
@@ -20,8 +20,8 @@ const getLinkStyle = (href: string) => {
 }
 ---
 
-<nav class="border-y-2 mt-2.5 bg-gray-50 relative">
-  <div class="flex justify-between items-center py-4 px-6">
+<nav class="relative mt-2.5 border-y-2 bg-gray-50">
+  <div class="flex items-center justify-between px-6 py-4">
     <a href="/" class="font-eina03 text-2xl font-medium text-gray-900">
       Espace29
     </a>
@@ -32,7 +32,7 @@ const getLinkStyle = (href: string) => {
       aria-label="Toggle menu"
     >
       <svg
-        class="w-6 h-6"
+        class="h-6 w-6"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ const getLinkStyle = (href: string) => {
 
   <div
     id="mobile-menu"
-    class="hidden absolute top-full left-0 right-0 border-y-2 border-gray-200 bg-white shadow-lg z-50"
+    class="absolute top-full right-0 left-0 z-50 hidden border-y-2 border-gray-200 bg-white shadow-lg"
   >
     <ul class="flex flex-col text-xl">
       {
@@ -65,20 +65,20 @@ const getLinkStyle = (href: string) => {
 </nav>
 
 <script>
-  const menuButton = document.getElementById("mobile-menu-button")
-  const mobileMenu = document.getElementById("mobile-menu")
+  const menuButton = document.getElementById('mobile-menu-button')
+  const mobileMenu = document.getElementById('mobile-menu')
 
   if (menuButton && mobileMenu) {
-    menuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden")
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden')
     })
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener('click', (event) => {
       if (
         !menuButton.contains(event.target as Node) &&
         !mobileMenu.contains(event.target as Node)
       ) {
-        mobileMenu.classList.add("hidden")
+        mobileMenu.classList.add('hidden')
       }
     })
   }

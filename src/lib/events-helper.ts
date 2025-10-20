@@ -1,22 +1,22 @@
 export type EventSeason = {
-  slug: string;
-  name: string;
-  dateStart: string;
-  dateEnd: string;
-};
+  slug: string
+  name: string
+  dateStart: string
+  dateEnd: string
+}
 
 export type Event = {
-  slug: string;
-  title: string;
-  dateStart: string;
-  dateEnd?: string;
-  cardDescription: string;
-  cardImageUrl: string;
-  cardImageAlt: string;
-  Description: string;
-  ImageUrlList: { url: string; alt: string }[];
-  practicalInfo: string;
-};
+  slug: string
+  title: string
+  dateStart: string
+  dateEnd?: string
+  cardDescription: string
+  cardImageUrl: string
+  cardImageAlt: string
+  Description: string
+  ImageUrlList: { url: string; alt: string }[]
+  practicalInfo: string
+}
 
 export const eventSeasons: EventSeason[] = [
   {
@@ -31,7 +31,7 @@ export const eventSeasons: EventSeason[] = [
     dateStart: "2024-09-01",
     dateEnd: "2025-08-31",
   },
-];
+]
 
 export const events: Event[] = [
   // Saison 2023-2024 events
@@ -301,4 +301,4 @@ export const events: Event[] = [
     practicalInfo:
       "Performance le 28 juin 2025 à 19h, places limitées, réservation indispensable.",
   },
-];
+]

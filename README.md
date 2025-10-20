@@ -2,7 +2,10 @@
 
 ## About Espace29
 
-Espace29 is a contemporary art space located in Bordeaux's Gambetta-Meriadeck district. Opened in 2006, this 800m² hybrid venue hosts artistic and cultural events, provides studios for 30+ artists across multiple disciplines, and features a modular exhibition space showcasing both emerging and established contemporary artists.
+Espace29 is a contemporary art space located in Bordeaux's Gambetta-Meriadeck district. Opened in
+2006, this 800m² hybrid venue hosts artistic and cultural events, provides studios for 30+ artists
+across multiple disciplines, and features a modular exhibition space showcasing both emerging and
+established contemporary artists.
 
 ## Development Setup
 

@@ -1,7 +1,7 @@
 declare global {
   interface Window {
-    ScrollTrigger?: typeof import("gsap/ScrollTrigger").ScrollTrigger;
+    ScrollTrigger?: typeof import("gsap/ScrollTrigger").ScrollTrigger
   }
 }
 
-export {};
+export {}

@@ -1,21 +1,21 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import PageTopLayout from "@layouts/PageTopLayout.astro"
+import Layout from '@layouts/Layout.astro'
+import PageTopLayout from '@layouts/PageTopLayout.astro'
 ---
 
 <Layout title="e29 | Infos">
-  <main class="min-h-full w-full flex flex-col items-start">
+  <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout title="Infos" />
     <section
-      class="grow w-full flex flex-col sm:flex-row gap-6 px-2 sm:px-10 pb-4 sm:pb-10"
+      class="flex w-full grow flex-col gap-6 px-2 pb-4 sm:flex-row sm:px-10 sm:pb-10"
     >
       <div class="flex-3">
         <!-- L'Espace29 -->
-        <div class="p-6 bg-gray-50 border border-gray-200">
-          <h2 class="text-3xl font-eina02 font-semibold mb-6 text-gray-900">
+        <div class="border border-gray-200 bg-gray-50 p-6">
+          <h2 class="font-eina02 mb-6 text-3xl font-semibold text-gray-900">
             L'Espace29
           </h2>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+          <p class="font-eina03 text-lg leading-relaxed text-gray-700">
             L'espace 29, situé dans le quartier de Gambetta-Meriadeck, qui
             ouvrit ses portes en 2006, est un lieu d'art contemporain de 800 m².
             Sa forme hybride y accueille depuis lors de nombreux événements
@@ -30,7 +30,7 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
             institutions ou personnalités, en proposant un espace neutre
             favorable au développement de nouvelles idées et projets.
           </p>
-          <p class="text-lg font-eina03 font-semibold mt-6 text-gray-900">
+          <p class="font-eina03 mt-6 text-lg font-semibold text-gray-900">
             Entrée libre lors des expositions (se renseigner sur les horraires
             d'ouverture). Hors exposition, l'Espace29 est fermé au public. Pour
             nous rencontrer, rendez-vous via notre mail.<br />
@@ -39,11 +39,11 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
         </div>
 
         <!-- Les ateliers -->
-        <div class="p-6 bg-gray-50 border border-gray-200">
-          <h2 class="text-3xl font-eina02 font-semibold mb-6 text-gray-900">
+        <div class="border border-gray-200 bg-gray-50 p-6">
+          <h2 class="font-eina02 mb-6 text-3xl font-semibold text-gray-900">
             Les ateliers
           </h2>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+          <p class="font-eina03 text-lg leading-relaxed text-gray-700">
             L'Espace29 accueille aujourd'hui une trentaine d'artistes divisés en
             plusieurs ateliers, aux dimensions variables en fonction des besoins
             et pratiques de chacun.e, et répartis sur deux étages. Ce sont des
@@ -61,11 +61,11 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
         </div>
 
         <!-- Les expositions -->
-        <div class="p-6 bg-gray-50 border border-gray-200">
-          <h2 class="text-3xl font-eina02 font-semibold mb-6 text-gray-900">
+        <div class="border border-gray-200 bg-gray-50 p-6">
+          <h2 class="font-eina02 mb-6 text-3xl font-semibold text-gray-900">
             Les expositions
           </h2>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+          <p class="font-eina03 text-lg leading-relaxed text-gray-700">
             Au rez-de-chaussée, une salle modulable accueille les divers
             événements. Les expositions, performances sonores, marchés
             associatifs(...) qui ont lieu, sont programmés par l'Espace29 et
@@ -82,7 +82,7 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
             pas une honte mais une nécessité d'expression qui se manifeste par
             l'art.
           </p>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700 mt-4">
+          <p class="font-eina03 mt-4 text-lg leading-relaxed text-gray-700">
             Notre direction artistique porte sur des sujets de sociétés actuels,
             incluant des visions d'artistes ayant un regard vif sur
             l'historicité des événements, sur les choses qui existent depuis
@@ -96,61 +96,61 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
         </div>
       </div>
       <!-- Contact -->
-      <div class="p-6 bg-gray-50 border border-gray-200 flex-1">
-        <h2 class="text-3xl font-eina02 font-semibold mb-6 text-gray-900">
+      <div class="flex-1 border border-gray-200 bg-gray-50 p-6">
+        <h2 class="font-eina02 mb-6 text-3xl font-semibold text-gray-900">
           Contact
         </h2>
         <div class="space-y-6">
           <div>
-            <h3 class="text-lg font-eina03 font-semibold mb-2 text-gray-900">
+            <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
               Administratrice :
             </h3>
-            <p class="text-lg font-eina03 text-gray-700">Marion Cabanne</p>
+            <p class="font-eina03 text-lg text-gray-700">Marion Cabanne</p>
             <a
               href="mailto:espace29@gmail.com"
-              class="text-lg font-eina03 text-gray-700 hover:text-gray-900 transition-colors underline hover:no-underline"
+              class="font-eina03 text-lg text-gray-700 underline transition-colors hover:text-gray-900 hover:no-underline"
               >espace29@gmail.com</a
             >
           </div>
           <div>
-            <h3 class="text-lg font-eina03 font-semibold mb-2 text-gray-900">
+            <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
               Responsable communication et médiation :
             </h3>
-            <p class="text-lg font-eina03 text-gray-700">Mario Sardo</p>
+            <p class="font-eina03 text-lg text-gray-700">Mario Sardo</p>
             <a
               href="mailto:projets.e29@gmail.com"
-              class="text-lg font-eina03 text-gray-700 hover:text-gray-900 transition-colors underline hover:no-underline"
+              class="font-eina03 text-lg text-gray-700 underline transition-colors hover:text-gray-900 hover:no-underline"
               >projets.e29@gmail.com</a
             >
           </div>
           <div>
             <a
               href="https://www.instagram.com/espace29_bx/"
-              class="text-lg font-eina03 font-semibold text-gray-900 hover:text-gray-700 transition-colors"
+              class="font-eina03 text-lg font-semibold text-gray-900 transition-colors hover:text-gray-700"
               >@espace29_bx</a
             >
           </div>
           <div>
-            <p class="text-lg font-eina03 text-gray-700">
+            <p class="font-eina03 text-lg text-gray-700">
               29 rue Fernand Marin - 33000 Bordeaux
             </p>
           </div>
           <div class="border-t border-gray-200 pt-6">
             <div class="mb-4">
-              <h3 class="text-lg font-eina03 font-semibold mb-2 text-gray-900">
+              <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
                 Textes :
               </h3>
-              <p class="text-lg font-eina03 text-gray-700">Clément Houbart</p>
+              <p class="font-eina03 text-lg text-gray-700">Clément Houbart</p>
             </div>
             <div class="mb-4">
-              <h3 class="text-lg font-eina03 font-semibold mb-2 text-gray-900">
+              <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
                 Webdesign :
               </h3>
-              <p class="text-lg font-eina03 text-gray-700">Mario Sardo</p>
+              <p class="font-eina03 text-lg text-gray-700">Mario Sardo</p>
             </div>
             <a
               href="/mentions-legales"
-              class="text-lg font-eina03 font-semibold text-gray-900 hover:text-gray-700 transition-colors"
+              class="font-eina03 text-lg font-semibold text-gray-900 transition-colors hover:text-gray-700"
               >Mentions légales</a
             >
           </div>

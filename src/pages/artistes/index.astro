@@ -1,8 +1,8 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Card from "@components/ui/card/Card.astro"
-import { artists } from "@lib/artists-helper"
-import PageTopLayout from "@layouts/PageTopLayout.astro"
+import Layout from '@layouts/Layout.astro'
+import Card from '@components/ui/card/Card.astro'
+import { artists } from '@lib/artists-helper'
+import PageTopLayout from '@layouts/PageTopLayout.astro'
 
 // Helper function to format artist name
 const formatArtistName = (artist: any) => {
@@ -14,14 +14,14 @@ const formatArtistName = (artist: any) => {
 ---
 
 <Layout title="e29 | Artistes">
-  <main class="min-h-full w-full flex flex-col items-start">
+  <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout title="Artistes" showBackToTop={true} />
     <!-- With padding container -->
     <div class="px-2 pb-2 sm:px-10 sm:pb-0">
       <!-- Introduction Text -->
-      <section class="w-full mb-12">
+      <section class="mb-12 w-full">
         <div class="max-w-4xl">
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
+          <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
             Les ateliers et studios d'artistes résidents de l'Espace29 forment
             un lieu de travail communautaire unique, où la créativité et
             l'échange sont au cœur de la démarche artistique. Ces espaces,
@@ -30,12 +30,12 @@ const formatArtistName = (artist: any) => {
             collaboration et le dialogue entre créateur-ices de diverses
             disciplines.
           </p>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700 mb-6">
+          <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
             L'Espace29 se veut ainsi un véritable laboratoire de création, où le
             collectif et le partage enrichissent les pratiques artistiques et
             permettent l'émergence de projets communs.
           </p>
-          <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+          <p class="font-eina03 text-lg leading-relaxed text-gray-700">
             Le site de l'Espace29 est encore en cours de construction. Revenez
             bientôt pour découvrir les artistes qui habitent ce lieu.
           </p>
@@ -46,13 +46,13 @@ const formatArtistName = (artist: any) => {
     <!-- Horizontal Scroll Section (no padding) -->
     <section
       id="horizontal-scroll-section"
-      class="hidden sm:block w-full h-screen overflow-hidden"
+      class="hidden h-screen w-full overflow-hidden sm:block"
     >
-      <div id="artist-cards-wrapper" class="flex flex-row flex-nowrap h-full">
-        <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
+      <div id="artist-cards-wrapper" class="flex h-full flex-row flex-nowrap">
+        <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10"></div>
         {
           artists.map((artist) => (
-            <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0">
+            <div class="min-w-full flex-shrink-0 md:min-w-[40vw] lg:min-w-[30vw]">
               <Card
                 title={formatArtistName(artist).toLocaleUpperCase()}
                 subtitle={artist.title}
@@ -60,17 +60,17 @@ const formatArtistName = (artist: any) => {
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
                 href={`/artistes/${artist.slug}`}
-                grayscale={"notHover"}
+                grayscale={'notHover'}
               />
             </div>
           ))
         }
-        <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
+        <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10"></div>
       </div>
     </section>
 
     <!-- Mobile Vertical Cards Section -->
-    <section id="mobile-cards-section" class="block sm:hidden w-full px-2 pb-8">
+    <section id="mobile-cards-section" class="block w-full px-2 pb-8 sm:hidden">
       <div class="flex flex-col gap-4">
         {
           artists.map((artist) => (
@@ -82,7 +82,7 @@ const formatArtistName = (artist: any) => {
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
                 href={`/artistes/${artist.slug}`}
-                grayscale={"notHover"}
+                grayscale={'notHover'}
                 className="w-full min-w-full"
               />
             </div>
@@ -97,8 +97,8 @@ const formatArtistName = (artist: any) => {
 </Layout>
 
 <script>
-  import { gsap } from "gsap"
-  import { ScrollTrigger } from "gsap/ScrollTrigger"
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
   gsap.registerPlugin(ScrollTrigger)
 
@@ -106,7 +106,7 @@ const formatArtistName = (artist: any) => {
     // Only run on desktop (same breakpoint as the CSS)
     if (window.innerWidth < 640) {
       // Reset margin on mobile
-      const verticalContent = document.getElementById("vertical-content")
+      const verticalContent = document.getElementById('vertical-content')
       if (verticalContent) {
         gsap.set(verticalContent, { marginTop: 0 })
       }
@@ -114,10 +114,10 @@ const formatArtistName = (artist: any) => {
     }
 
     const horizontalSection = document.getElementById(
-      "horizontal-scroll-section"
+      'horizontal-scroll-section'
     )
-    const cardsWrapper = document.getElementById("artist-cards-wrapper")
-    const verticalContent = document.getElementById("vertical-content")
+    const cardsWrapper = document.getElementById('artist-cards-wrapper')
+    const verticalContent = document.getElementById('vertical-content')
 
     if (!horizontalSection || !cardsWrapper || !verticalContent) return
 
@@ -135,26 +135,26 @@ const formatArtistName = (artist: any) => {
     // Deadzone before first card (no movement - user can read first card)
     tl.to(cardsWrapper, {
       duration: deadZone,
-      ease: "none",
+      ease: 'none',
     })
 
     // Actual horizontal scroll between cards
     tl.to(cardsWrapper, {
       x: -scrollDistance,
       duration: scrollDistance,
-      ease: "none",
+      ease: 'none',
     })
 
     // Deadzone after last card (no movement - user can read last card)
     tl.to(cardsWrapper, {
       duration: deadZone,
-      ease: "none",
+      ease: 'none',
     })
 
     // Create ScrollTrigger for horizontal scroll with proper spacing
     ScrollTrigger.create({
       trigger: horizontalSection,
-      start: "top top",
+      start: 'top top',
       end: () => `+=${totalScrollDistance}`,
       scrub: 1,
       pin: true,
@@ -169,10 +169,10 @@ const formatArtistName = (artist: any) => {
     })
   }
 
-  document.addEventListener("DOMContentLoaded", initializeScrollAnimation)
+  document.addEventListener('DOMContentLoaded', initializeScrollAnimation)
 
   // Refresh ScrollTrigger and reinitialize on window resize
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     ScrollTrigger.refresh()
     initializeScrollAnimation()
