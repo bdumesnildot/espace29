@@ -11,28 +11,97 @@ const { title, backTo } = Astro.props
 ---
 
 <div class="pt-2 px-2 sm:pt-10 sm:px-10 w-full relative">
-  {backTo && (
-    <nav class="absolute top-2 left-2 sm:top-10 sm:left-10 z-10">
-      <a 
-        href={backTo.href}
-        class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-eina04 font-medium transition-colors duration-200 group"
-        aria-label={`Return to ${backTo.label}`}
-      >
-        <svg 
-          class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
+  {
+    backTo && (
+      <nav class="absolute top-2 left-2 sm:top-10 sm:left-10 z-10">
+        <a
+          href={backTo.href}
+          class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-eina04 font-medium transition-colors duration-200 group"
+          aria-label={`Return to ${backTo.label}`}
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        <span class="text-sm sm:text-base">{backTo.label}</span>
-      </a>
-    </nav>
-  )}
+          <svg
+            class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span class="text-sm sm:text-base">{backTo.label}</span>
+        </a>
+      </nav>
+    )
+  }
+
+  <!-- Back to Top Button -->
+  <button
+    id="back-to-top"
+    class="fixed top-2 right-2 sm:top-10 sm:right-10 z-20 opacity-0 pointer-events-none transition-all duration-300 bg-gray-900/70 hover:bg-gray-900/90 text-white p-3 rounded-lg backdrop-blur-sm"
+    aria-label="Return to top of page"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <!-- Horizontal bar at top -->
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2.5"
+        d="M6 4h12"></path>
+      <!-- Arrow pointing up -->
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 8l-4 4m4-4l4 4m-4-4v12"></path>
+    </svg>
+  </button>
+
   <h1
     class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
   >
     {title}
   </h1>
 </div>
+
+<script>
+  function initializeBackToTop() {
+    const backToTopButton = document.getElementById("back-to-top")
+    if (!backToTopButton) return
+
+    const showThreshold = 300 // Show button after scrolling 300px
+
+    function toggleBackToTop() {
+      if (!backToTopButton) return
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+
+      if (scrollTop > showThreshold) {
+        backToTopButton.classList.remove("opacity-0", "pointer-events-none")
+        backToTopButton.classList.add("opacity-100", "pointer-events-auto")
+      } else {
+        backToTopButton.classList.add("opacity-0", "pointer-events-none")
+        backToTopButton.classList.remove("opacity-100", "pointer-events-auto")
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
+
+    // Add event listeners
+    window.addEventListener("scroll", toggleBackToTop)
+    backToTopButton.addEventListener("click", scrollToTop)
+
+    // Initial check
+    toggleBackToTop()
+  }
+
+  // Initialize on DOM content loaded
+  document.addEventListener("DOMContentLoaded", initializeBackToTop)
+</script>
