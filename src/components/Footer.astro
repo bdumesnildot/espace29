@@ -1,0 +1,80 @@
+---
+import { navigationItems } from '@lib/navigation-helper'
+---
+
+<footer class="mt-30 bg-gray-50">
+  <div class="mx-auto max-w-7xl px-6 py-12">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+      <!-- Espace29 Info -->
+      <div>
+        <h3 class="font-eina02 mb-4 text-lg font-semibold text-gray-900">
+          Espace29
+        </h3>
+        <p class="font-eina03 mb-4 text-sm leading-relaxed text-gray-700">
+          Lieu d'art contemporain de 800 m² dans le quartier de
+          Gambetta-Meriadeck. Plateforme de rencontre et d'échange entre
+          artistes professionnels.
+        </p>
+        <address class="font-eina03 text-sm text-gray-700 not-italic">
+          29 rue Fernand Marin<br />
+          33000 Bordeaux
+        </address>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 class="font-eina02 mb-4 text-lg font-semibold text-gray-900">
+          Navigation
+        </h3>
+        <nav>
+          <ul class="space-y-2">
+            {
+              navigationItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="font-eina03 text-sm text-gray-600 transition-colors duration-200 hover:text-gray-900"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Social & Legal -->
+      <div>
+        <h3 class="font-eina02 mb-4 text-lg font-semibold text-gray-900">
+          Suivez-nous
+        </h3>
+        <div class="mb-6">
+          <a
+            href="https://www.instagram.com/espace29_bx/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-eina03 text-sm text-gray-600 transition-colors duration-200 hover:text-gray-900"
+          >
+            @espace29_bx
+          </a>
+        </div>
+        <div class="space-y-2">
+          <a
+            href="/mentions-legales"
+            class="font-eina03 block text-sm text-gray-600 transition-colors duration-200 hover:text-gray-900"
+          >
+            Mentions légales
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="mt-12 border-t border-gray-100 pt-8">
+      <p class="font-eina03 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} Espace29 — Lieu d'art contemporain, Bordeaux
+      </p>
+    </div>
+  </div>
+</footer>
