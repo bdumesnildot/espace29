@@ -92,9 +92,9 @@ const sortedSeasons = Object.keys(eventsBySeason)
                 id={`events-wrapper-${seasonIndex}`}
                 class="flex h-full flex-row flex-nowrap"
               >
-                <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10" />
+                <div class="h-full w-10 flex-shrink-0" />
                 {eventsBySeason[season].map((event) => (
-                  <div class="h-full min-w-full flex-shrink-0 md:min-w-[40vw] lg:min-w-[30vw]">
+                  <div class="h-full min-w-full flex-shrink-0 sm:w-[650px] sm:min-w-[650px]">
                     <Card
                       title={event.title.toLocaleUpperCase()}
                       subtitle={formatDate(event.dateStart, event.dateEnd)}
@@ -102,11 +102,11 @@ const sortedSeasons = Object.keys(eventsBySeason)
                       imageUrl={event.cardImageUrl}
                       imageAlt={event.cardImageAlt}
                       href={`/agenda/${event.slug}`}
-                      grayscale={'notHover'}
+                      grayscale={'untilHover'}
                     />
                   </div>
                 ))}
-                <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10" />
+                <div class="h-full w-10 flex-shrink-0" />
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
             <h2 class="font-eina02 mb-8 text-3xl font-semibold text-gray-900">
               {season}
             </h2>
-            <div class="flex flex-col gap-4">
+            <div class="flex h-[500px] flex-col gap-4">
               {eventsBySeason[season].map((event) => (
                 <div class="w-full">
                   <Card
@@ -126,7 +126,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
                     imageUrl={event.cardImageUrl}
                     imageAlt={event.cardImageAlt}
                     href={`/agenda/${event.slug}`}
-                    grayscale={'notHover'}
+                    grayscale={'untilHover'}
                     className="w-full min-w-full"
                   />
                 </div>

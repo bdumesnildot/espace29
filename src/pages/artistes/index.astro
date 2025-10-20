@@ -49,10 +49,10 @@ const formatArtistName = (artist: any) => {
       class="hidden h-screen w-full overflow-hidden sm:block"
     >
       <div id="artist-cards-wrapper" class="flex h-full flex-row flex-nowrap">
-        <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10"></div>
+        <div class="h-full w-10 flex-shrink-0"></div>
         {
           artists.map((artist) => (
-            <div class="min-w-full flex-shrink-0 md:min-w-[40vw] lg:min-w-[30vw]">
+            <div class="w-[650px] min-w-[650px] flex-shrink-0">
               <Card
                 title={formatArtistName(artist).toLocaleUpperCase()}
                 subtitle={artist.title}
@@ -60,18 +60,18 @@ const formatArtistName = (artist: any) => {
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
                 href={`/artistes/${artist.slug}`}
-                grayscale={'notHover'}
+                grayscale={'untilHover'}
               />
             </div>
           ))
         }
-        <div class="h-full min-w-2 flex-shrink-0 sm:min-w-10"></div>
+        <div class="h-full w-10 flex-shrink-0"></div>
       </div>
     </section>
 
     <!-- Mobile Vertical Cards Section -->
     <section id="mobile-cards-section" class="block w-full px-2 pb-8 sm:hidden">
-      <div class="flex flex-col gap-4">
+      <div class="flex h-[500px] flex-col gap-4">
         {
           artists.map((artist) => (
             <div class="w-full">
@@ -82,7 +82,7 @@ const formatArtistName = (artist: any) => {
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
                 href={`/artistes/${artist.slug}`}
-                grayscale={'notHover'}
+                grayscale={'untilHover'}
                 className="w-full min-w-full"
               />
             </div>
