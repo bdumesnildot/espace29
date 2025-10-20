@@ -54,50 +54,50 @@ const sortedSeasons = Object.keys(eventsBySeason)
 
 <Layout title="e29 | Agenda">
   <main class="min-h-full w-full flex flex-col items-start">
-    <PageTopLayout title="Agenda" />
+    <PageTopLayout title="Agenda" showBackToTop={true} />
     
     {sortedSeasons.map((season, seasonIndex) => (
-      <section class={`w-full ${seasonIndex > 0 && 'mt-20'}`}>
-        <!-- Season Title (Fixed Above Horizontal Scroll) -->
-        <div class="hidden sm:block sticky top-0 z-10 bg-gray-50 px-2 sm:px-10 py-4">
-          <h2 class="text-5xl font-eina02 text-gray-900">
-            {season}
-          </h2>
-        </div>
+      <section class={`w-full`}>
+        {
+          /* Spacing between seasons */
+          seasonIndex > 0 ? <div class="h-16 sm:h-32 w-full"></div> : null
+        }
 
-        <!-- Mobile Season Title -->
-        <div class="block sm:hidden px-2 mb-8">
-          <h2 class="text-3xl font-eina02 font-semibold text-gray-900">
-            {season}
-          </h2>
-        </div>
-
-        <!-- Horizontal Scroll Section (no padding) -->
-        <div
-          class="hidden sm:block w-full h-screen overflow-hidden"
+        <!-- Season View (full screen height, fix title and horizontal scroll content) -->
+        <div 
           id={`season-${seasonIndex}`}
+          class="hidden sm:flex sm:flex-col h-screen overflow-hidden"
         >
-          <div class="flex flex-row flex-nowrap h-full" id={`events-wrapper-${seasonIndex}`}>
-            <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
-            {eventsBySeason[season].map((event) => (
-              <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0">
-                <Card
-                  title={event.title.toLocaleUpperCase()}
-                  subtitle={formatDate(event.dateStart, event.dateEnd)}
-                  description={event.cardDescription}
-                  imageUrl={event.cardImageUrl}
-                  imageAlt={event.cardImageAlt}
-                  href={`/agenda/${event.slug}`}
-                  grayscale={"notHover"}
-                />
-              </div>
-            ))}
-            <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
+          <h2 class="text-6xl font-eina02 text-gray-900 mb-1 px-2 sm:px-10 py-4 flex-shrink-0">
+            {season}
+          </h2>
+
+          <div class="w-full flex-1 overflow-hidden">
+            <div id={`events-wrapper-${seasonIndex}`} class="flex flex-row flex-nowrap h-full">
+              <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
+              {eventsBySeason[season].map((event) => (
+                <div class="min-w-full md:min-w-[40vw] lg:min-w-[30vw] flex-shrink-0 h-full">
+                  <Card
+                    title={event.title.toLocaleUpperCase()}
+                    subtitle={formatDate(event.dateStart, event.dateEnd)}
+                    description={event.cardDescription}
+                    imageUrl={event.cardImageUrl}
+                    imageAlt={event.cardImageAlt}
+                    href={`/agenda/${event.slug}`}
+                    grayscale={"notHover"}
+                  />
+                </div>
+              ))}
+              <div class="h-full min-w-2 sm:min-w-10 flex-shrink-0"></div>
+            </div>
           </div>
         </div>
 
         <!-- Mobile Vertical Cards Section -->
         <div class="block sm:hidden w-full px-2 pb-8">
+          <h2 class="text-3xl font-eina02 font-semibold text-gray-900 mb-8">
+            {season}
+          </h2>
           <div class="flex flex-col gap-4">
             {eventsBySeason[season].map((event) => (
               <div class="w-full">
@@ -127,7 +127,6 @@ const sortedSeasons = Object.keys(eventsBySeason)
   gsap.registerPlugin(ScrollTrigger)
 
   function initializeHoverDetection() {
-    // Only run on desktop
     if (window.innerWidth < 640) return
 
     const seasonSections = document.querySelectorAll('[id^="season-"]')
@@ -168,12 +167,10 @@ const sortedSeasons = Object.keys(eventsBySeason)
   }
 
   function initializeScrollAnimations() {
-    // Only run on desktop (same breakpoint as the CSS)
     if (window.innerWidth < 640) {
       return
     }
 
-    // Get all season sections
     const seasonSections = document.querySelectorAll('[id^="season-"]')
     
     seasonSections.forEach((seasonSection, index) => {
@@ -181,39 +178,32 @@ const sortedSeasons = Object.keys(eventsBySeason)
       
       if (!seasonSection || !cardsWrapper) return
 
-      // Calculate scroll distance
       const viewportWidth = window.innerWidth
       const scrollDistance = cardsWrapper.scrollWidth - viewportWidth
 
-      if (scrollDistance <= 0) return // Skip if no horizontal scroll needed
+      if (scrollDistance <= 0) return
 
-      // Add deadzones for comfortable reading
       const deadZone = viewportWidth * 0.1
       const totalScrollDistance = scrollDistance + deadZone * 2
 
-      // Create timeline with deadzones
       const tl = gsap.timeline()
 
-      // Deadzone before first card
       tl.to(cardsWrapper, {
         duration: deadZone,
         ease: "none",
       })
 
-      // Actual horizontal scroll between cards
       tl.to(cardsWrapper, {
         x: -scrollDistance,
         duration: scrollDistance,
         ease: "none",
       })
 
-      // Deadzone after last card
       tl.to(cardsWrapper, {
         duration: deadZone,
         ease: "none",
       })
 
-      // Create ScrollTrigger for horizontal scroll
       ScrollTrigger.create({
         trigger: seasonSection,
         start: "top top",
@@ -232,7 +222,6 @@ const sortedSeasons = Object.keys(eventsBySeason)
     initializeHoverDetection()
   })
 
-  // Refresh ScrollTrigger and reinitialize on window resize
   window.addEventListener("resize", () => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     ScrollTrigger.refresh()

@@ -5,9 +5,10 @@ interface Props {
     href: string
     label: string
   }
+  showBackToTop?: boolean
 }
 
-const { title, backTo } = Astro.props
+const { title, backTo, showBackToTop = false } = Astro.props
 ---
 
 <div class="pt-2 px-2 sm:pt-10 sm:px-10 w-full relative">
@@ -39,26 +40,28 @@ const { title, backTo } = Astro.props
   }
 
   <!-- Back to Top Button -->
-  <button
-    id="back-to-top"
-    class="fixed top-2 right-2 sm:top-10 sm:right-10 z-20 opacity-0 pointer-events-none transition-all duration-300 bg-gray-900/70 hover:bg-gray-900/90 text-white p-3 rounded-lg backdrop-blur-sm"
-    aria-label="Return to top of page"
-  >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <!-- Horizontal bar at top -->
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2.5"
-        d="M6 4h12"></path>
-      <!-- Arrow pointing up -->
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M12 8l-4 4m4-4l4 4m-4-4v12"></path>
-    </svg>
-  </button>
+  { showBackToTop && (
+    <button
+      id="back-to-top"
+      class="fixed top-2 right-2 sm:top-10 sm:right-10 z-20 opacity-0 pointer-events-none transition-all duration-300 bg-gray-900/70 hover:bg-gray-900/90 text-white p-3 rounded-lg backdrop-blur-sm"
+      aria-label="Return to top of page"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Horizontal bar at top -->
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2.5"
+          d="M6 4h12"></path>
+        <!-- Arrow pointing up -->
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 8l-4 4m4-4l4 4m-4-4v12"></path>
+      </svg>
+    </button>
+  )}
 
   <h1
     class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
@@ -90,7 +93,7 @@ const { title, backTo } = Astro.props
     function scrollToTop() {
       window.scrollTo({
         top: 0,
-        behavior: "smooth",
+        behavior: "instant",
       })
     }
 
