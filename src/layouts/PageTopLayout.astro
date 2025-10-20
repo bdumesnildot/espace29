@@ -43,7 +43,7 @@ const { title, backTo, showBackToTop = false } = Astro.props
   { showBackToTop && (
     <button
       id="back-to-top"
-      class="fixed top-2 right-2 sm:top-10 sm:right-10 z-20 opacity-0 pointer-events-none transition-all duration-300 bg-gray-900/70 hover:bg-gray-900/90 text-white p-3 rounded-lg backdrop-blur-sm"
+      class="fixed top-2 right-2 sm:top-10 sm:right-10 z-20 opacity-0 pointer-events-none transition-all duration-300 bg-gray-900 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 text-white p-3 rounded-lg focus:outline-none"
       aria-label="Return to top of page"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,10 +91,25 @@ const { title, backTo, showBackToTop = false } = Astro.props
     }
 
     function scrollToTop() {
+      // Kill all GSAP ScrollTrigger instances temporarily to avoid conflicts
+      if (window.ScrollTrigger) {
+        window.ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      }
+
+      // Scroll to top instantly
       window.scrollTo({
         top: 0,
         behavior: "instant",
       })
+
+      // Reinitialize ScrollTrigger after a short delay
+      if (window.ScrollTrigger) {
+        setTimeout(() => {
+          window.ScrollTrigger?.refresh()
+          // Trigger custom event for pages to reinitialize their animations
+          window.dispatchEvent(new CustomEvent('backToTopComplete'))
+        }, 100)
+      }
     }
 
     // Add event listeners
