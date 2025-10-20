@@ -57,10 +57,10 @@ const sortedSeasons = Object.keys(eventsBySeason)
     <PageTopLayout title="Agenda" />
     
     {sortedSeasons.map((season, seasonIndex) => (
-      <section class="w-full mb-16">
+      <section class={`w-full ${seasonIndex > 0 && 'mt-20'}`}>
         <!-- Season Title (Fixed Above Horizontal Scroll) -->
         <div class="hidden sm:block sticky top-0 z-10 bg-gray-50 px-2 sm:px-10 py-4">
-          <h2 class="text-3xl font-eina02 font-semibold text-gray-900">
+          <h2 class="text-5xl font-eina02 text-gray-900">
             {season}
           </h2>
         </div>
@@ -188,7 +188,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
       if (scrollDistance <= 0) return // Skip if no horizontal scroll needed
 
       // Add deadzones for comfortable reading
-      const deadZone = viewportWidth * 0.25
+      const deadZone = viewportWidth * 0.1
       const totalScrollDistance = scrollDistance + deadZone * 2
 
       // Create timeline with deadzones
