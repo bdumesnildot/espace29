@@ -10,13 +10,13 @@ const isActiveLink = (href: string) => {
 
 const getLinkStyle = (href: string) => {
   const baseStyle =
-    'font-eina03 hover:text-gray-600 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1'
+    'font-eina03 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1'
 
   if (isActiveLink(href)) {
-    return `${baseStyle} text-gray-900 font-medium border-gray-900`
+    return `${baseStyle} text-gray-900 border-gray-900`
   }
 
-  return `${baseStyle} text-gray-700 border-transparent`
+  return `${baseStyle} text-gray-900 border-transparent hover:text-gray-600`
 }
 ---
 
