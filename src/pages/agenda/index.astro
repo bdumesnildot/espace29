@@ -138,13 +138,14 @@ const sortedSeasons = Object.keys(eventsBySeason)
       cards.forEach((card) => {
         let isHovered = false
 
-        const handleMouseMove = (e) => {
+        const handleMouseMove = (e: Event) => {
+          const mouseEvent = e as MouseEvent
           const rect = card.getBoundingClientRect()
           const isInBounds = 
-            e.clientX >= rect.left &&
-            e.clientX <= rect.right &&
-            e.clientY >= rect.top &&
-            e.clientY <= rect.bottom
+            mouseEvent.clientX >= rect.left &&
+            mouseEvent.clientX <= rect.right &&
+            mouseEvent.clientY >= rect.top &&
+            mouseEvent.clientY <= rect.bottom
 
           if (isInBounds && !isHovered) {
             isHovered = true
