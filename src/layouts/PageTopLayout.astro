@@ -1,12 +1,35 @@
 ---
 interface Props {
   title: string
+  backTo?: {
+    href: string
+    label: string
+  }
 }
 
-const { title } = Astro.props
+const { title, backTo } = Astro.props
 ---
 
-<div class="pt-2 px-2 sm:pt-10 sm:px-10 w-full">
+<div class="pt-2 px-2 sm:pt-10 sm:px-10 w-full relative">
+  {backTo && (
+    <nav class="absolute top-2 left-2 sm:top-10 sm:left-10 z-10">
+      <a 
+        href={backTo.href}
+        class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-eina04 font-medium transition-colors duration-200 group"
+        aria-label={`Return to ${backTo.label}`}
+      >
+        <svg 
+          class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span class="text-sm sm:text-base">{backTo.label}</span>
+      </a>
+    </nav>
+  )}
   <h1
     class="text-6xl sm:text-8xl text-gray-900 font-eina01 font-semibold pt-4 pb-8 sm:pt-20 sm:pb-40 w-full"
   >

@@ -19,29 +19,35 @@ if (!event) {
 // Helper function to format date for display
 const formatDate = (dateStart: string, dateEnd?: string) => {
   const start = new Date(dateStart)
-  const startFormatted = start.toLocaleDateString('fr-FR', { 
-    day: 'numeric', 
-    month: 'long', 
-    year: 'numeric' 
+  const startFormatted = start.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   })
-  
+
   if (dateEnd) {
     const end = new Date(dateEnd)
-    const endFormatted = end.toLocaleDateString('fr-FR', { 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
+    const endFormatted = end.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     })
     return `${startFormatted} - ${endFormatted}`
   }
-  
+
   return startFormatted
 }
 ---
 
 <Layout title={`e29 | ${event.title}`}>
   <main class="min-h-full w-full flex flex-col items-start">
-    <PageTopLayout title={event.title} />
+    <PageTopLayout
+      title={event.title}
+      backTo={{
+        href: "/agenda",
+        label: "Retour à l'agenda",
+      }}
+    />
     <section class="w-full h-screen flex flex-col md:flex-row">
       <!-- Mobile: Event Details First -->
       <div class="md:hidden w-full p-4 flex flex-col space-y-4">
@@ -59,13 +65,11 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
           </h3>
           <div class="space-y-3">
             {
-              event.Description
-                .split("\n\n")
-                .map((paragraph) => (
-                  <p class="text-sm font-eina03 leading-relaxed text-gray-700">
-                    {paragraph.trim()}
-                  </p>
-                ))
+              event.Description.split("\n\n").map((paragraph) => (
+                <p class="text-sm font-eina03 leading-relaxed text-gray-700">
+                  {paragraph.trim()}
+                </p>
+              ))
             }
           </div>
         </div>
@@ -92,14 +96,16 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
       <!-- Mobile: Images Grid -->
       <div class="md:hidden w-full bg-gray-50 p-4">
         <div class="grid grid-cols-1 gap-4">
-          {event.ImageUrlList.map((image, index) => (
-            <img
-              src={image.url}
-              alt={image.alt}
-              class="w-full h-64 object-cover rounded-lg shadow-sm"
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          ))}
+          {
+            event.ImageUrlList.map((image, index) => (
+              <img
+                src={image.url}
+                alt={image.alt}
+                class="w-full h-64 object-cover rounded-lg shadow-sm"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            ))
+          }
         </div>
       </div>
 
@@ -192,7 +198,6 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
       <!-- Desktop: Event Details -->
       <div class="hidden md:flex flex-1 h-full flex-col">
         <div class="p-8 pt-12 h-full flex flex-col space-y-8">
-                    
           <!-- Event Date -->
           <div class="border-b border-gray-400 pb-6">
             <h2 class="text-4xl font-eina02 font-semibold text-gray-900">
@@ -207,13 +212,11 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
             </h3>
             <div class="space-y-4">
               {
-                event.Description
-                  .split("\n\n")
-                  .map((paragraph) => (
-                    <p class="text-lg font-eina03 leading-relaxed text-gray-700">
-                      {paragraph.trim()}
-                    </p>
-                  ))
+                event.Description.split("\n\n").map((paragraph) => (
+                  <p class="text-lg font-eina03 leading-relaxed text-gray-700">
+                    {paragraph.trim()}
+                  </p>
+                ))
               }
             </div>
           </div>

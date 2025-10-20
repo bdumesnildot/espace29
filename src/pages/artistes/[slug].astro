@@ -21,7 +21,13 @@ const formattedName = formatArtistName(artist)
 
 <Layout title={`e29 | ${formattedName}`}>
   <main class="min-h-full w-full flex flex-col items-start">
-    <PageTopLayout title={formattedName} />
+    <PageTopLayout
+      title={formattedName}
+      backTo={{
+        href: "/artistes",
+        label: "Retour au artistes",
+      }}
+    />
     <section class="w-full h-screen flex flex-col md:flex-row">
       <!-- Mobile: Artist Details First -->
       <div class="md:hidden w-full p-4 flex flex-col space-y-4">
@@ -90,14 +96,16 @@ const formattedName = formatArtistName(artist)
       <!-- Mobile: Images Grid -->
       <div class="md:hidden w-full bg-gray-50 p-4">
         <div class="grid grid-cols-1 gap-4">
-          {artist.profileImageUrlList.map((image, index) => (
-            <img
-              src={image.url}
-              alt={image.alt}
-              class="w-full h-64 object-cover rounded-lg shadow-sm"
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          ))}
+          {
+            artist.profileImageUrlList.map((image, index) => (
+              <img
+                src={image.url}
+                alt={image.alt}
+                class="w-full h-64 object-cover rounded-lg shadow-sm"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            ))
+          }
         </div>
       </div>
 
@@ -190,7 +198,6 @@ const formattedName = formatArtistName(artist)
       <!-- Desktop: Artist Details -->
       <div class="hidden md:flex flex-1 h-full flex-col">
         <div class="p-8 pt-12 h-full flex flex-col space-y-8">
-                    
           <!-- Artist Title -->
           <div class="border-b border-gray-400 pb-6">
             <h2 class="text-4xl font-eina02 font-semibold text-gray-900">
