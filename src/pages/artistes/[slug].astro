@@ -28,7 +28,11 @@ const formattedName = formatArtistName(artist)
         label: 'Retour au artistes',
       }}
     />
-    <section class="flex h-screen w-full flex-col md:flex-row">
+    <section
+      id={`artist-${artist.slug}-details-section`}
+      class="flex h-screen w-full flex-col md:flex-row"
+      data-artist-slug={artist.slug}
+    >
       <!-- Mobile: Artist Details First -->
       <div class="flex w-full flex-col space-y-4 p-4 md:hidden">
         <!-- Artist Title -->
@@ -261,11 +265,18 @@ const formattedName = formatArtistName(artist)
         </div>
       </div>
     </section>
+
+    <!-- Spacer div to prevent footer from moving up during pin -->
+    <div id="pin-spacer" class="h-0"></div>
   </main>
 </Layout>
 
 <script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
   document.addEventListener('DOMContentLoaded', function () {
+    // Carousel functionality
     const images = document.querySelectorAll(
       '.carousel-image'
     ) as NodeListOf<HTMLImageElement>
@@ -275,64 +286,82 @@ const formattedName = formatArtistName(artist)
     const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement
     const nextBtn = document.getElementById('next-btn') as HTMLButtonElement
 
-    if (images.length <= 1) return
+    if (images.length > 1) {
+      let currentIndex = 0
 
-    let currentIndex = 0
+      function showImage(index: number) {
+        images.forEach((img, i) => {
+          img.classList.toggle('opacity-100', i === index)
+          img.classList.toggle('opacity-0', i !== index)
+        })
 
-    function showImage(index: number) {
-      // Hide all images
-      images.forEach((img, i) => {
-        img.classList.toggle('opacity-100', i === index)
-        img.classList.toggle('opacity-0', i !== index)
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove('bg-white/50', 'hover:bg-white/75')
+            dot.classList.add('bg-white')
+          } else {
+            dot.classList.remove('bg-white')
+            dot.classList.add('bg-white/50', 'hover:bg-white/75')
+          }
+        })
+
+        currentIndex = index
+      }
+
+      function nextImage() {
+        const newIndex = (currentIndex + 1) % images.length
+        showImage(newIndex)
+      }
+
+      function prevImage() {
+        const newIndex = (currentIndex - 1 + images.length) % images.length
+        showImage(newIndex)
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', prevImage)
+      if (nextBtn) nextBtn.addEventListener('click', nextImage)
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showImage(index))
       })
 
-      // Update dots
-      dots.forEach((dot, i) => {
-        if (i === index) {
-          dot.classList.remove('bg-white/50', 'hover:bg-white/75')
-          dot.classList.add('bg-white')
-        } else {
-          dot.classList.remove('bg-white')
-          dot.classList.add('bg-white/50', 'hover:bg-white/75')
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevImage()
+        } else if (e.key === 'ArrowRight') {
+          nextImage()
         }
       })
-
-      currentIndex = index
     }
 
-    function nextImage() {
-      const newIndex = (currentIndex + 1) % images.length
-      showImage(newIndex)
-    }
+    // Magnet scroll effect
+    gsap.registerPlugin(ScrollTrigger)
 
-    function prevImage() {
-      const newIndex = (currentIndex - 1 + images.length) % images.length
-      showImage(newIndex)
-    }
+    const artistSlug = window.location.pathname.split('/').pop()
+    if (!artistSlug) return
 
-    // Event listeners
-    if (prevBtn) {
-      prevBtn.addEventListener('click', prevImage)
-    }
+    const section = document.getElementById(
+      `artist-${artistSlug}-details-section`
+    )
+    const pinSpacer = document.getElementById('pin-spacer')
+    if (!section || !pinSpacer) return
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', nextImage)
-    }
+    const RELEASE_OFFSET = 300
 
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => showImage(index))
+    // Set the pin-spacer height to match the pin duration
+    pinSpacer.style.height = `${RELEASE_OFFSET}px`
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: `+=${RELEASE_OFFSET}`,
+      pin: true,
+      scrub: 0.5,
+      invalidateOnRefresh: true,
+      onRefresh: () => {
+        // Ensure pin-spacer height is recalculated on window resize
+        pinSpacer.style.height = `${RELEASE_OFFSET}px`
+      },
     })
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        prevImage()
-      } else if (e.key === 'ArrowRight') {
-        nextImage()
-      }
-    })
-
-    // Auto-play (optional - uncomment to enable)
-    // setInterval(nextImage, 5000);
   })
 </script>
