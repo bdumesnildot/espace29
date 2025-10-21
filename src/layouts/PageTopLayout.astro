@@ -5,10 +5,9 @@ interface Props {
     href: string
     label: string
   }
-  showBackToTop?: boolean
 }
 
-const { title, backTo, showBackToTop = false } = Astro.props
+const { title, backTo } = Astro.props
 ---
 
 <div class="relative w-full px-2 pt-2 sm:px-10 sm:pt-10">
@@ -39,96 +38,9 @@ const { title, backTo, showBackToTop = false } = Astro.props
     )
   }
 
-  <!-- Back to Top Button -->
-  {
-    showBackToTop && (
-      <button
-        id="back-to-top"
-        class="pointer-events-none fixed top-2 right-2 z-20 rounded-lg bg-gray-900 p-3 text-white opacity-0 transition-all duration-300 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none sm:top-10 sm:right-10"
-        aria-label="Return to top of page"
-      >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          {/* Horizontal bar at top */}
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2.5"
-            d="M6 4h12"
-          />
-          {/* Arrow pointing up */}
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 8l-4 4m4-4l4 4m-4-4v12"
-          />
-        </svg>
-      </button>
-    )
-  }
-
   <h1
     class="font-eina01 w-full pt-4 pb-8 text-6xl font-semibold text-gray-900 sm:pt-20 sm:pb-40 sm:text-8xl"
   >
     {title}
   </h1>
 </div>
-
-<script>
-  function initializeBackToTop() {
-    const backToTopButton = document.getElementById("back-to-top")
-    if (!backToTopButton) return
-
-    const showThreshold = 300 // Show button after scrolling 300px
-
-    function toggleBackToTop() {
-      if (!backToTopButton) return
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-
-      if (scrollTop > showThreshold) {
-        backToTopButton.classList.remove("opacity-0", "pointer-events-none")
-        backToTopButton.classList.add("opacity-100", "pointer-events-auto")
-      } else {
-        backToTopButton.classList.add("opacity-0", "pointer-events-none")
-        backToTopButton.classList.remove("opacity-100", "pointer-events-auto")
-      }
-    }
-
-    function scrollToTop() {
-      // Kill all GSAP ScrollTrigger instances temporarily to avoid conflicts
-      if (window.ScrollTrigger) {
-        window.ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      }
-
-      // Scroll to top instantly
-      window.scrollTo({
-        top: 0,
-        behavior: "instant",
-      })
-
-      // Reinitialize ScrollTrigger after a short delay
-      if (window.ScrollTrigger) {
-        setTimeout(() => {
-          window.ScrollTrigger?.refresh()
-          // Trigger custom event for pages to reinitialize their animations
-          window.dispatchEvent(new CustomEvent("backToTopComplete"))
-        }, 100)
-      }
-    }
-
-    // Add event listeners
-    window.addEventListener("scroll", toggleBackToTop)
-    backToTopButton.addEventListener("click", scrollToTop)
-
-    // Initial check
-    toggleBackToTop()
-  }
-
-  // Initialize on DOM content loaded
-  document.addEventListener("DOMContentLoaded", initializeBackToTop)
-</script>

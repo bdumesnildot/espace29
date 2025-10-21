@@ -66,9 +66,9 @@ const eventsBySeason = eventSeasons
 const sortedSeasons = Object.keys(eventsBySeason)
 ---
 
-<Layout title="e29 | Agenda">
+<Layout title="e29 | Agenda" showBackToTop={true}>
   <main class="flex min-h-full w-full flex-col items-start">
-    <PageTopLayout title="Agenda" showBackToTop={true} />
+    <PageTopLayout title="Agenda" />
 
     {
       sortedSeasons.map((season, seasonIndex) => (

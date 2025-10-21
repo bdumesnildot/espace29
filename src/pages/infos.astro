@@ -1,4 +1,5 @@
 ---
+import Icon from "@components/ui/icons/Icon.astro"
 import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
 ---
@@ -25,7 +26,7 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
             fonction des spécificités de chaque projet. C'est avant tout une
             plateforme de rencontre et d'échange entre artistes professionnels,
             mais aussi avec le public accueilli lors des événements ainsi que
-            diverses associations, écoles, collectifs, etc. Ce lieu met en avant
+            diverses associations, écoles, collectifs, etc. Ce lieu met en ava
             la communication et la collaboration entre divers pôles artistiques,
             institutions ou personnalités, en proposant un espace neutre
             favorable au développement de nouvelles idées et projets.
@@ -103,7 +104,7 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
         <div class="space-y-6">
           <div>
             <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
-              Administratrice :
+              Administratrice
             </h3>
             <p class="font-eina03 text-lg text-gray-700">### ###</p>
             <a
@@ -114,7 +115,7 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
           </div>
           <div>
             <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
-              Responsable communication et médiation :
+              Responsable communication et médiation
             </h3>
             <p class="font-eina03 text-lg text-gray-700">Mario Sardo</p>
             <a
@@ -123,36 +124,44 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
               >projets.e29@gmail.com</a
             >
           </div>
-          <div>
+          <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
+            Réseaux sociaux
+          </h3>
+          <div class="flex gap-2">
+            <Icon name="instagram" class="h-6 w-6" />
             <a
               href="https://www.instagram.com/espace29_bx/"
-              class="font-eina03 text-lg font-semibold text-gray-900 transition-colors hover:text-gray-700"
-              >@espace29_bx</a
+              class="font-eina03 text-lg text-gray-900 transition-colors hover:text-gray-700"
+              >espace29_bx</a
             >
           </div>
-          <div>
-            <p class="font-eina03 text-lg text-gray-700">
-              29 rue Fernand Marin - 33000 Bordeaux
-            </p>
-          </div>
+          <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
+            Adresse
+          </h3>
+          <p class="font-eina03 text-lg text-gray-700">
+            29 rue Fernand Marin - 33000 Bordeaux
+          </p>
+
           <div class="border-t border-gray-200 pt-6">
             <div class="mb-4">
               <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
-                Textes :
+                Textes
               </h3>
               <p class="font-eina03 text-lg text-gray-700">Clément Houbart</p>
             </div>
             <div class="mb-4">
               <h3 class="font-eina03 mb-2 text-lg font-semibold text-gray-900">
-                Webdesign :
+                Webdesign
               </h3>
               <p class="font-eina03 text-lg text-gray-700">Mario Sardo</p>
             </div>
-            <a
-              href="/mentions-legales"
-              class="font-eina03 text-lg font-semibold text-gray-900 transition-colors hover:text-gray-700"
-              >Mentions légales</a
-            >
+            <div class="mt-12">
+              <a
+                href="/mentions-legales"
+                class="font-eina03 text-lg font-semibold text-gray-900 transition-colors hover:text-gray-700"
+                >Mentions légales</a
+              >
+            </div>
           </div>
         </div>
       </div>
