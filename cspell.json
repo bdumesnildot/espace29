@@ -1,18 +1,31 @@
 {
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "words": ["deadzone", "deadzones", "eina", " e29", "grayscale", "gsap", "mdx", "jsonc"],
-  "dictionaryDefinitions": [],
+  "language": "en,fr,fr_FR,lorem, lorem-ipsum",
+  "words": [
+    "deadzone",
+    "deadzones",
+    "eina",
+    "e29",
+    "grayscale",
+    "gsap",
+    "houbart",
+    "mdx",
+    "meriadeck",
+    "jsonc",
+    "sardo",
+    "vercel"
+  ],
   "enableFiletypes": [
     "astro",
     "javascript",
     "javascriptreact",
-    "typescript",
-    "typescriptreact",
+    "json",
+    "jsonc",
     "markdown",
     "mdx",
-    "json",
-    "jsonc"
+    "typescript",
+    "typescriptreact"
   ],
   "files": [
     "**/*.md",
@@ -40,5 +53,5 @@
     }
   ],
   "import": ["@cspell/dict-fr-fr/cspell-ext.json"],
-  "ignorePaths": []
+  "ignorePaths": ["node_modules/**", "dist/**", "public/**", "pnpm-lock.yaml"]
 }
