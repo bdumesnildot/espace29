@@ -94,7 +94,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
               >
                 <div class="h-full w-10 flex-shrink-0" />
                 {eventsBySeason[season].map((event) => (
-                  <div class="h-full min-w-full flex-shrink-0 sm:w-[650px] sm:min-w-[650px]">
+                  <div class="h-full min-w-full flex-shrink-0 sm:w-[500px] sm:min-w-[500px]">
                     <Card
                       title={event.title.toLocaleUpperCase()}
                       subtitle={formatDate(event.dateStart, event.dateEnd)}

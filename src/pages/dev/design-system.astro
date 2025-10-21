@@ -189,28 +189,28 @@ import NavbarMobile from "../../components/navigation/NavbarMobile.astro"
           <div class="flex items-center gap-6 border-l-4 border-gray-900 p-4">
             <span class="font-eina01 text-8xl font-semibold">text-8xl</span>
             <div>
-              <p class="font-mono text-sm">120px, font-weight: 600</p>
+              <p class="font-mono text-sm">96px, font-weight: 600</p>
               <p class="text-gray-600">Hero headings</p>
             </div>
           </div>
           <div class="flex items-center gap-6 border-l-4 border-gray-700 p-4">
             <span class="font-eina01 text-7xl font-semibold">text-7xl</span>
             <div>
-              <p class="font-mono text-sm">100px, font-weight: 600</p>
+              <p class="font-mono text-sm">80px, font-weight: 600</p>
               <p class="text-gray-600">Large display headings</p>
             </div>
           </div>
           <div class="flex items-center gap-6 border-l-4 border-gray-500 p-4">
             <span class="font-eina02 text-6xl">text-6xl</span>
             <div>
-              <p class="font-mono text-sm">80px, font-weight: 400</p>
+              <p class="font-mono text-sm">64px, font-weight: 400</p>
               <p class="text-gray-600">Section headings</p>
             </div>
           </div>
           <div class="flex items-center gap-6 border-l-4 border-gray-400 p-4">
             <span class="font-eina02 text-5xl">text-5xl</span>
             <div>
-              <p class="font-mono text-sm">60px, font-weight: 400</p>
+              <p class="font-mono text-sm">48px, font-weight: 400</p>
               <p class="text-gray-600">Major headings</p>
             </div>
           </div>
@@ -218,7 +218,7 @@ import NavbarMobile from "../../components/navigation/NavbarMobile.astro"
             <span class="font-eina03 text-4xl">text-4xl</span>
             <div>
               <p class="font-mono text-sm">
-                35px, line-height: 1.2, font-weight: 400
+                28px, line-height: 1.2, font-weight: 400
               </p>
               <p class="text-gray-600">Content headings</p>
             </div>
@@ -226,21 +226,21 @@ import NavbarMobile from "../../components/navigation/NavbarMobile.astro"
           <div class="flex items-center gap-6 border-l-4 border-gray-200 p-4">
             <span class="font-eina03 text-3xl">text-3xl</span>
             <div>
-              <p class="font-mono text-sm">30px, font-weight: 400</p>
+              <p class="font-mono text-sm">24px, font-weight: 400</p>
               <p class="text-gray-600">Subheadings</p>
             </div>
           </div>
           <div class="flex items-center gap-6 border-l-4 border-gray-200 p-4">
             <span class="font-eina03 text-2xl">text-2xl</span>
             <div>
-              <p class="font-mono text-sm">25px, font-weight: 400</p>
+              <p class="font-mono text-sm">20px, font-weight: 400</p>
               <p class="text-gray-600">Card titles</p>
             </div>
           </div>
           <div class="flex items-center gap-6 border-l-4 border-gray-100 p-4">
             <span class="font-eina03 text-xl">text-xl</span>
             <div>
-              <p class="font-mono text-sm">20px, font-weight: 400</p>
+              <p class="font-mono text-sm">16px, font-weight: 400</p>
               <p class="text-gray-600">Large body text</p>
             </div>
           </div>
@@ -248,7 +248,7 @@ import NavbarMobile from "../../components/navigation/NavbarMobile.astro"
             <span class="font-eina03 text-lg">text-lg</span>
             <div>
               <p class="font-mono text-sm">
-                15px, line-height: 1.6, font-weight: 400
+                12px, line-height: 1.6, font-weight: 400
               </p>
               <p class="text-gray-600">Body text, paragraphs</p>
             </div>
@@ -746,7 +746,8 @@ import NavbarMobile from "../../components/navigation/NavbarMobile.astro"
             <Button intent="primary" size="large">Large</Button>
           </div>
           <div class="mt-4 font-mono text-sm text-gray-600">
-            size="small" | size="medium" | size="large"
+            size="small" (py-2 px-4 text-sm) | size="medium" (py-3 px-6) |
+            size="large" (py-4 px-8 text-lg)
           </div>
         </div>
 
@@ -798,8 +799,10 @@ import NavbarMobile from "../../components/navigation/NavbarMobile.astro"
                   </tr>
                   <tr class="border-b border-gray-100">
                     <td class="py-3 font-mono text-gray-900">size</td>
-                    <td class="py-3 text-gray-600">"sm" | "md" | "lg"</td>
-                    <td class="py-3 text-gray-500">"md"</td>
+                    <td class="py-3 text-gray-600"
+                      >"small" | "medium" | "large"</td
+                    >
+                    <td class="py-3 text-gray-500">"medium"</td>
                     <td class="py-3 text-gray-700">Button size variant</td>
                   </tr>
                   <tr class="border-b border-gray-100">

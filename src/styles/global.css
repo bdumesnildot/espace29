@@ -1,10 +1,20 @@
 @import 'tailwindcss';
 @import './fonts.css';
 
-/* Custom font families for Tailwind v4 */
+/* Custom font families and sizes for Tailwind v4 */
 @theme {
   --font-eina01: 'Eina01', ui-sans-serif, system-ui, sans-serif;
   --font-eina02: 'Eina02', ui-sans-serif, system-ui, sans-serif;
   --font-eina03: 'Eina03', ui-sans-serif, system-ui, sans-serif;
   --font-eina04: 'Eina04', ui-sans-serif, system-ui, sans-serif;
+
+  --text-8xl: 96px;
+  --text-7xl: 80px;
+  --text-6xl: 64px;
+  --text-5xl: 48px;
+  --text-4xl: 28px;
+  --text-3xl: 24px;
+  --text-2xl: 20px;
+  --text-xl: 16px;
+  --text-lg: 12px;
 }
