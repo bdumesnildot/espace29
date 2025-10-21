@@ -1,8 +1,8 @@
 ---
-import Layout from '@layouts/Layout.astro'
-import Card from '@components/ui/card/Card.astro'
-import { artists } from '@lib/artists-helper'
-import PageTopLayout from '@layouts/PageTopLayout.astro'
+import Layout from "@layouts/Layout.astro"
+import Card from "@components/ui/card/Card.astro"
+import { artists } from "@lib/artists-helper"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
 
 // Helper function to format artist name
 const formatArtistName = (artist: any) => {
@@ -60,7 +60,7 @@ const formatArtistName = (artist: any) => {
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
                 href={`/artistes/${artist.slug}`}
-                grayscale={'untilHover'}
+                grayscale={"untilHover"}
               />
             </div>
           ))
@@ -82,7 +82,7 @@ const formatArtistName = (artist: any) => {
                 imageUrl={artist.cardImageUrl}
                 imageAlt={artist.cardImageAlt}
                 href={`/artistes/${artist.slug}`}
-                grayscale={'untilHover'}
+                grayscale={"untilHover"}
                 className="w-full min-w-full"
               />
             </div>
@@ -97,8 +97,8 @@ const formatArtistName = (artist: any) => {
 </Layout>
 
 <script>
-  import { gsap } from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
 
   gsap.registerPlugin(ScrollTrigger)
 
@@ -106,7 +106,7 @@ const formatArtistName = (artist: any) => {
     // Only run on desktop (same breakpoint as the CSS)
     if (window.innerWidth < 640) {
       // Reset margin on mobile
-      const verticalContent = document.getElementById('vertical-content')
+      const verticalContent = document.getElementById("vertical-content")
       if (verticalContent) {
         gsap.set(verticalContent, { marginTop: 0 })
       }
@@ -114,10 +114,10 @@ const formatArtistName = (artist: any) => {
     }
 
     const horizontalSection = document.getElementById(
-      'horizontal-scroll-section'
+      "horizontal-scroll-section"
     )
-    const cardsWrapper = document.getElementById('artist-cards-wrapper')
-    const verticalContent = document.getElementById('vertical-content')
+    const cardsWrapper = document.getElementById("artist-cards-wrapper")
+    const verticalContent = document.getElementById("vertical-content")
 
     if (!horizontalSection || !cardsWrapper || !verticalContent) return
 
@@ -135,26 +135,26 @@ const formatArtistName = (artist: any) => {
     // Deadzone before first card (no movement - user can read first card)
     tl.to(cardsWrapper, {
       duration: deadZone,
-      ease: 'none',
+      ease: "none",
     })
 
     // Actual horizontal scroll between cards
     tl.to(cardsWrapper, {
       x: -scrollDistance,
       duration: scrollDistance,
-      ease: 'none',
+      ease: "none",
     })
 
     // Deadzone after last card (no movement - user can read last card)
     tl.to(cardsWrapper, {
       duration: deadZone,
-      ease: 'none',
+      ease: "none",
     })
 
     // Create ScrollTrigger for horizontal scroll with proper spacing
     ScrollTrigger.create({
       trigger: horizontalSection,
-      start: 'top top',
+      start: "top top",
       end: () => `+=${totalScrollDistance}`,
       scrub: 1,
       pin: true,
@@ -169,10 +169,10 @@ const formatArtistName = (artist: any) => {
     })
   }
 
-  document.addEventListener('DOMContentLoaded', initializeScrollAnimation)
+  document.addEventListener("DOMContentLoaded", initializeScrollAnimation)
 
   // Refresh ScrollTrigger and reinitialize on window resize
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     ScrollTrigger.refresh()
     initializeScrollAnimation()

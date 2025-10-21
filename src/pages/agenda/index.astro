@@ -1,24 +1,24 @@
 ---
-import Layout from '@layouts/Layout.astro'
-import Card from '@components/ui/card/Card.astro'
-import { events, eventSeasons } from '@lib/events-helper'
-import PageTopLayout from '@layouts/PageTopLayout.astro'
+import Layout from "@layouts/Layout.astro"
+import Card from "@components/ui/card/Card.astro"
+import { events, eventSeasons } from "@lib/events-helper"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
 
 // Helper function to format date for display
 const formatDate = (dateStart: string, dateEnd?: string) => {
   const start = new Date(dateStart)
-  const startFormatted = start.toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+  const startFormatted = start.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   })
 
   if (dateEnd) {
     const end = new Date(dateEnd)
-    const endFormatted = end.toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
+    const endFormatted = end.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     })
     return `${startFormatted} - ${endFormatted}`
   }
@@ -102,7 +102,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
                       imageUrl={event.cardImageUrl}
                       imageAlt={event.cardImageAlt}
                       href={`/agenda/${event.slug}`}
-                      grayscale={'untilHover'}
+                      grayscale={"untilHover"}
                     />
                   </div>
                 ))}
@@ -126,7 +126,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
                     imageUrl={event.cardImageUrl}
                     imageAlt={event.cardImageAlt}
                     href={`/agenda/${event.slug}`}
-                    grayscale={'untilHover'}
+                    grayscale={"untilHover"}
                     className="w-full min-w-full"
                   />
                 </div>
@@ -140,8 +140,8 @@ const sortedSeasons = Object.keys(eventsBySeason)
 </Layout>
 
 <script>
-  import { gsap } from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
 
   gsap.registerPlugin(ScrollTrigger)
 
@@ -167,18 +167,18 @@ const sortedSeasons = Object.keys(eventsBySeason)
 
           if (isInBounds && !isHovered) {
             isHovered = true
-            card.classList.remove('grayscale')
+            card.classList.remove("grayscale")
           } else if (!isInBounds && isHovered) {
             isHovered = false
-            card.classList.add('grayscale')
+            card.classList.add("grayscale")
           }
         }
 
-        seasonSection.addEventListener('mousemove', handleMouseMove)
-        seasonSection.addEventListener('mouseleave', () => {
+        seasonSection.addEventListener("mousemove", handleMouseMove)
+        seasonSection.addEventListener("mouseleave", () => {
           if (isHovered) {
             isHovered = false
-            card.classList.add('grayscale')
+            card.classList.add("grayscale")
           }
         })
       })
@@ -209,23 +209,23 @@ const sortedSeasons = Object.keys(eventsBySeason)
 
       tl.to(cardsWrapper, {
         duration: deadZone,
-        ease: 'none',
+        ease: "none",
       })
 
       tl.to(cardsWrapper, {
         x: -scrollDistance,
         duration: scrollDistance,
-        ease: 'none',
+        ease: "none",
       })
 
       tl.to(cardsWrapper, {
         duration: deadZone,
-        ease: 'none',
+        ease: "none",
       })
 
       ScrollTrigger.create({
         trigger: seasonSection,
-        start: 'top top',
+        start: "top top",
         end: () => `+=${totalScrollDistance}`,
         scrub: 1,
         pin: true,
@@ -236,12 +236,12 @@ const sortedSeasons = Object.keys(eventsBySeason)
     })
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     initializeScrollAnimations()
     initializeHoverDetection()
   })
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     ScrollTrigger.refresh()
     initializeScrollAnimations()

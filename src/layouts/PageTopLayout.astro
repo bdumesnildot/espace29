@@ -81,7 +81,7 @@ const { title, backTo, showBackToTop = false } = Astro.props
 
 <script>
   function initializeBackToTop() {
-    const backToTopButton = document.getElementById('back-to-top')
+    const backToTopButton = document.getElementById("back-to-top")
     if (!backToTopButton) return
 
     const showThreshold = 300 // Show button after scrolling 300px
@@ -91,11 +91,11 @@ const { title, backTo, showBackToTop = false } = Astro.props
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop
 
       if (scrollTop > showThreshold) {
-        backToTopButton.classList.remove('opacity-0', 'pointer-events-none')
-        backToTopButton.classList.add('opacity-100', 'pointer-events-auto')
+        backToTopButton.classList.remove("opacity-0", "pointer-events-none")
+        backToTopButton.classList.add("opacity-100", "pointer-events-auto")
       } else {
-        backToTopButton.classList.add('opacity-0', 'pointer-events-none')
-        backToTopButton.classList.remove('opacity-100', 'pointer-events-auto')
+        backToTopButton.classList.add("opacity-0", "pointer-events-none")
+        backToTopButton.classList.remove("opacity-100", "pointer-events-auto")
       }
     }
 
@@ -108,7 +108,7 @@ const { title, backTo, showBackToTop = false } = Astro.props
       // Scroll to top instantly
       window.scrollTo({
         top: 0,
-        behavior: 'instant',
+        behavior: "instant",
       })
 
       // Reinitialize ScrollTrigger after a short delay
@@ -116,19 +116,19 @@ const { title, backTo, showBackToTop = false } = Astro.props
         setTimeout(() => {
           window.ScrollTrigger?.refresh()
           // Trigger custom event for pages to reinitialize their animations
-          window.dispatchEvent(new CustomEvent('backToTopComplete'))
+          window.dispatchEvent(new CustomEvent("backToTopComplete"))
         }, 100)
       }
     }
 
     // Add event listeners
-    window.addEventListener('scroll', toggleBackToTop)
-    backToTopButton.addEventListener('click', scrollToTop)
+    window.addEventListener("scroll", toggleBackToTop)
+    backToTopButton.addEventListener("click", scrollToTop)
 
     // Initial check
     toggleBackToTop()
   }
 
   // Initialize on DOM content loaded
-  document.addEventListener('DOMContentLoaded', initializeBackToTop)
+  document.addEventListener("DOMContentLoaded", initializeBackToTop)
 </script>

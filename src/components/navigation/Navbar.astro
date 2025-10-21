@@ -1,16 +1,16 @@
 ---
-import { navigationItems } from '@lib/navigation-helper.ts'
+import { navigationItems } from "@lib/navigation-helper.ts"
 
 const currentPath = Astro.url.pathname
 
 const isActiveLink = (href: string) => {
-  if (href === '/') return currentPath === '/'
+  if (href === "/") return currentPath === "/"
   return currentPath.startsWith(href)
 }
 
 const getLinkStyle = (href: string) => {
   const baseStyle =
-    'font-eina03 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1'
+    "font-eina03 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1"
 
   if (isActiveLink(href)) {
     return `${baseStyle} text-gray-900 border-gray-900`

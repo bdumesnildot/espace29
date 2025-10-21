@@ -1,5 +1,5 @@
 ---
-import { classMerge } from '../../../styles/utils'
+import { classMerge } from "../../../styles/utils"
 
 export interface Props {
   title: string
@@ -9,7 +9,7 @@ export interface Props {
   imageAlt?: string
   href?: string
   className?: string
-  grayscale?: 'always' | 'untilHover' | false
+  grayscale?: "always" | "untilHover" | false
   onClick?: string
   id?: string
 }
@@ -19,25 +19,25 @@ const {
   subtitle,
   description,
   imageUrl,
-  imageAlt = '',
+  imageAlt = "",
   href,
-  className = '',
+  className = "",
   grayscale = false,
   onClick,
   id,
 } = Astro.props
 
-const Component = href ? 'a' : 'div'
+const Component = href ? "a" : "div"
 const isInteractive = href || onClick
 
 // Base classes following design system philosophy
 const baseClasses =
-  'bg-transparent border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col w-full'
-const interactiveClasses = isInteractive ? 'cursor-pointer' : ''
+  "bg-transparent border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col w-full"
+const interactiveClasses = isInteractive ? "cursor-pointer" : ""
 const grayscaleClasses = (() => {
-  if (grayscale === 'always') return 'filter grayscale'
-  if (grayscale === 'untilHover') return 'filter grayscale hover:grayscale-0'
-  return ''
+  if (grayscale === "always") return "filter grayscale"
+  if (grayscale === "untilHover") return "filter grayscale hover:grayscale-0"
+  return ""
 })()
 ---
 

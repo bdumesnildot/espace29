@@ -1,7 +1,7 @@
 ---
-import Layout from '@layouts/Layout.astro'
-import PageTopLayout from '@layouts/PageTopLayout.astro'
-import { artists, type Artist, formatArtistName } from '@lib/artists-helper'
+import Layout from "@layouts/Layout.astro"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
+import { artists, type Artist, formatArtistName } from "@lib/artists-helper"
 
 export function getStaticPaths() {
   return artists.map((artist) => ({
@@ -13,7 +13,7 @@ export function getStaticPaths() {
 const { artist } = Astro.props
 
 if (!artist) {
-  return Astro.redirect('/404')
+  return Astro.redirect("/404")
 }
 
 const formattedName = formatArtistName(artist)
@@ -24,8 +24,8 @@ const formattedName = formatArtistName(artist)
     <PageTopLayout
       title={formattedName}
       backTo={{
-        href: '/artistes',
-        label: 'Retour au artistes',
+        href: "/artistes",
+        label: "Retour au artistes",
       }}
     />
     <section
@@ -86,7 +86,7 @@ const formattedName = formatArtistName(artist)
           <div class="space-y-3">
             {
               artist.profileDescription
-                .split('\n\n')
+                .split("\n\n")
                 .map((paragraph) => (
                   <p class="font-eina03 text-sm leading-relaxed text-gray-700">
                     {paragraph.trim()}
@@ -106,7 +106,7 @@ const formattedName = formatArtistName(artist)
                 src={image.url}
                 alt={image.alt}
                 class="h-64 w-full rounded-lg object-cover shadow-sm"
-                loading={index === 0 ? 'eager' : 'lazy'}
+                loading={index === 0 ? "eager" : "lazy"}
               />
             ))
           }
@@ -124,10 +124,10 @@ const formattedName = formatArtistName(artist)
                   src={image.url}
                   alt={image.alt}
                   class={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                    index === 0 ? 'opacity-100' : 'opacity-0'
+                    index === 0 ? "opacity-100" : "opacity-0"
                   }`}
                   data-index={index}
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
               ))
             }
@@ -187,7 +187,7 @@ const formattedName = formatArtistName(artist)
                 {artist.profileImageUrlList.map((_, index) => (
                   <button
                     class={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
-                      index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
+                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
                     }`}
                     data-index={index}
                     aria-label={`Image ${index + 1}`}
@@ -253,7 +253,7 @@ const formattedName = formatArtistName(artist)
             <div class="flex-1 space-y-4 overflow-y-auto">
               {
                 artist.profileDescription
-                  .split('\n\n')
+                  .split("\n\n")
                   .map((paragraph) => (
                     <p class="font-eina03 text-lg leading-relaxed text-gray-700">
                       {paragraph.trim()}
@@ -272,36 +272,36 @@ const formattedName = formatArtistName(artist)
 </Layout>
 
 <script>
-  import { gsap } from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener("DOMContentLoaded", function () {
     // Carousel functionality
     const images = document.querySelectorAll(
-      '.carousel-image'
+      ".carousel-image"
     ) as NodeListOf<HTMLImageElement>
     const dots = document.querySelectorAll(
-      '.carousel-dot'
+      ".carousel-dot"
     ) as NodeListOf<HTMLButtonElement>
-    const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement
-    const nextBtn = document.getElementById('next-btn') as HTMLButtonElement
+    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
+    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
 
     if (images.length > 1) {
       let currentIndex = 0
 
       function showImage(index: number) {
         images.forEach((img, i) => {
-          img.classList.toggle('opacity-100', i === index)
-          img.classList.toggle('opacity-0', i !== index)
+          img.classList.toggle("opacity-100", i === index)
+          img.classList.toggle("opacity-0", i !== index)
         })
 
         dots.forEach((dot, i) => {
           if (i === index) {
-            dot.classList.remove('bg-white/50', 'hover:bg-white/75')
-            dot.classList.add('bg-white')
+            dot.classList.remove("bg-white/50", "hover:bg-white/75")
+            dot.classList.add("bg-white")
           } else {
-            dot.classList.remove('bg-white')
-            dot.classList.add('bg-white/50', 'hover:bg-white/75')
+            dot.classList.remove("bg-white")
+            dot.classList.add("bg-white/50", "hover:bg-white/75")
           }
         })
 
@@ -318,17 +318,17 @@ const formattedName = formatArtistName(artist)
         showImage(newIndex)
       }
 
-      if (prevBtn) prevBtn.addEventListener('click', prevImage)
-      if (nextBtn) nextBtn.addEventListener('click', nextImage)
+      if (prevBtn) prevBtn.addEventListener("click", prevImage)
+      if (nextBtn) nextBtn.addEventListener("click", nextImage)
 
       dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => showImage(index))
+        dot.addEventListener("click", () => showImage(index))
       })
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
           prevImage()
-        } else if (e.key === 'ArrowRight') {
+        } else if (e.key === "ArrowRight") {
           nextImage()
         }
       })
@@ -337,13 +337,13 @@ const formattedName = formatArtistName(artist)
     // Magnet scroll effect
     gsap.registerPlugin(ScrollTrigger)
 
-    const artistSlug = window.location.pathname.split('/').pop()
+    const artistSlug = window.location.pathname.split("/").pop()
     if (!artistSlug) return
 
     const section = document.getElementById(
       `artist-${artistSlug}-details-section`
     )
-    const pinSpacer = document.getElementById('pin-spacer')
+    const pinSpacer = document.getElementById("pin-spacer")
     if (!section || !pinSpacer) return
 
     const RELEASE_OFFSET = 300
@@ -353,7 +353,7 @@ const formattedName = formatArtistName(artist)
 
     ScrollTrigger.create({
       trigger: section,
-      start: 'top top',
+      start: "top top",
       end: `+=${RELEASE_OFFSET}`,
       pin: true,
       scrub: 0.5,

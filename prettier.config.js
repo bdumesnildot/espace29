@@ -22,6 +22,7 @@ export default {
       options: {
         parser: "astro",
         astroAllowShorthand: false,
+        singleQuote: false,
       },
     },
     {
