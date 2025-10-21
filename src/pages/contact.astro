@@ -1,0 +1,172 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Button from "../components/ui/button/Button.astro"
+---
+
+<Layout title="e29 | Contact">
+  <main class="mx-auto max-w-7xl px-6 py-12">
+    <!-- Header -->
+    <header class="mb-16 text-center">
+      <h1 class="font-eina01 mb-4 text-5xl font-semibold sm:mt-4 sm:text-8xl">
+        Contact
+      </h1>
+      <p class="mx-auto max-w-3xl text-xl leading-relaxed text-gray-600">
+        Entrez en contact avec Espace29. Nous serions ravis d'échanger avec vous
+        sur nos projets artistiques, nos événements ou toute collaboration
+        possible.
+      </p>
+    </header>
+
+    <!-- Contact Form Section -->
+    <section class="mx-auto max-w-4xl">
+      <!-- Contact Form -->
+      <form
+        class="rounded-lg border border-gray-200 bg-white p-8 shadow-sm"
+        method="POST"
+        action="#"
+      >
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <!-- First Name -->
+          <div>
+            <label
+              for="firstName"
+              class="font-eina04 mb-2 block text-sm font-medium text-gray-700"
+            >
+              Prénom <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              placeholder="Votre prénom"
+              class="font-eina03 w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            />
+          </div>
+
+          <!-- Last Name -->
+          <div>
+            <label
+              for="lastName"
+              class="font-eina04 mb-2 block text-sm font-medium text-gray-700"
+            >
+              Nom <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              placeholder="Votre nom"
+              class="font-eina03 w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="mt-6">
+          <label
+            for="email"
+            class="font-eina04 mb-2 block text-sm font-medium text-gray-700"
+          >
+            Email <span class="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="votre.email@exemple.com"
+            class="font-eina03 w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+          />
+        </div>
+
+        <!-- Phone (optional) -->
+        <div class="mt-6">
+          <label
+            for="phone"
+            class="font-eina04 mb-2 block text-sm font-medium text-gray-700"
+          >
+            Téléphone
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+33 X XX XX XX XX"
+            class="font-eina03 w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+          />
+        </div>
+
+        <!-- Subject -->
+        <div class="mt-6">
+          <label
+            for="subject"
+            class="font-eina04 mb-2 block text-sm font-medium text-gray-700"
+          >
+            Sujet <span class="text-red-500">*</span>
+          </label>
+          <select
+            id="subject"
+            name="subject"
+            required
+            class="font-eina03 w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+          >
+            <option value="">Choisissez un sujet</option>
+            <option value="general">Question générale</option>
+            <option value="event">Événement / Spectacle</option>
+            <option value="artist">Artiste / Collaboration</option>
+            <option value="space">Location d'espace</option>
+            <option value="partnership">Partenariat</option>
+            <option value="press">Presse / Médias</option>
+            <option value="other">Autre</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div class="mt-6">
+          <label
+            for="message"
+            class="font-eina04 mb-2 block text-sm font-medium text-gray-700"
+          >
+            Message <span class="text-red-500">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="6"
+            placeholder="Décrivez votre demande, votre projet ou vos questions..."
+            class="font-eina03 w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+          ></textarea>
+        </div>
+
+        <!-- Privacy Notice -->
+        <div class="mt-6">
+          <div class="flex items-start gap-3">
+            <input
+              type="checkbox"
+              id="privacy"
+              name="privacy"
+              required
+              class="mt-1 h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-2 focus:ring-gray-900"
+            />
+            <label for="privacy" class="font-eina03 text-sm text-gray-600">
+              J'accepte que mes données personnelles soient utilisées pour
+              traiter ma demande. Les informations collectées sont utilisées
+              uniquement pour vous répondre et ne sont jamais partagées avec des
+              tiers. <span class="text-red-500">*</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-8 flex justify-end">
+          <Button type="submit" intent="primary" size="medium">
+            Envoyer le message
+          </Button>
+        </div>
+      </form>
+    </section>
+  </main>
+</Layout>

@@ -3,6 +3,7 @@ const baseNavigationItems = [
   { href: "/infos", label: "Infos" },
   { href: "/agenda", label: "Agenda" },
   { href: "/artistes", label: "Artistes" },
+  { href: "/contact", label: "Contact" },
 ]
 
 const devNavigationItems = [
