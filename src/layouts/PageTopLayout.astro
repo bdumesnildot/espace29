@@ -10,10 +10,10 @@ interface Props {
 const { title, backTo } = Astro.props
 ---
 
-<div class="relative w-full px-2 sm:px-8">
+<div class="relative w-full px-2 sm:px-10">
   {
     backTo && (
-      <nav class="absolute top-6 left-8 z-10 hidden sm:block">
+      <nav class="absolute top-5 left-6 z-10 hidden sm:block">
         <a
           href={backTo.href}
           class="font-eina04 group flex items-center gap-1 font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900"
