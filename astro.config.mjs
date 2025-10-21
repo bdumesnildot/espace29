@@ -1,7 +1,7 @@
 import { defineConfig, envField } from "astro/config"
 import dotenv from "dotenv"
 import tailwindcss from "@tailwindcss/vite"
-import vercel from "@astrojs/vercel/serverless"
+import vercel from "@astrojs/vercel/static"
 
 dotenv.config()
 const { APP_BASE_URL } = process.env
@@ -31,11 +31,10 @@ export default defineConfig({
     remotePatterns: [{ protocol: "https" }],
   },
 
-  output: "server",
+  output: "static",
   adapter: vercel({
     webAnalytics: {
       enabled: false,
     },
-    maxDuration: 8,
   }),
 })
