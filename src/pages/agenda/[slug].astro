@@ -1,7 +1,7 @@
 ---
-import Layout from '@layouts/Layout.astro'
-import PageTopLayout from '@layouts/PageTopLayout.astro'
-import { events, type Event } from '@lib/events-helper'
+import Layout from "@layouts/Layout.astro"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
+import { events, type Event } from "@lib/events-helper"
 
 export function getStaticPaths() {
   return events.map((event) => ({
@@ -13,24 +13,24 @@ export function getStaticPaths() {
 const { event } = Astro.props
 
 if (!event) {
-  return Astro.redirect('/404')
+  return Astro.redirect("/404")
 }
 
 // Helper function to format date for display
 const formatDate = (dateStart: string, dateEnd?: string) => {
   const start = new Date(dateStart)
-  const startFormatted = start.toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+  const startFormatted = start.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   })
 
   if (dateEnd) {
     const end = new Date(dateEnd)
-    const endFormatted = end.toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
+    const endFormatted = end.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     })
     return `${startFormatted} - ${endFormatted}`
   }
@@ -44,11 +44,14 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
     <PageTopLayout
       title={event.title}
       backTo={{
-        href: '/agenda',
+        href: "/agenda",
         label: "Retour à l'agenda",
       }}
     />
-    <section class="flex h-screen w-full flex-col md:flex-row">
+    <section
+      id={`event-${event.slug}-details-section`}
+      class="flex h-screen w-full flex-col md:flex-row"
+    >
       <!-- Mobile: Event Details First -->
       <div class="flex w-full flex-col space-y-4 p-4 md:hidden">
         <!-- Event Date -->
@@ -65,7 +68,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
           </h3>
           <div class="space-y-3">
             {
-              event.Description.split('\n\n').map((paragraph) => (
+              event.Description.split("\n\n").map((paragraph) => (
                 <p class="font-eina03 text-sm leading-relaxed text-gray-700">
                   {paragraph.trim()}
                 </p>
@@ -82,7 +85,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
           <div class="space-y-3">
             {
               event.practicalInfo
-                .split('\n\n')
+                .split("\n\n")
                 .map((paragraph) => (
                   <p class="font-eina03 text-sm leading-relaxed text-gray-700">
                     {paragraph.trim()}
@@ -102,7 +105,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
                 src={image.url}
                 alt={image.alt}
                 class="h-64 w-full rounded-lg object-cover shadow-sm"
-                loading={index === 0 ? 'eager' : 'lazy'}
+                loading={index === 0 ? "eager" : "lazy"}
               />
             ))
           }
@@ -120,10 +123,10 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
                   src={image.url}
                   alt={image.alt}
                   class={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                    index === 0 ? 'opacity-100' : 'opacity-0'
+                    index === 0 ? "opacity-100" : "opacity-0"
                   }`}
                   data-index={index}
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
               ))
             }
@@ -183,7 +186,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
                 {event.ImageUrlList.map((_, index) => (
                   <button
                     class={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
-                      index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
+                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
                     }`}
                     data-index={index}
                     aria-label={`Image ${index + 1}`}
@@ -212,7 +215,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
             </h3>
             <div class="space-y-4">
               {
-                event.Description.split('\n\n').map((paragraph) => (
+                event.Description.split("\n\n").map((paragraph) => (
                   <p class="font-eina03 text-lg leading-relaxed text-gray-700">
                     {paragraph.trim()}
                   </p>
@@ -229,7 +232,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
             <div class="flex-1 space-y-4 overflow-y-auto">
               {
                 event.practicalInfo
-                  .split('\n\n')
+                  .split("\n\n")
                   .map((paragraph) => (
                     <p class="font-eina03 text-lg leading-relaxed text-gray-700">
                       {paragraph.trim()}
@@ -241,19 +244,25 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
         </div>
       </div>
     </section>
+
+    <!-- Spacer div to prevent footer from moving up during pin -->
+    <div id="pin-spacer" class="h-0"></div>
   </main>
 </Layout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  document.addEventListener("DOMContentLoaded", function () {
     const images = document.querySelectorAll(
-      '.carousel-image'
+      ".carousel-image"
     ) as NodeListOf<HTMLImageElement>
     const dots = document.querySelectorAll(
-      '.carousel-dot'
+      ".carousel-dot"
     ) as NodeListOf<HTMLButtonElement>
-    const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement
-    const nextBtn = document.getElementById('next-btn') as HTMLButtonElement
+    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
+    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
 
     if (images.length <= 1) return
 
@@ -262,18 +271,18 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
     function showImage(index: number) {
       // Hide all images
       images.forEach((img, i) => {
-        img.classList.toggle('opacity-100', i === index)
-        img.classList.toggle('opacity-0', i !== index)
+        img.classList.toggle("opacity-100", i === index)
+        img.classList.toggle("opacity-0", i !== index)
       })
 
       // Update dots
       dots.forEach((dot, i) => {
         if (i === index) {
-          dot.classList.remove('bg-white/50', 'hover:bg-white/75')
-          dot.classList.add('bg-white')
+          dot.classList.remove("bg-white/50", "hover:bg-white/75")
+          dot.classList.add("bg-white")
         } else {
-          dot.classList.remove('bg-white')
-          dot.classList.add('bg-white/50', 'hover:bg-white/75')
+          dot.classList.remove("bg-white")
+          dot.classList.add("bg-white/50", "hover:bg-white/75")
         }
       })
 
@@ -292,27 +301,57 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
 
     // Event listeners
     if (prevBtn) {
-      prevBtn.addEventListener('click', prevImage)
+      prevBtn.addEventListener("click", prevImage)
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', nextImage)
+      nextBtn.addEventListener("click", nextImage)
     }
 
     dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => showImage(index))
+      dot.addEventListener("click", () => showImage(index))
     })
 
     // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
         prevImage()
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         nextImage()
       }
     })
 
     // Auto-play (optional - uncomment to enable)
     // setInterval(nextImage, 5000);
+
+    // Magnet scroll effect
+    gsap.registerPlugin(ScrollTrigger)
+
+    const eventSlug = window.location.pathname.split("/").pop()
+    if (!eventSlug) return
+
+    const section = document.getElementById(
+      `event-${eventSlug}-details-section`
+    )
+    const pinSpacer = document.getElementById("pin-spacer")
+    if (!section || !pinSpacer) return
+
+    const RELEASE_OFFSET = 300
+
+    // Set the pin-spacer height to match the pin duration
+    pinSpacer.style.height = `${RELEASE_OFFSET}px`
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: `+=${RELEASE_OFFSET}`,
+      pin: true,
+      scrub: 0.5,
+      invalidateOnRefresh: true,
+      onRefresh: () => {
+        // Ensure pin-spacer height is recalculated on window resize
+        pinSpacer.style.height = `${RELEASE_OFFSET}px`
+      },
+    })
   })
 </script>
