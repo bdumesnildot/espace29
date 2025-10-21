@@ -39,6 +39,5 @@ export default defineConfig({
       enabled: false,
     },
     maxDuration: 8,
-    im,
   }),
 })
