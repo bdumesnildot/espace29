@@ -3,7 +3,7 @@ import '../styles/global.css'
 
 import Navbar from '../components/navigation/Navbar.astro'
 import NavbarMobile from '../components/navigation/NavbarMobile.astro'
-import Footer from '@components/Footer.astro'
+import Footer from './Footer.astro'
 
 export interface Props {
   title?: string
@@ -248,8 +248,7 @@ const { title = 'Espace29' } = Astro.props
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-  </head>
-  <body
+  </head><body
     class="m-0 flex min-h-screen flex-col bg-gray-50 p-0 font-sans text-gray-900"
   >
     <header>
@@ -263,6 +262,6 @@ const { title = 'Espace29' } = Astro.props
     <div class="grow">
       <slot />
     </div>
+    <Footer />
   </body>
-  <Footer />
 </html>
