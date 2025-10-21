@@ -23,9 +23,7 @@ export default defineConfig({
   },
 
   env: {
-    schema: {
-      APP_BASE_URL: envField.string({ context: "server", access: "public" }),
-    },
+    schema: {},
   },
 
   image: {
