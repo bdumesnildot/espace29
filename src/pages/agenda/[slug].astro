@@ -50,7 +50,7 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
     />
     <section
       id={`event-${event.slug}-details-section`}
-      class="flex h-screen w-full flex-col md:flex-row"
+      class="flex w-full flex-col md:h-screen md:flex-row"
     >
       <!-- Mobile: Event Details First -->
       <div class="flex w-full flex-col space-y-4 p-4 md:hidden">
@@ -98,13 +98,13 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
 
       <!-- Mobile: Images Grid -->
       <div class="w-full bg-gray-50 p-4 md:hidden">
-        <div class="grid grid-cols-1 gap-4">
+        <div class="flex flex-col items-center gap-4">
           {
             event.ImageUrlList.map((image, index) => (
               <img
                 src={image.url}
                 alt={image.alt}
-                class="h-64 w-full rounded-lg object-cover shadow-sm"
+                class="h-[400px] w-full object-cover shadow-sm"
                 loading={index === 0 ? "eager" : "lazy"}
               />
             ))
@@ -245,8 +245,8 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
       </div>
     </section>
 
-    <!-- Spacer div to prevent footer from moving up during pin -->
-    <div id="pin-spacer" class="h-0"></div>
+    <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
+    <div id="pin-spacer" class="hidden h-0 md:block"></div>
   </main>
 </Layout>
 
@@ -324,34 +324,37 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
     // Auto-play (optional - uncomment to enable)
     // setInterval(nextImage, 5000);
 
-    // Magnet scroll effect
-    gsap.registerPlugin(ScrollTrigger)
+    // Magnet scroll effect (desktop only)
+    if (window.innerWidth >= 768) {
+      // md breakpoint
+      gsap.registerPlugin(ScrollTrigger)
 
-    const eventSlug = window.location.pathname.split("/").pop()
-    if (!eventSlug) return
+      const eventSlug = window.location.pathname.split("/").pop()
+      if (!eventSlug) return
 
-    const section = document.getElementById(
-      `event-${eventSlug}-details-section`
-    )
-    const pinSpacer = document.getElementById("pin-spacer")
-    if (!section || !pinSpacer) return
+      const section = document.getElementById(
+        `event-${eventSlug}-details-section`
+      )
+      const pinSpacer = document.getElementById("pin-spacer")
+      if (!section || !pinSpacer) return
 
-    const RELEASE_OFFSET = 300
+      const RELEASE_OFFSET = 300
 
-    // Set the pin-spacer height to match the pin duration
-    pinSpacer.style.height = `${RELEASE_OFFSET}px`
+      // Set the pin-spacer height to match the pin duration
+      pinSpacer.style.height = `${RELEASE_OFFSET}px`
 
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: `+=${RELEASE_OFFSET}`,
-      pin: true,
-      scrub: 0.5,
-      invalidateOnRefresh: true,
-      onRefresh: () => {
-        // Ensure pin-spacer height is recalculated on window resize
-        pinSpacer.style.height = `${RELEASE_OFFSET}px`
-      },
-    })
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: `+=${RELEASE_OFFSET}`,
+        pin: true,
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+        onRefresh: () => {
+          // Ensure pin-spacer height is recalculated on window resize
+          pinSpacer.style.height = `${RELEASE_OFFSET}px`
+        },
+      })
+    }
   })
 </script>

@@ -83,7 +83,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
             id={`season-${seasonIndex}`}
             class="hidden h-screen overflow-hidden sm:flex sm:flex-col"
           >
-            <h2 class="font-eina02 mb-1 flex-shrink-0 px-2 py-4 text-6xl text-gray-900 sm:px-10">
+            <h2 class="font-eina02 mb-1 flex-shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
               {season}
             </h2>
 
@@ -113,12 +113,12 @@ const sortedSeasons = Object.keys(eventsBySeason)
 
           {/* Mobile Vertical Cards Section */}
           <div class="block w-full px-2 pb-8 sm:hidden">
-            <h2 class="font-eina02 mb-8 text-3xl font-semibold text-gray-900">
+            <h2 class="font-eina02 mb-2 text-3xl font-semibold text-gray-900 sm:mb-8">
               {season}
             </h2>
-            <div class="flex h-[500px] flex-col gap-4">
+            <div class="flex flex-col gap-4">
               {eventsBySeason[season].map((event) => (
-                <div class="w-full">
+                <div class="h-[500px] w-full">
                   <Card
                     title={event.title.toLocaleUpperCase()}
                     subtitle={formatDate(event.dateStart, event.dateEnd)}

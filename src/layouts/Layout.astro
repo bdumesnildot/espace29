@@ -271,10 +271,10 @@ const { title = "Espace29", showBackToTop = false } = Astro.props
       showBackToTop && (
         <button
           id="back-to-top-nav-helper"
-          class="pointer-events-none fixed right-4 bottom-4 z-20 rounded-lg bg-gray-900 p-3 text-white opacity-0 transition-all duration-300 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+          class="pointer-events-none fixed right-4 bottom-4 z-20 hidden h-8 w-8 items-center justify-center rounded-lg bg-gray-900 text-white opacity-0 transition-all duration-300 hover:bg-gray-800 focus:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none sm:flex"
           aria-label="Return to top of page"
         >
-          <Icon name="arrow-up-to-line" class="" />
+          <Icon name="arrow-up-to-line" class="w-2" />
         </button>
       )
     }
