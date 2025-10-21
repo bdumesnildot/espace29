@@ -65,6 +65,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.7.1
         version: 0.7.1(prettier-plugin-astro@0.14.1)(prettier@3.6.2)
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
 
 packages:
   "@astrojs/compiler@2.13.0":
