@@ -1,4 +1,5 @@
 ---
+import Analytics from "@vercel/analytics/astro"
 import "../styles/global.css"
 
 import Navbar from "../components/navigation/Navbar.astro"
@@ -250,6 +251,7 @@ const { title = "Espace29", showBackToTop = false } = Astro.props
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <Analytics />
   </head>
   <body
     class="font-eina03 m-0 flex min-h-screen flex-col bg-gray-50 p-0 text-gray-900"
