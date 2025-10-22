@@ -1,5 +1,5 @@
-import type { Collection } from "tinacms";
-import IconComponent from "../components/IconComponent";
+import type { Collection } from "tinacms"
+import IconComponent from "../components/IconComponent"
 
 export const GlobalConfigCollection: Collection = {
   name: "config",
@@ -33,7 +33,7 @@ export const GlobalConfigCollection: Collection = {
           required: true,
           type: "string",
           ui: {
-            defaultValue: "Your name here"
+            defaultValue: "Your name here",
           },
         },
         // Add more settings here...
@@ -47,8 +47,8 @@ export const GlobalConfigCollection: Collection = {
       ui: {
         itemProps: (item) => {
           return {
-            label: item.title
-          };
+            label: item.title,
+          }
         },
       },
       fields: [
@@ -56,16 +56,15 @@ export const GlobalConfigCollection: Collection = {
           name: "title",
           label: "Title of Nav Item",
           type: "string",
-          required: true
+          required: true,
         },
         {
           name: "link",
           label: "Path of the Nav Item",
           type: "string",
-          required: true
-
-        }
-      ]
+          required: true,
+        },
+      ],
     },
     {
       name: "contactLinks",
@@ -75,7 +74,7 @@ export const GlobalConfigCollection: Collection = {
       ui: {
         itemProps: (item) => {
           return {
-            label: item.title
+            label: item.title,
           }
         },
       },
@@ -83,12 +82,12 @@ export const GlobalConfigCollection: Collection = {
         {
           name: "title",
           label: "Title",
-          type: "string"
+          type: "string",
         },
         {
           name: "link",
           label: "Link",
-          type: "string"
+          type: "string",
         },
         {
           name: "icon",
@@ -96,12 +95,12 @@ export const GlobalConfigCollection: Collection = {
           type: "string",
           ui: {
             //@ts-ignore
-            component: IconComponent
-          }
-        }
+            component: IconComponent,
+          },
+        },
       ],
-    }
+    },
 
     // Add other config fields here...
-  ]
+  ],
 }

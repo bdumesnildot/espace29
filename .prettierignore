@@ -1,0 +1,39 @@
+.DS_Store
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+out/
+coverage/
+.vercel/
+
+# Generated files
+generated/
+
+# Cache directories
+.cache/
+cache/
+
+# Public assets (typically shouldn't be formatted)
+public/
+
+# Config files that should maintain their formatting
+*.config.js
+*.config.mjs
+astro.config.mjs
+.vscode/
+.astro/
+_legacy/
+.husky/
+
+.gitignore
+.prettierignore
+.eslintignore
+
+# File extensions
+*.lock
+*.log
