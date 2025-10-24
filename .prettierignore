@@ -2,7 +2,6 @@
 
 # Dependencies
 node_modules/
-pnpm-lock.yaml
 
 # Build outputs
 dist/
@@ -20,6 +19,10 @@ cache/
 
 # Public assets (typically shouldn't be formatted)
 public/
+
+# Lock files
+pnpm-lock.yaml
+tina-lock.json
 
 # Config files that should maintain their formatting
 *.config.js

@@ -1,0 +1,176 @@
+---
+import Layout from "@layouts/Layout.astro"
+import Card from "@components/ui/card/Card.astro"
+import { artists } from "@lib/artists-helper"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
+
+// Helper function to format artist name
+const formatArtistName = (artist: any) => {
+  if (artist.firstName) {
+    return `${artist.firstName} ${artist.lastName}`
+  }
+  return artist.lastName
+}
+---
+
+<Layout title="e29 | Artistes" showBackToTop={true}>
+  <main class="flex min-h-full w-full flex-col items-start">
+    <PageTopLayout title="Artistes" />
+    <!-- With padding container -->
+    <div class="px-2 pb-2 sm:px-10 sm:pb-0">
+      <!-- Introduction Text -->
+      <section class="mb-12 w-full">
+        <div class="max-w-4xl">
+          <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
+            Les ateliers et studios d'artistes résidents de l'Espace29 forment
+            un lieu de travail communautaire unique, où la créativité et
+            l'échange sont au cœur de la démarche artistique. Ces espaces,
+            partagés ou individuels, offrent aux artistes un environnement
+            propice à la réflexion et à la production, tout en favorisant la
+            collaboration et le dialogue entre créateur-ices de diverses
+            disciplines.
+          </p>
+          <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
+            L'Espace29 se veut ainsi un véritable laboratoire de création, où le
+            collectif et le partage enrichissent les pratiques artistiques et
+            permettent l'émergence de projets communs.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Horizontal Scroll Section (no padding) -->
+    <section
+      id="horizontal-scroll-section"
+      class="hidden h-screen w-full overflow-hidden sm:block"
+    >
+      <div id="artist-cards-wrapper" class="flex h-full flex-row flex-nowrap">
+        <div class="h-full w-10 flex-shrink-0"></div>
+        {
+          artists.map((artist) => (
+            <div class="w-[500px] min-w-[500px] flex-shrink-0">
+              <Card
+                title={formatArtistName(artist).toLocaleUpperCase()}
+                subtitle={artist.title}
+                description={artist.cardDescription}
+                imageUrl={artist.cardImageUrl}
+                imageAlt={artist.cardImageAlt}
+                href={`/artistes/${artist.slug}`}
+                grayscale={"untilHover"}
+              />
+            </div>
+          ))
+        }
+        <div class="h-full w-10 flex-shrink-0"></div>
+      </div>
+    </section>
+
+    <!-- Mobile Vertical Cards Section -->
+    <section id="mobile-cards-section" class="block w-full px-2 pb-8 sm:hidden">
+      <div class="flex flex-col gap-4">
+        {
+          artists.map((artist) => (
+            <div class="h-[500px] w-full">
+              <Card
+                title={formatArtistName(artist).toLocaleUpperCase()}
+                subtitle={artist.title}
+                description={artist.cardDescription}
+                imageUrl={artist.cardImageUrl}
+                imageAlt={artist.cardImageAlt}
+                href={`/artistes/${artist.slug}`}
+                grayscale={"untilHover"}
+                className="w-full min-w-full"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Vertical Content Section After Horizontal Scroll -->
+    <section id="vertical-content" class="w-full"></section>
+  </main>
+</Layout>
+
+<script>
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  function initializeScrollAnimation() {
+    // Only run on desktop (same breakpoint as the CSS)
+    if (window.innerWidth < 640) {
+      // Reset margin on mobile
+      const verticalContent = document.getElementById("vertical-content")
+      if (verticalContent) {
+        gsap.set(verticalContent, { marginTop: 0 })
+      }
+      return
+    }
+
+    const horizontalSection = document.getElementById(
+      "horizontal-scroll-section"
+    )
+    const cardsWrapper = document.getElementById("artist-cards-wrapper")
+    const verticalContent = document.getElementById("vertical-content")
+
+    if (!horizontalSection || !cardsWrapper || !verticalContent) return
+
+    // Calculate scroll distance and deadzones
+    const viewportWidth = window.innerWidth
+    const scrollDistance = cardsWrapper.scrollWidth - viewportWidth
+
+    // Add deadzones for comfortable reading
+    const deadZone = viewportWidth * 0.1
+    const totalScrollDistance = scrollDistance + deadZone * 2
+
+    // Create timeline with deadzones
+    const tl = gsap.timeline()
+
+    // Deadzone before first card (no movement - user can read first card)
+    tl.to(cardsWrapper, {
+      duration: deadZone,
+      ease: "none",
+    })
+
+    // Actual horizontal scroll between cards
+    tl.to(cardsWrapper, {
+      x: -scrollDistance,
+      duration: scrollDistance,
+      ease: "none",
+    })
+
+    // Deadzone after last card (no movement - user can read last card)
+    tl.to(cardsWrapper, {
+      duration: deadZone,
+      ease: "none",
+    })
+
+    // Create ScrollTrigger for horizontal scroll with proper spacing
+    ScrollTrigger.create({
+      trigger: horizontalSection,
+      start: "top top",
+      end: () => `+=${totalScrollDistance}`,
+      scrub: 1,
+      pin: true,
+      animation: tl,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+    })
+
+    // Push vertical content down to prevent overlap
+    gsap.set(verticalContent, {
+      marginTop: totalScrollDistance,
+    })
+  }
+
+  document.addEventListener("DOMContentLoaded", initializeScrollAnimation)
+
+  // Refresh ScrollTrigger and reinitialize on window resize
+  window.addEventListener("resize", () => {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    ScrollTrigger.refresh()
+    initializeScrollAnimation()
+  })
+</script>

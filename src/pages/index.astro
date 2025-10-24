@@ -1,21 +1,25 @@
 ---
-import BaseHead from "../components/BaseHead.astro"
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
-import config from "../content/config/config.json"
-import client from "../../tina/__generated__/client"
-import HomePage from "../../tina/pages/HomePage.tsx"
-const data = await client.queries.page({ relativePath: "home.mdx" })
+import Layout from "@layouts/Layout.astro"
+import galleryImage from "@assets/e29-gallery.webp"
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={config.seo.title} description={config.seo.description} />
-  </head>
-  <body>
-    <Header />
-    <HomePage {...data} client:tina />
-    <Footer />
-  </body>
-</html>
+<Layout title="e29 | Accueil">
+  <main class="flex h-[calc(100vh-60px)]">
+    <div class="hero-image-container relative flex-1">
+      <img
+        src={galleryImage.src}
+        alt="Espace 29 Gallery"
+        class="h-full w-full object-cover"
+      />
+      <div
+        class="absolute inset-0 flex items-center justify-center bg-gray-900/40"
+      >
+        <h1
+          class="font-eina01 text-6xl font-semibold text-white drop-shadow-lg md:text-8xl"
+        >
+          espace29
+        </h1>
+      </div>
+    </div>
+  </main>
+</Layout>

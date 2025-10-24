@@ -1,0 +1,44 @@
+---
+import Icon from "@components/ui/icons/Icon.astro"
+import { navigationItems } from "@lib/navigation-helper.ts"
+
+const currentPath = Astro.url.pathname
+
+const isActiveLink = (href: string) => {
+  if (href === "/") return currentPath === "/"
+  return currentPath.startsWith(href)
+}
+
+const getLinkStyle = (href: string) => {
+  const baseStyle =
+    "font-eina03 transition-colors duration-200 focus:outline-none px-1 py-1 border-b-2 pb-1"
+
+  if (isActiveLink(href)) {
+    return `${baseStyle} text-gray-900 border-gray-900`
+  }
+
+  return `${baseStyle} text-gray-900 border-transparent hover:text-gray-600`
+}
+---
+
+<nav
+  class="mt-[6px] flex h-[54px] items-center justify-between border-y-[1.5px] bg-gray-50 px-10"
+>
+  <ul class="flex justify-start gap-6 text-xl no-underline">
+    {
+      navigationItems.map(({ href, label }) => (
+        <li>
+          <a href={href} class={getLinkStyle(href)}>
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="flex items-center gap-2">
+    <a href="https://www.instagram.com/espace29/"><Icon name="instagram" /></a>
+    <a href="https://www.facebook.com/p/Espace-29-100063568931402/"
+      ><Icon name="facebook" /></a
+    >
+  </div>
+</nav>

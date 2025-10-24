@@ -1,0 +1,87 @@
+---
+import { classMerge } from "@styles/utils"
+
+export interface Props {
+  title: string
+  subtitle?: string
+  description?: string
+  imageUrl?: string
+  imageAlt?: string
+  href?: string
+  className?: string
+  grayscale?: "always" | "untilHover" | false
+  onClick?: string
+  id?: string
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  imageUrl,
+  imageAlt = "",
+  href,
+  className = "",
+  grayscale = false,
+  onClick,
+  id,
+} = Astro.props
+
+const Component = href ? "a" : "div"
+const isInteractive = href || onClick
+
+// Base classes following design system philosophy
+const baseClasses =
+  "bg-transparent border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col w-full"
+const interactiveClasses = isInteractive ? "cursor-pointer" : ""
+const grayscaleClasses = (() => {
+  if (grayscale === "always") return "filter grayscale"
+  if (grayscale === "untilHover") return "filter grayscale hover:grayscale-0"
+  return ""
+})()
+---
+
+<Component
+  class={classMerge(
+    baseClasses,
+    interactiveClasses,
+    grayscaleClasses,
+    className
+  )}
+  href={href}
+  onclick={onClick}
+  id={id}
+>
+  {
+    imageUrl && (
+      <div class="flex-3">
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          class="h-full w-full object-cover transition-all duration-300"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+
+  <div class="flex-1 border-t border-gray-700 bg-gray-50 p-6">
+    <h3 class="font-eina03 mb-3 text-2xl font-semibold text-gray-900">
+      {title}
+    </h3>
+    {
+      subtitle && (
+        <p class="font-eina03 mb-2 text-xl font-medium text-gray-700">
+          {subtitle}
+        </p>
+      )
+    }
+    {
+      description && (
+        <p class="font-eina03 line-clamp-6 text-lg leading-relaxed text-gray-700">
+          {description}
+        </p>
+      )
+    }
+  </div>
+</Component>

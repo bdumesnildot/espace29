@@ -11,6 +11,10 @@ import vercel from "@astrojs/vercel/static"
 // https://astro.build/config
 export default defineConfig({
 	site: process.env.SITE_URL || `https://${process.env.VERCEL_URL}`,
+
+	redirects: {
+    "/admin": "/admin/index.html",
+  },
 	
 	env: {
 		schema: {

@@ -1,7 +1,7 @@
 import React from "react"
 
-function FormattedDate({ date }: { date: string }) {
-  const _date = new Date(date)
+function FormattedDate({ date }: { date: string | null | undefined }) {
+  const _date = date ? new Date(date) : new Date()
   return (
     <time dateTime={_date.toISOString()}>
       {_date.toLocaleDateString("en-us", {

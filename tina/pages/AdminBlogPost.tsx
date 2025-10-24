@@ -2,7 +2,7 @@ import React from "react"
 import { tinaField, useTina } from "tinacms/dist/react"
 import type { BlogQuery, BlogQueryVariables } from "../__generated__/types"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
-import FormattedDate from "../../src/components/react/FormattedDate.tsx"
+import FormattedDate from "@components/_boilerplate/react/FormattedDate"
 
 type Props = {
   variables: BlogQueryVariables

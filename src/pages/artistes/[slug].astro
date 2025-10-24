@@ -1,0 +1,370 @@
+---
+import Layout from "@layouts/Layout.astro"
+import PageTopLayout from "@layouts/PageTopLayout.astro"
+import { artists, type Artist, formatArtistName } from "@lib/artists-helper"
+
+export function getStaticPaths() {
+  return artists.map((artist) => ({
+    params: { slug: artist.slug },
+    props: { artist },
+  }))
+}
+
+const { artist } = Astro.props
+
+if (!artist) {
+  return Astro.redirect("/404")
+}
+
+const formattedName = formatArtistName(artist)
+---
+
+<Layout title={`e29 | ${formattedName}`}>
+  <main class="flex min-h-full w-full flex-col items-start">
+    <PageTopLayout
+      title={formattedName}
+      backTo={{
+        href: "/artistes",
+        label: "Retour au artistes",
+      }}
+    />
+    <section
+      id={`artist-${artist.slug}-details-section`}
+      class="flex w-full flex-col sm:h-screen sm:flex-row"
+      data-artist-slug={artist.slug}
+    >
+      <!-- Mobile: Artist Details First -->
+      <div class="flex w-full flex-col space-y-4 p-4 sm:hidden">
+        <!-- Artist Title -->
+        <div class="border-b border-gray-400 pb-4">
+          <h2 class="font-eina02 text-2xl font-semibold text-gray-900">
+            {artist.title}
+          </h2>
+        </div>
+
+        <!-- Website Link -->
+        {
+          artist.websiteUrl && (
+            <div class="border-b border-gray-400 pb-4">
+              <h3 class="font-eina04 mb-2 text-base font-semibold text-gray-900">
+                Site Web
+              </h3>
+              <a
+                href={artist.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-eina03 border-b border-transparent text-sm text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+              >
+                {artist.websiteUrl}
+              </a>
+            </div>
+          )
+        }
+
+        <!-- Email -->
+        {
+          artist.email && (
+            <div class="border-b border-gray-400 pb-4">
+              <h3 class="font-eina04 mb-2 text-base font-semibold text-gray-900">
+                Contact
+              </h3>
+              <a
+                href={`mailto:${artist.email}`}
+                class="font-eina03 border-b border-transparent text-sm text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+              >
+                {artist.email}
+              </a>
+            </div>
+          )
+        }
+
+        <!-- Description -->
+        <div>
+          <h3 class="font-eina04 mb-3 text-base font-semibold text-gray-900">
+            À propos
+          </h3>
+          <div class="space-y-3">
+            {
+              artist.profileDescription
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p class="font-eina03 text-sm leading-relaxed text-gray-700">
+                    {paragraph.trim()}
+                  </p>
+                ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile: Images -->
+      <div class="w-full bg-gray-50 p-4 sm:hidden">
+        <div class="flex flex-col items-center gap-4">
+          {
+            artist.profileImageUrlList.map((image, index) => (
+              <img
+                src={image.url}
+                alt={image.alt}
+                class="h-[400px] w-full object-cover shadow-sm"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Desktop: Image Carousel -->
+      <div class="relative hidden flex-1 overflow-hidden bg-gray-50 sm:flex">
+        <div class="relative h-full w-full">
+          <!-- Images -->
+          <div class="carousel-container relative h-full w-full">
+            {
+              artist.profileImageUrlList.map((image, index) => (
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  class={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+                    index === 0 ? "opacity-100" : "opacity-0"
+                  }`}
+                  data-index={index}
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              ))
+            }
+          </div>
+
+          <!-- Navigation Buttons -->
+          {
+            artist.profileImageUrlList.length > 1 && (
+              <>
+                <button
+                  id="prev-btn"
+                  class="carousel-btn absolute top-1/2 left-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                  aria-label="Image précédente"
+                >
+                  <svg
+                    class="h-4 w-4 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  id="next-btn"
+                  class="carousel-btn absolute top-1/2 right-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                  aria-label="Image suivante"
+                >
+                  <svg
+                    class="h-4 w-4 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )
+          }
+
+          <!-- Image navigation dots (if multiple images) -->
+          {
+            artist.profileImageUrlList.length > 1 && (
+              <div class="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
+                {artist.profileImageUrlList.map((_, index) => (
+                  <button
+                    class={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
+                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
+                    }`}
+                    data-index={index}
+                    aria-label={`Image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Desktop: Artist Details -->
+      <div class="hidden h-full flex-1 flex-col sm:flex">
+        <div class="flex h-full flex-col space-y-8 p-8 pt-12">
+          <!-- Artist Title -->
+          <div class="border-b border-gray-400 pb-6">
+            <h2 class="font-eina02 text-4xl font-semibold text-gray-900">
+              {artist.title}
+            </h2>
+          </div>
+
+          <!-- Website Link -->
+          {
+            artist.websiteUrl && (
+              <div class="border-b border-gray-400 pb-6">
+                <h3 class="font-eina04 mb-3 text-lg font-semibold text-gray-900">
+                  Site Web
+                </h3>
+                <a
+                  href={artist.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-eina03 border-b border-transparent text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+                >
+                  {artist.websiteUrl}
+                </a>
+              </div>
+            )
+          }
+
+          <!-- Email -->
+          {
+            artist.email && (
+              <div class="border-b border-gray-400 pb-6">
+                <h3 class="font-eina04 mb-3 text-lg font-semibold text-gray-900">
+                  Contact
+                </h3>
+                <a
+                  href={`mailto:${artist.email}`}
+                  class="font-eina03 border-b border-transparent text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+                >
+                  {artist.email}
+                </a>
+              </div>
+            )
+          }
+
+          <!-- Description -->
+          <div class="flex flex-1 flex-col">
+            <h3 class="font-eina04 mb-4 text-lg font-semibold text-gray-900">
+              À propos
+            </h3>
+            <div class="flex-1 space-y-4 overflow-y-auto">
+              {
+                artist.profileDescription
+                  .split("\n\n")
+                  .map((paragraph) => (
+                    <p class="font-eina03 text-lg leading-relaxed text-gray-700">
+                      {paragraph.trim()}
+                    </p>
+                  ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
+    <div id="pin-spacer" class="hidden h-0 sm:block"></div>
+  </main>
+</Layout>
+
+<script>
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Carousel functionality
+    const images = document.querySelectorAll(
+      ".carousel-image"
+    ) as NodeListOf<HTMLImageElement>
+    const dots = document.querySelectorAll(
+      ".carousel-dot"
+    ) as NodeListOf<HTMLButtonElement>
+    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
+    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
+
+    if (images.length > 1) {
+      let currentIndex = 0
+
+      function showImage(index: number) {
+        images.forEach((img, i) => {
+          img.classList.toggle("opacity-100", i === index)
+          img.classList.toggle("opacity-0", i !== index)
+        })
+
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove("bg-white/50", "hover:bg-white/75")
+            dot.classList.add("bg-white")
+          } else {
+            dot.classList.remove("bg-white")
+            dot.classList.add("bg-white/50", "hover:bg-white/75")
+          }
+        })
+
+        currentIndex = index
+      }
+
+      function nextImage() {
+        const newIndex = (currentIndex + 1) % images.length
+        showImage(newIndex)
+      }
+
+      function prevImage() {
+        const newIndex = (currentIndex - 1 + images.length) % images.length
+        showImage(newIndex)
+      }
+
+      if (prevBtn) prevBtn.addEventListener("click", prevImage)
+      if (nextBtn) nextBtn.addEventListener("click", nextImage)
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => showImage(index))
+      })
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          prevImage()
+        } else if (e.key === "ArrowRight") {
+          nextImage()
+        }
+      })
+    }
+
+    // Magnet scroll effect (desktop only)
+    if (window.innerWidth >= 640) {
+      // sm breakpoint
+      gsap.registerPlugin(ScrollTrigger)
+
+      const artistSlug = window.location.pathname.split("/").pop()
+      if (!artistSlug) return
+
+      const section = document.getElementById(
+        `artist-${artistSlug}-details-section`
+      )
+      const pinSpacer = document.getElementById("pin-spacer")
+      if (!section || !pinSpacer) return
+
+      const RELEASE_OFFSET = 300
+
+      // Set the pin-spacer height to match the pin duration
+      pinSpacer.style.height = `${RELEASE_OFFSET}px`
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: `+=${RELEASE_OFFSET}`,
+        pin: true,
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+        onRefresh: () => {
+          // Ensure pin-spacer height is recalculated on window resize
+          pinSpacer.style.height = `${RELEASE_OFFSET}px`
+        },
+      })
+    }
+  })
+</script>

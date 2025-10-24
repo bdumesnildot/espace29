@@ -1,0 +1,39 @@
+---
+import { classMerge } from "@styles/utils"
+import Alert from "./svg/Alert.astro"
+import ArrowUpToLine from "./svg/ArrowUpToLine.astro"
+import BurgerMenu from "./svg/BurgerMenu.astro"
+import Facebook from "./svg/Facebook.astro"
+import Info from "./svg/Info.astro"
+import Instagram from "./svg/Instagram.astro"
+
+const IconMap = {
+  alert: Alert,
+  "arrow-up-to-line": ArrowUpToLine,
+  "burger-menu": BurgerMenu,
+  facebook: Facebook,
+  info: Info,
+  instagram: Instagram,
+}
+export type IconName = keyof typeof IconMap
+
+export interface IconProps {
+  name: IconName
+  class?: string
+}
+
+const { name, class: className, ...rest } = Astro.props
+
+const IconComponent = IconMap[name as IconName]
+---
+
+{
+  IconComponent ? (
+    <IconComponent
+      class={classMerge("h-4 w-4 text-gray-900", className)}
+      {...rest}
+    />
+  ) : (
+    <Fragment />
+  )
+}

@@ -1,10 +1,10 @@
 ---
-import BaseHead from "../../components/BaseHead.astro"
-import Header from "../../components/Header.astro"
-import Footer from "../../components/Footer.astro"
+import BaseHead from "@components/_boilerplate/BaseHead.astro"
 import config from "../../content/config/config.json"
 import { getCollection } from "astro:content"
-import FormattedDate from "../../components/FormattedDate.astro"
+import Header from "@components/_boilerplate/Header.astro"
+import FormattedDate from "@components/_boilerplate/FormattedDate.astro"
+import Footer from "@components/_boilerplate/Footer.astro"
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()

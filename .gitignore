@@ -1,6 +1,10 @@
 # macOS-specific files
 .DS_Store
 
+# build output
+dist/
+.vercel/
+
 # Logs
 logs
 *.log
@@ -25,7 +29,5 @@ node_modules/
 # Astro
 .astro
 
-# build output
-dist/
-.vercel/
-
+# Tina
+tina/__generated__

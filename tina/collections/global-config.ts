@@ -1,5 +1,5 @@
 import type { Collection } from "tinacms"
-import IconComponent from "../components/IconComponent"
+import IconComponent from "@tina/components/IconComponent"
 
 export const GlobalConfigCollection: Collection = {
   name: "config",

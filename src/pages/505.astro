@@ -1,0 +1,39 @@
+---
+import PageTopLayout from "@layouts/PageTopLayout.astro"
+import Button from "@components/ui/button/Button.astro"
+---
+
+<main class="flex h-[calc(100vh-60px)] w-full flex-col items-start">
+  <div class="mx-auto max-w-2xl text-center">
+    <!-- Error Code -->
+    <div class="mb-8">
+      <h1 class="font-eina01 mb-4 text-5xl font-semibold text-gray-900">505</h1>
+      <div class="mx-auto mb-8 h-px w-24 bg-gray-300"></div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="mb-12">
+      <h2 class="font-eina02 mb-6 text-3xl font-medium text-gray-900">
+        Version non supportée
+      </h2>
+      <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
+        La version du protocole HTTP utilisée n'est pas supportée par notre
+        serveur.
+      </p>
+      <p class="font-eina03 text-lg text-gray-600">
+        Cette erreur est généralement temporaire. Veuillez mettre à jour votre
+        navigateur ou réessayer avec un navigateur plus récent.
+      </p>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <Button intent="primary" size="small" onClick="window.location.reload()"
+        >Recharger la page</Button
+      >
+      <a href="/" class="inline-block">
+        <Button intent="secondary" size="small"> Retour à l'accueil </Button>
+      </a>
+    </div>
+  </div>
+</main>
