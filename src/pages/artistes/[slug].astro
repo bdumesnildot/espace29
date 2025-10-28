@@ -1,13 +1,34 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
-import { artists, type Artist, formatArtistName } from "@lib/artists-helper"
+import { getCollection } from "astro:content"
+import { formatArtistName, type Artist } from "@lib/artists-helper"
 
 export function getStaticPaths() {
-  return artists.map((artist) => ({
-    params: { slug: artist.slug },
-    props: { artist },
-  }))
+  const artistList = getCollection("artist")
+  return artistList.then((artistEntries) =>
+    artistEntries.map(({ id: slug, data }) => ({
+      params: { slug },
+      props: {
+        artist: {
+          slug,
+          firstName: data.firstName || undefined,
+          lastName: data.lastName,
+          title: data.title || "",
+          cardDescription: data.cardDescription || "",
+          cardImageUrl: data.cardImageUrl || "",
+          cardImageAlt: data.cardImageAlt || "",
+          profileDescription: data.profileDescription || "",
+          websiteUrl: data.websiteUrl || "",
+          email: data.email || "",
+          profileImageUrlList: (data.profileImageUrlList || []).map((img) => ({
+            url: img?.imageUrl || "",
+            alt: img?.alt || "",
+          })),
+        },
+      },
+    }))
+  )
 }
 
 const { artist } = Astro.props
@@ -15,14 +36,12 @@ const { artist } = Astro.props
 if (!artist) {
   return Astro.redirect("/404")
 }
-
-const formattedName = formatArtistName(artist)
 ---
 
-<Layout title={`e29 | ${formattedName}`}>
+<Layout title={`e29 | ${formatArtistName(artist)}`}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout
-      title={formattedName}
+      title={formatArtistName(artist)}
       backTo={{
         href: "/artistes",
         label: "Retour au artistes",
@@ -101,7 +120,7 @@ const formattedName = formatArtistName(artist)
       <div class="w-full bg-gray-50 p-4 sm:hidden">
         <div class="flex flex-col items-center gap-4">
           {
-            artist.profileImageUrlList.map((image, index) => (
+            (artist.profileImageUrlList || []).map((image, index) => (
               <img
                 src={image.url}
                 alt={image.alt}
@@ -119,7 +138,7 @@ const formattedName = formatArtistName(artist)
           <!-- Images -->
           <div class="carousel-container relative h-full w-full">
             {
-              artist.profileImageUrlList.map((image, index) => (
+              (artist.profileImageUrlList || []).map((image, index) => (
                 <img
                   src={image.url}
                   alt={image.alt}
@@ -135,7 +154,7 @@ const formattedName = formatArtistName(artist)
 
           <!-- Navigation Buttons -->
           {
-            artist.profileImageUrlList.length > 1 && (
+            (artist.profileImageUrlList?.length || 0) > 1 && (
               <>
                 <button
                   id="prev-btn"
@@ -182,9 +201,9 @@ const formattedName = formatArtistName(artist)
 
           <!-- Image navigation dots (if multiple images) -->
           {
-            artist.profileImageUrlList.length > 1 && (
+            (artist.profileImageUrlList?.length || 0) > 1 && (
               <div class="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
-                {artist.profileImageUrlList.map((_, index) => (
+                {(artist.profileImageUrlList || []).map((_, index) => (
                   <button
                     class={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
                       index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"

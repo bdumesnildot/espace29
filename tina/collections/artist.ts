@@ -7,7 +7,7 @@ export const ArtistCollection: Collection = {
   format: "mdx",
   ui: {
     router({ document }) {
-      return `/artistes-poc/${document._sys.filename}`
+      return `/artistes/${document._sys.filename}`
     },
   },
   fields: [
