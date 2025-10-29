@@ -38,7 +38,10 @@ if (!artist) {
         label: "Retour au artistes",
       }}
     />
-    <ArtistContent client:load artist={artist.data} />
+
+    <div id={`artist-${artist.data.tinaInfo.filename}-details-section`}>
+      <ArtistContent artist={artist.data} />
+    </div>
 
     <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
     <div id="pin-spacer" class="hidden h-0 sm:block"></div>
