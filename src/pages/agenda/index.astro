@@ -3,6 +3,9 @@ import Layout from "@layouts/Layout.astro"
 import Card from "@components/ui/card/Card.astro"
 import { events, eventSeasons } from "@lib/events-helper"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
+import { getCollection } from "astro:content"
+
+const seasonCollection = (await getCollection("season"))
 
 // Helper function to format date for display
 const formatDate = (dateStart: string, dateEnd?: string) => {

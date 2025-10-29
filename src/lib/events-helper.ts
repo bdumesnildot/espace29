@@ -22,7 +22,7 @@ export const eventSeasons: EventSeason[] = [
   {
     slug: "2023-2024",
     name: "Saison 2023-2024",
-    dateStart: "2023-09-01",
+    dateStart: "2023--01",
     dateEnd: "2024-08-31",
   },
   {

@@ -1,47 +1,35 @@
 import type { Collection } from "tinacms"
 
-export const ArtistCollection: Collection = {
-  name: "artist",
-  label: "Artists",
-  path: "src/content/artist",
+export const EventCollection: Collection = {
+  name: "event",
+  label: "Events",
+  path: "src/content/event",
   format: "mdx",
   ui: {
     router({ document }) {
-      return `/artistes/${document._sys.filename}`
+      return `/agenda/${document._sys.filename}`
     },
   },
   fields: [
     {
       type: "string",
-      name: "firstName",
-      label: "First Name",
-      required: false,
+      name: "title",
+      label: "Title",
+      required: true,
+      description:
+        "e.g., Exposition, Performance, Rencontre, Atelier, Conférence",
+      isTitle: true,
     },
     {
-      type: "string",
-      name: "lastName",
-      label: "Last Name",
-      isTitle: true,
+      type: "datetime",
+      name: "dateStart",
+      label: "Start Date",
       required: true,
     },
     {
-      type: "string",
-      name: "title",
-      label: "Title",
-      required: false,
-      description:
-        "e.g., Artiste Plasticienne, Sculpteur, Peintre Contemporaine",
-    },
-    {
-      type: "string",
-      name: "email",
-      label: "Email",
-      required: false,
-    },
-    {
-      type: "string",
-      name: "websiteUrl",
-      label: "Website URL",
+      type: "datetime",
+      name: "dateEnd",
+      label: "End Date",
       required: false,
     },
     {
@@ -52,14 +40,14 @@ export const ArtistCollection: Collection = {
       ui: {
         component: "textarea",
       },
-      description: "Short description shown on artist list page cards",
+      description: "Short description shown on Event list page cards",
     },
     {
       type: "string",
       name: "cardImageUrl",
       label: "Card Image",
       required: false,
-      description: "Image shown on artist list page card",
+      description: "Image shown on Event list page card",
     },
     {
       type: "string",
@@ -70,18 +58,18 @@ export const ArtistCollection: Collection = {
     },
     {
       type: "rich-text",
-      name: "profileDescription",
-      label: "Profile Description",
+      name: "description",
+      label: "Event description",
       required: false,
       ui: {
         component: "textarea",
       },
-      description: "Long-form biography shown on artist detail page",
+      description: "Long-form description shown on event detail page",
     },
     {
       type: "object",
-      name: "profileImageUrlList",
-      label: "Profile Images",
+      name: "imageUrlList",
+      label: "Event Images",
       list: true,
       required: false,
       ui: {

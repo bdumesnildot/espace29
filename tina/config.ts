@@ -1,5 +1,7 @@
 import { defineConfig } from "tinacms"
 import { ArtistCollection } from "./collections/artist"
+import { SeasonCollection } from "./collections/season"
+import { EventCollection } from "./collections/event"
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -28,6 +30,6 @@ export default defineConfig({
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
-    collections: [ArtistCollection],
+    collections: [ArtistCollection, SeasonCollection, EventCollection],
   },
 })
