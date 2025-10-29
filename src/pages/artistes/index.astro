@@ -1,31 +1,16 @@
 ---
 import Layout from "@layouts/Layout.astro"
-import { formatArtistName, type Artist } from "@lib/artists-helper"
+import { formatArtistName } from "@lib/artists-helper"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
-import client from "@tina/__generated__/client"
 import { ArtistCard } from "@tina/components/ArtistCard.tsx"
+import { getCollection } from "astro:content"
 
-const artistsResponse = await client.queries.artistConnection()
-const artistsData =
-  artistsResponse.data.artistConnection.edges?.reduce((acc, artist) => {
-    if (!artist || !artist.node) return acc
-    const data = artist.node
-    acc.push({
-      slug: data._sys.filename,
-      firstName: data.firstName || undefined,
-      lastName: data.lastName,
-      title: data.title || "",
-      cardDescription: data.cardDescription || "",
-      cardImageUrl: data.cardImageUrl || "",
-      cardImageAlt: data.cardImageAlt || "",
-      profileDescription: data.profileDescription || "",
-      profileImageUrlList: (data.profileImageUrlList || []).map((img) => ({
-        url: img?.imageUrl || "",
-        alt: img?.alt || "",
-      })),
-    })
-    return acc
-  }, [] as Artist[]) || []
+const artistCollection = (await getCollection("artist")).sort((a, b) =>
+  a.data.lastName < b.data.lastName ? -1 : 1
+)
+
+console.log({ artistCollection })
+console.log("🔥", artistCollection[0].data.tinaInfo)
 ---
 
 <Layout title="e29 | Artistes" showBackToTop={true}>
@@ -63,17 +48,13 @@ const artistsData =
         <div class="h-full w-10 shrink-0"></div>
 
         {
-          artistsData.map((artist) => (
+          artistCollection.map(({ data: artistData }) => (
             <div class="w-[500px] min-w-[500px] shrink-0">
               <ArtistCard
-                title={formatArtistName(artist).toLocaleUpperCase()}
-                subtitle={artist.title}
-                description={artist.cardDescription}
-                imageUrl={artist.cardImageUrl}
-                imageAlt={artist.cardImageAlt}
+                artist={artistData}
                 grayscale="untilHover"
                 className="h-full"
-                href={`/artistes/${artist.slug}`}
+                href={`/artistes/${artistData.tinaInfo.filename}`}
               />
             </div>
           ))
@@ -86,18 +67,13 @@ const artistsData =
     <section id="mobile-cards-section" class="block w-full px-2 pb-8 sm:hidden">
       <div class="flex flex-col gap-4">
         {
-          artistsData.map((artist) => (
+          artistCollection.map(({ data: artistData }) => (
             <div class="h-[500px] w-full">
               <ArtistCard
-                title={formatArtistName(artist).toLocaleUpperCase()}
-                subtitle={artist.title}
-                description={artist.cardDescription}
-                imageUrl={artist.cardImageUrl}
-                imageAlt={artist.cardImageAlt}
-                href={`/artistes/${artist.slug}`}
+                artist={artistData}
                 grayscale="untilHover"
                 className="h-full"
-                href={`/artistes/${artist.slug}`}
+                href={`/artistes/${artistData.tinaInfo.filename}`}
               />
             </div>
           ))

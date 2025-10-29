@@ -1,18 +1,8 @@
-export type Artist = {
-  slug?: string
-  firstName?: string
-  lastName: string
-  title: string
-  email?: string
-  websiteUrl?: string
-  cardDescription: string
-  cardImageUrl: string
-  cardImageAlt: string
-  profileDescription: string
-  profileImageUrlList: { url: string; alt: string }[]
-}
+import type { Artist } from "@tina/__generated__/types"
 
-export const formatArtistName = (artist: Artist) => {
+export const formatArtistName = (
+  artist: Pick<Artist, "firstName" | "lastName">
+) => {
   if (artist.firstName) {
     return `${artist.firstName} ${artist.lastName}`
   }
