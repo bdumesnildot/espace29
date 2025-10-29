@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import type { CollectionEntry } from "astro:content"
-import { formatArtistName } from "@lib/artists-helper"
 
 type ArtistContentProps = {
   artist: CollectionEntry<"artist">["data"]
@@ -55,21 +54,26 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
     }
 
     const showNextImage = () => {
-      const newIndex = (currentImageIndex + 1) % images.length
-      updateCarousel(newIndex)
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
     }
 
     const showPrevImage = () => {
-      const newIndex = (currentImageIndex - 1 + images.length) % images.length
-      updateCarousel(newIndex)
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex - 1 + images.length) % images.length
+      )
     }
+
+    // Create stable dot click handlers
+    const dotClickHandlers = Array.from(dots).map((_, index) => {
+      return () => updateCarousel(index)
+    })
 
     // Event listeners
     if (prevBtn) prevBtn.addEventListener("click", showPrevImage)
     if (nextBtn) nextBtn.addEventListener("click", showNextImage)
 
     dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => updateCarousel(index))
+      dot.addEventListener("click", dotClickHandlers[index])
     })
 
     const handleKeydown = (e: KeyboardEvent) => {
@@ -86,11 +90,11 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
       if (prevBtn) prevBtn.removeEventListener("click", showPrevImage)
       if (nextBtn) nextBtn.removeEventListener("click", showNextImage)
       dots.forEach((dot, index) => {
-        dot.removeEventListener("click", () => updateCarousel(index))
+        dot.removeEventListener("click", dotClickHandlers[index])
       })
       document.removeEventListener("keydown", handleKeydown)
     }
-  }, [currentImageIndex, hasMultipleImages])
+  }, [hasMultipleImages])
 
   return (
     <section
@@ -144,8 +148,11 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
             À propos
           </h3>
           <div className="space-y-3">
-            {profileDescription.split("\n\n").map((paragraph) => (
-              <p className="font-eina03 text-sm leading-relaxed text-gray-700">
+            {profileDescription.split("\n\n").map((paragraph, index) => (
+              <p
+                key={`${tinaInfo.filename}-mobile-para-${index}`}
+                className="font-eina03 text-sm leading-relaxed text-gray-700"
+              >
                 {paragraph.trim()}
               </p>
             ))}
@@ -158,6 +165,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
         <div className="flex flex-col items-center gap-4">
           {(profileImageUrlList || []).map((image, index) => (
             <img
+              key={`${tinaInfo.filename}-mobile-image-${index}`}
               src={image.imageUrl}
               alt={image.alt}
               className="h-[400px] w-full object-cover shadow-sm"
@@ -174,6 +182,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
           <div className="carousel-container relative h-full w-full">
             {(profileImageUrlList || []).map((image, index) => (
               <img
+                key={`${tinaInfo.filename}-carousel-image-${index}`}
                 src={image.imageUrl}
                 alt={image.alt}
                 className={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
@@ -200,9 +209,9 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
                   viewBox="0 0 24 24"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M15 19l-7-7 7-7"
                   />
                 </svg>
@@ -220,9 +229,9 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
                   viewBox="0 0 24 24"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
@@ -235,6 +244,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
             <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
               {(profileImageUrlList || []).map((_, index) => (
                 <button
+                  key={`${tinaInfo.filename}-dot-${index}`}
                   className={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
                     index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
                   }`}
@@ -295,8 +305,11 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
               À propos
             </h3>
             <div className="flex-1 space-y-4 overflow-y-auto">
-              {profileDescription.split("\n\n").map((paragraph) => (
-                <p className="font-eina03 text-lg leading-relaxed text-gray-700">
+              {profileDescription.split("\n\n").map((paragraph, index) => (
+                <p
+                  key={`${tinaInfo.filename}-desktop-para-${index}`}
+                  className="font-eina03 text-lg leading-relaxed text-gray-700"
+                >
                   {paragraph.trim()}
                 </p>
               ))}
