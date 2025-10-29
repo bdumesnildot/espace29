@@ -84,7 +84,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
           id={`season-${seasonIndex}`}
           class="hidden h-screen overflow-hidden sm:flex sm:flex-col"
         >
-          <h2 class="font-eina02 mb-1 flex-shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
+          <h2 class="font-eina02 mb-1 shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
             {season}
           </h2>
 
@@ -93,9 +93,9 @@ const sortedSeasons = Object.keys(eventsBySeason)
               id={`events-wrapper-${seasonIndex}`}
               class="flex h-full flex-row flex-nowrap"
             >
-              <div class="h-full w-10 flex-shrink-0" />
+              <div class="h-full w-10 shrink-0" />
               {eventsBySeason[season].map((event) => (
-                <div class="h-full min-w-full flex-shrink-0 sm:w-[500px] sm:min-w-[500px]">
+                <div class="h-full min-w-full shrink-0 sm:w-[500px] sm:min-w-[500px]">
                   <Card
                     title={event.title.toLocaleUpperCase()}
                     subtitle={formatDate(event.dateStart, event.dateEnd)}
@@ -107,7 +107,7 @@ const sortedSeasons = Object.keys(eventsBySeason)
                   />
                 </div>
               ))}
-              <div class="h-full w-10 flex-shrink-0" />
+              <div class="h-full w-10 shrink-0" />
             </div>
           </div>
         </div>
