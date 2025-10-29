@@ -1,33 +1,44 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import Card from "@components/ui/card/Card.astro"
-import { events, eventSeasons } from "@lib/events-helper"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
 import { getCollection } from "astro:content"
+import { formatDateRange } from "@lib/date-helpers"
+import type { CollectionEntry } from "astro:content"
+import { EventCard } from "@tina/components/event/EventCard.tsx"
+import client from "@tina/__generated__/client"
 
-const seasonCollection = (await getCollection("season"))
-
-// Helper function to format date for display
-const formatDate = (dateStart: string, dateEnd?: string) => {
-  const start = new Date(dateStart)
-  const startFormatted = start.toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  })
-
-  if (dateEnd) {
-    const end = new Date(dateEnd)
-    const endFormatted = end.toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
-    return `${startFormatted} - ${endFormatted}`
-  }
-
-  return startFormatted
+type SeasonWithTinaProps = CollectionEntry<"season"> & {
+  tinaProps: Awaited<ReturnType<typeof client.queries.season>>
 }
+
+type EventWithTinaProps = CollectionEntry<"event"> & {
+  tinaProps: Awaited<ReturnType<typeof client.queries.event>>
+}
+
+const seasonCollection = await getCollection("season")
+const seasonCollectionWithTinaProps = await Promise.all(
+  seasonCollection.map(async (season) => {
+    return {
+      ...season,
+      tinaProps: await client.queries.season({
+        relativePath: season.data.tinaInfo.relativePath,
+      }),
+    }
+  })
+)
+
+const eventCollection = await getCollection("event")
+const eventCollectionWithTinaProps = await Promise.all(
+  eventCollection.map(async (event) => {
+    return {
+      ...event,
+      tinaProps: await client.queries.event({
+        relativePath: event.data.tinaInfo.relativePath,
+      }),
+    }
+  })
+)
 
 // Helper function to check if an event belongs to a season
 const isEventInSeason = (
@@ -42,28 +53,36 @@ const isEventInSeason = (
 }
 
 // Group events by season using the eventSeasons data
-const eventsBySeason = eventSeasons
+const eventsBySeason = seasonCollection
   .sort(
-    (a, b) => new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()
+    (a, b) =>
+      new Date(b.data.dateStart).getTime() -
+      new Date(a.data.dateStart).getTime()
   ) // Most recent season first
   .reduce(
     (acc, season) => {
-      const eventsInSeason = events
-        .filter((event) =>
-          isEventInSeason(event.dateStart, season.dateStart, season.dateEnd)
+      const {
+        dateStart: seasonStart,
+        dateEnd: seasonEnd,
+        name: seasonName,
+      } = season.data
+      const eventsInSeason = eventCollectionWithTinaProps
+        .filter(({ data: eventData }) =>
+          isEventInSeason(eventData.dateStart, seasonStart, seasonEnd)
         )
         .sort(
           (a, b) =>
-            new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()
+            new Date(b.data.dateStart).getTime() -
+            new Date(a.data.dateStart).getTime()
         ) // Most recent events first within season
 
       if (eventsInSeason.length > 0) {
-        acc[season.name] = eventsInSeason
+        acc[seasonName] = eventsInSeason
       }
 
       return acc
     },
-    {} as Record<string, typeof events>
+    {} as Record<string, EventWithTinaProps[]>
   )
 
 const sortedSeasons = Object.keys(eventsBySeason)
@@ -97,16 +116,14 @@ const sortedSeasons = Object.keys(eventsBySeason)
               class="flex h-full flex-row flex-nowrap"
             >
               <div class="h-full w-10 shrink-0" />
-              {eventsBySeason[season].map((event) => (
+              {eventsBySeason[season].map(({ data: eventData, tinaProps }) => (
                 <div class="h-full min-w-full shrink-0 sm:w-[500px] sm:min-w-[500px]">
-                  <Card
-                    title={event.title.toLocaleUpperCase()}
-                    subtitle={formatDate(event.dateStart, event.dateEnd)}
-                    description={event.cardDescription}
-                    imageUrl={event.cardImageUrl}
-                    imageAlt={event.cardImageAlt}
-                    href={`/agenda/${event.slug}`}
-                    grayscale={"untilHover"}
+                  <EventCard
+                    grayscale="untilHover"
+                    className="h-full"
+                    href={`/agenda/${eventData.tinaInfo.filename}`}
+                    {...tinaProps}
+                    client:tina
                   />
                 </div>
               ))}
@@ -121,17 +138,14 @@ const sortedSeasons = Object.keys(eventsBySeason)
             {season}
           </h2>
           <div class="flex flex-col gap-4">
-            {eventsBySeason[season].map((event) => (
+            {eventsBySeason[season].map(({ data: eventData, tinaProps }) => (
               <div class="h-[500px] w-full">
-                <Card
-                  title={event.title.toLocaleUpperCase()}
-                  subtitle={formatDate(event.dateStart, event.dateEnd)}
-                  description={event.cardDescription}
-                  imageUrl={event.cardImageUrl}
-                  imageAlt={event.cardImageAlt}
-                  href={`/agenda/${event.slug}`}
-                  grayscale={"untilHover"}
-                  className="w-full min-w-full"
+                <EventCard
+                  grayscale="untilHover"
+                  className="h-full"
+                  href={`/agenda/${eventData.tinaInfo.filename}`}
+                  {...tinaProps}
+                  client:tina
                 />
               </div>
             ))}

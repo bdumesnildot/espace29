@@ -60,7 +60,7 @@ export const EventCollection: Collection = {
       type: "rich-text",
       name: "description",
       label: "Event description",
-      required: false,
+      required: true,
       ui: {
         component: "textarea",
       },

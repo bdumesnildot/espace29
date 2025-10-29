@@ -29,7 +29,6 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
   } = artist
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const hasMultipleImages = (artist.profileImageUrlList?.length || 0) > 1
 
   // Handle carousel navigation
   const goToImage = (index: number) => {
@@ -51,10 +50,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
   }, [profileImageUrlList?.length])
 
   return (
-    <section
-      id={`artist-${artist._sys.filename}-details-section`}
-      className="flex w-full flex-col sm:h-screen sm:flex-row"
-    >
+    <section className="flex w-full flex-col sm:h-screen sm:flex-row">
       {/* Mobile: Artist Details First */}
       <div className="flex w-full flex-col space-y-4 p-4 sm:hidden">
         {/* Artist Title */}
@@ -277,14 +273,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
               className="flex-1 space-y-4 overflow-y-auto"
               data-tina-field={tinaField(artist, "profileDescription")}
             >
-              {profileDescription?.split("\n\n").map((paragraph, index) => (
-                <p
-                  key={`${_sys.filename}-desktop-para-${index}`}
-                  className="font-eina03 text-lg leading-relaxed text-gray-700"
-                >
-                  {paragraph.trim()}
-                </p>
-              ))}
+              <TinaMarkdown content={profileDescription as any} />
             </div>
           </div>
         </div>

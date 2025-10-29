@@ -1,248 +1,49 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
-import { events, type Event } from "@lib/events-helper"
+import { formatDateRange } from "@lib/date-helpers"
+import client from "@tina/__generated__/client"
+import { EventContent } from "@tina/components/event/EventContent"
+import { getCollection } from "astro:content"
 
-export function getStaticPaths() {
-  return events.map((event) => ({
-    params: { slug: event.slug },
-    props: { event },
+export async function getStaticPaths() {
+  const eventCollection = await getCollection("event")
+
+  return eventCollection.map((event) => ({
+    params: { slug: event.id },
+    props: {
+      event,
+      getTinaProps: async () =>
+        client.queries.event({
+          relativePath: event.data.tinaInfo.relativePath,
+        }),
+    },
   }))
 }
 
-const { event } = Astro.props
+const { event, getTinaProps } = Astro.props
+const tinaProps = await getTinaProps()
 
 if (!event) {
   return Astro.redirect("/404")
 }
-
-// Helper function to format date for display
-const formatDate = (dateStart: string, dateEnd?: string) => {
-  const start = new Date(dateStart)
-  const startFormatted = start.toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  })
-
-  if (dateEnd) {
-    const end = new Date(dateEnd)
-    const endFormatted = end.toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
-    return `${startFormatted} - ${endFormatted}`
-  }
-
-  return startFormatted
-}
 ---
 
-<Layout title={`e29 | ${event.title}`}>
+<Layout title={`e29 | ${event.data.title}`}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout
       backTo={{
         href: "/agenda",
         label: "Retour à l'agenda",
-      }}>{event.title}</PageTopLayout
+      }}>{event.data.title}</PageTopLayout
     >
-    <section
-      id={`event-${event.slug}-details-section`}
-      class="flex w-full flex-col md:h-screen md:flex-row"
+
+    <div
+      id={`event-${event.data.tinaInfo.filename}-details-section`}
+      class="w-full"
     >
-      <!-- Mobile: Event Details First -->
-      <div class="flex w-full flex-col space-y-4 p-4 md:hidden">
-        <!-- Event Date -->
-        <div class="border-b border-gray-400 pb-4">
-          <h2 class="font-eina02 text-2xl font-semibold text-gray-900">
-            {formatDate(event.dateStart, event.dateEnd)}
-          </h2>
-        </div>
-
-        <!-- Description -->
-        <div class="border-b border-gray-400 pb-4">
-          <h3 class="font-eina04 mb-3 text-base font-semibold text-gray-900">
-            Description
-          </h3>
-          <div class="space-y-3">
-            {
-              event.Description.split("\n\n").map((paragraph) => (
-                <p class="font-eina03 text-sm leading-relaxed text-gray-700">
-                  {paragraph.trim()}
-                </p>
-              ))
-            }
-          </div>
-        </div>
-
-        <!-- Practical Information -->
-        <div>
-          <h3 class="font-eina04 mb-3 text-base font-semibold text-gray-900">
-            Informations pratiques
-          </h3>
-          <div class="space-y-3">
-            {
-              event.practicalInfo
-                .split("\n\n")
-                .map((paragraph) => (
-                  <p class="font-eina03 text-sm leading-relaxed text-gray-700">
-                    {paragraph.trim()}
-                  </p>
-                ))
-            }
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile: Images Grid -->
-      <div class="w-full bg-gray-50 p-4 md:hidden">
-        <div class="flex flex-col items-center gap-4">
-          {
-            event.ImageUrlList.map((image, index) => (
-              <img
-                src={image.url}
-                alt={image.alt}
-                class="h-[400px] w-full object-cover shadow-sm"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            ))
-          }
-        </div>
-      </div>
-
-      <!-- Desktop: Image Carousel -->
-      <div class="relative hidden flex-1 overflow-hidden bg-gray-50 md:flex">
-        <div class="relative h-full w-full">
-          <!-- Images -->
-          <div class="carousel-container relative h-full w-full">
-            {
-              event.ImageUrlList.map((image, index) => (
-                <img
-                  src={image.url}
-                  alt={image.alt}
-                  class={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                    index === 0 ? "opacity-100" : "opacity-0"
-                  }`}
-                  data-index={index}
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-              ))
-            }
-          </div>
-
-          <!-- Navigation Buttons -->
-          {
-            event.ImageUrlList.length > 1 && (
-              <>
-                <button
-                  id="prev-btn"
-                  class="carousel-btn absolute top-1/2 left-4 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                  aria-label="Image précédente"
-                >
-                  <svg
-                    class="h-4 w-4 text-gray-900"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-
-                <button
-                  id="next-btn"
-                  class="carousel-btn absolute top-1/2 right-4 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                  aria-label="Image suivante"
-                >
-                  <svg
-                    class="h-4 w-4 text-gray-900"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </>
-            )
-          }
-
-          <!-- Image navigation dots (if multiple images) -->
-          {
-            event.ImageUrlList.length > 1 && (
-              <div class="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
-                {event.ImageUrlList.map((_, index) => (
-                  <button
-                    class={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
-                      index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
-                    }`}
-                    data-index={index}
-                    aria-label={`Image ${index + 1}`}
-                  />
-                ))}
-              </div>
-            )
-          }
-        </div>
-      </div>
-
-      <!-- Desktop: Event Details -->
-      <div class="hidden h-full flex-1 flex-col md:flex">
-        <div class="flex h-full flex-col space-y-8 p-8 pt-12">
-          <!-- Event Date -->
-          <div class="border-b border-gray-400 pb-6">
-            <h2 class="font-eina02 text-4xl font-semibold text-gray-900">
-              {formatDate(event.dateStart, event.dateEnd)}
-            </h2>
-          </div>
-
-          <!-- Description -->
-          <div class="border-b border-gray-400 pb-6">
-            <h3 class="font-eina04 mb-4 text-lg font-semibold text-gray-900">
-              Description
-            </h3>
-            <div class="space-y-4">
-              {
-                event.Description.split("\n\n").map((paragraph) => (
-                  <p class="font-eina03 text-lg leading-relaxed text-gray-700">
-                    {paragraph.trim()}
-                  </p>
-                ))
-              }
-            </div>
-          </div>
-
-          <!-- Practical Information -->
-          <div class="flex flex-1 flex-col">
-            <h3 class="font-eina04 mb-4 text-lg font-semibold text-gray-900">
-              Informations pratiques
-            </h3>
-            <div class="flex-1 space-y-4 overflow-y-auto">
-              {
-                event.practicalInfo
-                  .split("\n\n")
-                  .map((paragraph) => (
-                    <p class="font-eina03 text-lg leading-relaxed text-gray-700">
-                      {paragraph.trim()}
-                    </p>
-                  ))
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <EventContent {...tinaProps} client:load />
+    </div>
 
     <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
     <div id="pin-spacer" class="hidden h-0 md:block"></div>
@@ -254,78 +55,9 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
   import { ScrollTrigger } from "gsap/ScrollTrigger"
 
   document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(
-      ".carousel-image"
-    ) as NodeListOf<HTMLImageElement>
-    const dots = document.querySelectorAll(
-      ".carousel-dot"
-    ) as NodeListOf<HTMLButtonElement>
-    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
-    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
-
-    if (images.length <= 1) return
-
-    let currentIndex = 0
-
-    function showImage(index: number) {
-      // Hide all images
-      images.forEach((img, i) => {
-        img.classList.toggle("opacity-100", i === index)
-        img.classList.toggle("opacity-0", i !== index)
-      })
-
-      // Update dots
-      dots.forEach((dot, i) => {
-        if (i === index) {
-          dot.classList.remove("bg-white/50", "hover:bg-white/75")
-          dot.classList.add("bg-white")
-        } else {
-          dot.classList.remove("bg-white")
-          dot.classList.add("bg-white/50", "hover:bg-white/75")
-        }
-      })
-
-      currentIndex = index
-    }
-
-    function nextImage() {
-      const newIndex = (currentIndex + 1) % images.length
-      showImage(newIndex)
-    }
-
-    function prevImage() {
-      const newIndex = (currentIndex - 1 + images.length) % images.length
-      showImage(newIndex)
-    }
-
-    // Event listeners
-    if (prevBtn) {
-      prevBtn.addEventListener("click", prevImage)
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener("click", nextImage)
-    }
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => showImage(index))
-    })
-
-    // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        prevImage()
-      } else if (e.key === "ArrowRight") {
-        nextImage()
-      }
-    })
-
-    // Auto-play (optional - uncomment to enable)
-    // setInterval(nextImage, 5000);
-
     // Magnet scroll effect (desktop only)
-    if (window.innerWidth >= 768) {
-      // md breakpoint
+    if (window.innerWidth >= 640) {
+      // sm breakpoint
       gsap.registerPlugin(ScrollTrigger)
 
       const eventSlug = window.location.pathname.split("/").pop()
@@ -354,6 +86,9 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
           pinSpacer.style.height = `${RELEASE_OFFSET}px`
         },
       })
+
+      // Ensure carousel buttons remain clickable during pin
+      section.style.pointerEvents = "auto"
     }
   })
 </script>
