@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import type {
   ArtistQuery,
   ArtistQueryVariables,
@@ -28,56 +28,27 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
     _sys,
   } = artist
 
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const hasMultipleImages = (artist.profileImageUrlList?.length || 0) > 1
 
-  // Initialize carousel and scroll effects
+  // Handle carousel navigation
+  const goToImage = (index: number) => {
+    const totalImages = profileImageUrlList?.length || 0
+    setCurrentImageIndex((index + totalImages) % totalImages)
+  }
+
+  const handlePrev = () => {
+    goToImage(currentImageIndex - 1)
+  }
+
+  const handleNext = () => {
+    goToImage(currentImageIndex + 1)
+  }
+
+  // Reset index when images change
   useEffect(() => {
-    if (!hasMultipleImages) return
-
-    // Carousel functionality
-    const images = document.querySelectorAll(
-      ".carousel-image"
-    ) as NodeListOf<HTMLImageElement>
-    const dots = document.querySelectorAll(
-      ".carousel-dot"
-    ) as NodeListOf<HTMLButtonElement>
-
-    const updateCarousel = (index: number) => {
-      // Update images visibility
-      images.forEach((img, i) => {
-        img.classList.toggle("opacity-100", i === index)
-        img.classList.toggle("opacity-0", i !== index)
-      })
-
-      // Update dots styling
-      dots.forEach((dot, i) => {
-        if (i === index) {
-          dot.classList.remove("bg-white/50", "hover:bg-white/75")
-          dot.classList.add("bg-white")
-        } else {
-          dot.classList.remove("bg-white")
-          dot.classList.add("bg-white/50", "hover:bg-white/75")
-        }
-      })
-    }
-
-    // Create stable dot click handlers
-    const dotClickHandlers = Array.from(dots).map((_, index) => {
-      return () => updateCarousel(index)
-    })
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", dotClickHandlers[index])
-    })
-
-    // Cleanup event listeners
-    return () => {
-      dots.forEach((dot, index) => {
-        dot.removeEventListener("click", dotClickHandlers[index])
-      })
-    }
-  }, [hasMultipleImages])
+    setCurrentImageIndex(0)
+  }, [profileImageUrlList?.length])
 
   return (
     <section
@@ -176,7 +147,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
                 src={image?.imageUrl || ""}
                 alt={image?.alt || ""}
                 className={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                  index === 0 ? "opacity-100" : "opacity-0"
+                  index === currentImageIndex ? "opacity-100" : "opacity-0"
                 }`}
                 data-index={index}
                 loading={index === 0 ? "eager" : "lazy"}
@@ -188,7 +159,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
           {(profileImageUrlList?.length || 0) > 1 && (
             <>
               <button
-                id="prev-btn"
+                onClick={handlePrev}
                 className="carousel-btn absolute top-1/2 left-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                 aria-label="Image précédente"
               >
@@ -208,7 +179,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
               </button>
 
               <button
-                id="next-btn"
+                onClick={handleNext}
                 className="carousel-btn absolute top-1/2 right-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                 aria-label="Image suivante"
               >
@@ -235,8 +206,11 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
               {(profileImageUrlList || []).map((_, index) => (
                 <button
                   key={`${_sys.filename}-dot-${index}`}
+                  onClick={() => goToImage(index)}
                   className={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
-                    index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
+                    index === currentImageIndex
+                      ? "bg-white"
+                      : "bg-white/50 hover:bg-white/75"
                   }`}
                   data-index={index}
                   aria-label={`Image ${index + 1}`}
