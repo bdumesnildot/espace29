@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from "react"
 import type { CollectionEntry } from "astro:content"
+import type {
+  ArtistQuery,
+  ArtistQueryVariables,
+} from "@tina/__generated__/types"
+import { tinaField, useTina } from "tinacms/dist/react"
 
 type ArtistContentProps = {
   artist: CollectionEntry<"artist">["data"]
+  variables: ArtistQueryVariables
+  data: ArtistQuery
+  query: string
 }
 
-export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
+export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
+  const { data } = useTina({
+    query: props.query,
+    variables: props.variables,
+    data: props.data,
+  })
+
   const {
     title,
     websiteUrl,
@@ -13,9 +27,9 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
     profileDescription,
     profileImageUrlList,
     tinaInfo,
-  } = artist
+  } = props.artist
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  // const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const hasMultipleImages = (profileImageUrlList?.length || 0) > 1
 
   // Initialize carousel and scroll effects
@@ -29,8 +43,6 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
     const dots = document.querySelectorAll(
       ".carousel-dot"
     ) as NodeListOf<HTMLButtonElement>
-    const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement
-    const nextBtn = document.getElementById("next-btn") as HTMLButtonElement
 
     const updateCarousel = (index: number) => {
       // Update images visibility
@@ -49,18 +61,6 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
           dot.classList.add("bg-white/50", "hover:bg-white/75")
         }
       })
-
-      setCurrentImageIndex(index)
-    }
-
-    const showNextImage = () => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
-    }
-
-    const showPrevImage = () => {
-      setCurrentImageIndex(
-        (prevIndex) => (prevIndex - 1 + images.length) % images.length
-      )
     }
 
     // Create stable dot click handlers
@@ -68,31 +68,15 @@ export const ArtistContent: React.FC<ArtistContentProps> = ({ artist }) => {
       return () => updateCarousel(index)
     })
 
-    // Event listeners
-    if (prevBtn) prevBtn.addEventListener("click", showPrevImage)
-    if (nextBtn) nextBtn.addEventListener("click", showNextImage)
-
     dots.forEach((dot, index) => {
       dot.addEventListener("click", dotClickHandlers[index])
     })
 
-    const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        showPrevImage()
-      } else if (e.key === "ArrowRight") {
-        showNextImage()
-      }
-    }
-    document.addEventListener("keydown", handleKeydown)
-
     // Cleanup event listeners
     return () => {
-      if (prevBtn) prevBtn.removeEventListener("click", showPrevImage)
-      if (nextBtn) nextBtn.removeEventListener("click", showNextImage)
       dots.forEach((dot, index) => {
         dot.removeEventListener("click", dotClickHandlers[index])
       })
-      document.removeEventListener("keydown", handleKeydown)
     }
   }, [hasMultipleImages])
 
