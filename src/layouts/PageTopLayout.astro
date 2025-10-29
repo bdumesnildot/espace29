@@ -1,13 +1,12 @@
 ---
-interface Props {
-  title: string
+type Props = {
   backTo?: {
     href: string
     label: string
   }
 }
 
-const { title, backTo } = Astro.props
+const { backTo } = Astro.props
 ---
 
 <div class="relative w-full px-2 sm:px-10">
@@ -41,6 +40,6 @@ const { title, backTo } = Astro.props
   <h1
     class="font-eina01 w-full py-6 text-4xl font-semibold text-gray-900 sm:pt-16 sm:pb-25 sm:text-7xl"
   >
-    {title}
+    <slot />
   </h1>
 </div>

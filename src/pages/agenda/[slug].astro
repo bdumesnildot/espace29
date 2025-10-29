@@ -42,12 +42,11 @@ const formatDate = (dateStart: string, dateEnd?: string) => {
 <Layout title={`e29 | ${event.title}`}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout
-      title={event.title}
       backTo={{
         href: "/agenda",
         label: "Retour à l'agenda",
-      }}
-    />
+      }}>{event.title}</PageTopLayout
+    >
     <section
       id={`event-${event.slug}-details-section`}
       class="flex w-full flex-col md:h-screen md:flex-row"

@@ -1,23 +1,33 @@
 import React from "react"
-import { classMerge } from "../../src/styles/utils"
+import { classMerge } from "@styles/utils"
 import type { CollectionEntry } from "astro:content"
 import { formatArtistName } from "@lib/artists-helper"
+import { tinaField, useTina } from "tinacms/dist/react"
+import client from "@tina/__generated__/client"
+import type {
+  ArtistQuery,
+  ArtistQueryVariables,
+} from "@tina/__generated__/types"
 
 type ArtistCardProps = {
-  artist: CollectionEntry<"artist">["data"]
+  variables: ArtistQueryVariables
+  data: ArtistQuery
+  query: string
   className?: string
   grayscale?: "always" | "untilHover" | "false"
   href?: string
   onClick?: string
 }
 
-export const ArtistCard: React.FC<ArtistCardProps> = ({
-  artist,
-  className,
-  grayscale,
-  href,
-  onClick,
-}) => {
+export const ArtistCard: React.FC<ArtistCardProps> = (props) => {
+  const { data } = useTina({
+    query: props.query,
+    variables: props.variables,
+    data: props.data,
+  })
+  const artist = data.artist
+
+  const { className, grayscale = "false", href, onClick } = props
   const {
     firstName,
     lastName,
@@ -64,7 +74,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
         <div className="flex-3">
           <img
             src={cardImageUrl}
-            alt={cardImageAlt}
+            alt={cardImageAlt || ""}
             className="h-full w-full object-cover transition-all duration-300"
             loading="lazy"
           />
@@ -73,15 +83,30 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
 
       <div className="flex-1 border-t border-gray-700 bg-gray-50 p-6">
         <h3 className="font-eina03 mb-3 text-2xl font-semibold text-gray-900">
-          {formatArtistName(artist).toLocaleUpperCase()}
+          <div className="flex items-center justify-start gap-2">
+            {firstName && (
+              <span data-tina-field={tinaField(artist, "firstName")}>
+                {firstName}
+              </span>
+            )}
+            <span data-tina-field={tinaField(artist, "lastName")}>
+              {lastName}
+            </span>
+          </div>
         </h3>
         {cardSubtitle && (
-          <p className="font-eina03 mb-2 text-xl font-medium text-gray-700">
+          <p
+            className="font-eina03 mb-2 text-xl font-medium text-gray-700"
+            data-tina-field={tinaField(artist, "title")}
+          >
             {cardSubtitle}
           </p>
         )}
         {cardDescription && (
-          <p className="font-eina03 line-clamp-6 text-lg leading-relaxed text-gray-700">
+          <p
+            className="font-eina03 line-clamp-6 text-lg leading-relaxed text-gray-700"
+            data-tina-field={tinaField(artist, "cardDescription")}
+          >
             {cardDescription}
           </p>
         )}

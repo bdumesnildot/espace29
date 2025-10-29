@@ -3,8 +3,9 @@ import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
 import { getCollection } from "astro:content"
 import { formatArtistName } from "@lib/artists-helper"
-import client from "../../../tina/__generated__/client"
-import { ArtistContent } from "../../../tina/components/ArtistContent"
+import client from "@tina/__generated__/client"
+import { ArtistContent } from "@tina/components/artist/ArtistContent"
+import { ArtistTitle } from "@tina/components/artist/ArtistTitle"
 
 export async function getStaticPaths() {
   const artistCollection = await getCollection("artist")
@@ -32,15 +33,17 @@ if (!artist) {
 <Layout title={`e29 | ${formatArtistName(artist.data)}`}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout
-      title={formatArtistName(artist.data)}
       backTo={{
         href: "/artistes",
         label: "Retour au artistes",
-      }}
-    />
+      }}><ArtistTitle {...tinaProps} client:tina /></PageTopLayout
+    >
 
-    <div id={`artist-${artist.data.tinaInfo.filename}-details-section`}>
-      <ArtistContent artist={artist.data} />
+    <div
+      id={`artist-${artist.data.tinaInfo.filename}-details-section`}
+      class="w-full"
+    >
+      <ArtistContent {...tinaProps} client:tina />
     </div>
 
     <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
