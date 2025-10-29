@@ -32,19 +32,19 @@ if (!artist) {
 
 <Layout title={`e29 | ${formatArtistName(artist.data)}`}>
   <main class="flex min-h-full w-full flex-col items-start">
-     <PageTopLayout
-       backTo={{
-         href: "/artistes",
-         label: "Retour au artistes",
-       }}><ArtistTitle {...tinaProps} client:load /></PageTopLayout
-     >
+    <PageTopLayout
+      backTo={{
+        href: "/artistes",
+        label: "Retour au artistes",
+      }}><ArtistTitle {...tinaProps} client:load /></PageTopLayout
+    >
 
-     <div
-       id={`artist-${artist.data.tinaInfo.filename}-details-section`}
-       class="w-full"
-     >
-       <ArtistContent {...tinaProps} client:load />
-     </div>
+    <div
+      id={`artist-${artist.data.tinaInfo.filename}-details-section`}
+      class="w-full"
+    >
+      <ArtistContent {...tinaProps} client:load />
+    </div>
 
     <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
     <div id="pin-spacer" class="hidden h-0 sm:block"></div>
@@ -89,7 +89,7 @@ if (!artist) {
       })
 
       // Ensure carousel buttons remain clickable during pin
-      section.style.pointerEvents = 'auto'
+      section.style.pointerEvents = "auto"
     }
   })
 </script>
