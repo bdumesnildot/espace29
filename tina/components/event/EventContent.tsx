@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
 import { tinaField, useTina } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
-import { formatDate, formatDateRange } from "@lib/date-helpers"
+import { formatDate } from "@lib/date-helpers"
 
 type EventContentProps = {
   variables: EventQueryVariables
@@ -68,7 +68,7 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
             className="space-y-3"
             data-tina-field={tinaField(event, "description")}
           >
-            <TinaMarkdown content={description} />
+            <TinaMarkdown content={description as any} />
           </div>
         </div>
       </div>
@@ -78,6 +78,7 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
         <div className="flex flex-col items-center gap-4">
           {(imageUrlList || []).map((image, index) => (
             <img
+              key={`${_sys.filename}-mobile-image-${index}`}
               src={image?.imageUrl || ""}
               alt={image?.alt || ""}
               className="h-[400px] w-full object-cover shadow-sm"
@@ -94,10 +95,11 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
           <div className="carousel-container relative h-full w-full">
             {(imageUrlList || []).map((image, index) => (
               <img
+                key={`${_sys.filename}-carousel-image-${index}`}
                 src={image?.imageUrl || ""}
                 alt={image?.alt || ""}
                 className={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                  index === 0 ? "opacity-100" : "opacity-0"
+                  index === currentImageIndex ? "opacity-100" : "opacity-0"
                 }`}
                 data-index={index}
                 loading={index === 0 ? "eager" : "lazy"}
@@ -106,11 +108,11 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
           </div>
 
           {/* Navigation Buttons */}
-          {imageUrlList && imageUrlList.length > 1 && (
+          {(imageUrlList?.length || 0) > 1 && (
             <>
               <button
-                id="prev-btn"
-                className="carousel-btn absolute top-1/2 left-4 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                onClick={handlePrev}
+                className="carousel-btn absolute top-1/2 left-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                 aria-label="Image précédente"
               >
                 <svg
@@ -120,17 +122,17 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
                   viewBox="0 0 24 24"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M15 19l-7-7 7-7"
                   />
                 </svg>
               </button>
 
               <button
-                id="next-btn"
-                className="carousel-btn absolute top-1/2 right-4 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                onClick={handleNext}
+                className="carousel-btn absolute top-1/2 right-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                 aria-label="Image suivante"
               >
                 <svg
@@ -140,9 +142,9 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
                   viewBox="0 0 24 24"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
@@ -151,12 +153,16 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
           )}
 
           {/* Image navigation dots (if multiple images) */}
-          {imageUrlList && imageUrlList.length > 1 && (
+          {(imageUrlList?.length || 0) > 1 && (
             <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
-              {imageUrlList.map((_, index) => (
+              {(imageUrlList || []).map((_, index) => (
                 <button
+                  key={`${_sys.filename}-dot-${index}`}
+                  onClick={() => goToImage(index)}
                   className={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
-                    index === 0 ? "bg-white" : "bg-white/50 hover:bg-white/75"
+                    index === currentImageIndex
+                      ? "bg-white"
+                      : "bg-white/50 hover:bg-white/75"
                   }`}
                   data-index={index}
                   aria-label={`Image ${index + 1}`}
@@ -186,15 +192,15 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
           </div>
 
           {/* Description */}
-          <div className="border-gray-400 pb-6">
+          <div className="flex flex-1 flex-col">
             <h3 className="font-eina04 mb-4 text-lg font-semibold text-gray-900">
               Description
             </h3>
             <div
-              className="space-y-4"
+              className="flex-1 space-y-4 overflow-y-auto"
               data-tina-field={tinaField(event, "description")}
             >
-              <TinaMarkdown content={description} />
+              <TinaMarkdown content={description as any} />
             </div>
           </div>
         </div>
