@@ -8,7 +8,6 @@ const baseNavigationItems = [
 
 const devNavigationItems = [
   { href: "/dev/design-system", label: "Design system" },
-  { href: "/blog", label: "Blog" },
 ]
 
 export const navigationItems = import.meta.env.DEV
