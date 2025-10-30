@@ -3,18 +3,11 @@
  * 
  * Styles for TinaMarkdown-generated HTML elements.
  * Applies to content within the `.markdown-content` parent class.
- * 
- * Philosophy: Maintains the white canvas approach by providing
- * minimal but refined styling that integrates gracefully with
- * the Espace29 design system.
  */
 
 /* Main markdown content container */
 .markdown-content {
-  /* Base typography and spacing */
   font-family: 'Eina03', ui-sans-serif, system-ui, sans-serif;
-  color: rgb(55, 65, 81); /* gray-700 */
-  line-height: 1.6;
 }
 
 /* ============================================================================
@@ -23,61 +16,40 @@
 
 .markdown-content h1 {
   font-family: 'Eina02', ui-sans-serif, system-ui, sans-serif;
-  font-size: 48px; /* text-5xl equivalent */
+  font-size: 44px; /* text-5xl equivalent */
   font-weight: 400;
   line-height: 1.2;
-  color: rgb(17, 24, 39); /* gray-900 */
-  margin-top: 2rem; /* mt-8 */
-  margin-bottom: 1.5rem; /* mb-6 */
-  border-bottom: 1px solid rgb(209, 213, 219); /* border-gray-300 */
-  padding-bottom: 1rem; /* pb-4 */
-}
-
-.markdown-content h1:first-child {
-  margin-top: 0;
+  color: red;
 }
 
 .markdown-content h2 {
   font-family: 'Eina02', ui-sans-serif, system-ui, sans-serif;
-  font-size: 28px; /* text-4xl equivalent */
+  font-size: 34px; /* text-4xl equivalent */
   font-weight: 400;
   line-height: 1.2;
-  color: rgb(17, 24, 39); /* gray-900 */
-  margin-top: 1.5rem; /* mt-6 */
-  margin-bottom: 1rem; /* mb-4 */
-  border-bottom: 1px solid rgb(219, 234, 254); /* border-gray-200 */
-  padding-bottom: 0.75rem; /* pb-3 */
+  color: red;
 }
 
 .markdown-content h3 {
-  font-family: 'Eina03', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Eina02', ui-sans-serif, system-ui, sans-serif;
   font-size: 20px; /* text-2xl equivalent */
-  font-weight: 600;
-  line-height: 1.3;
-  color: rgb(17, 24, 39); /* gray-900 */
-  margin-top: 1.25rem; /* mt-5 */
-  margin-bottom: 0.75rem; /* mb-3 */
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .markdown-content h4 {
-  font-family: 'Eina03', ui-sans-serif, system-ui, sans-serif;
-  font-size: 16px; /* text-xl equivalent */
+  font-family: 'Eina02', ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px; /* text-xl equivalent */
   font-weight: 600;
-  line-height: 1.4;
-  color: rgb(17, 24, 39); /* gray-900 */
-  margin-top: 1rem; /* mt-4 */
-  margin-bottom: 0.5rem; /* mb-2 */
+  line-height: 1.2;
 }
 
 .markdown-content h5,
 .markdown-content h6 {
-  font-family: 'Eina03', ui-sans-serif, system-ui, sans-serif;
-  font-size: 14px;
+  font-family: 'Eina02', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
   font-weight: 600;
-  line-height: 1.4;
-  color: rgb(17, 24, 39); /* gray-900 */
-  margin-top: 0.75rem; /* mt-3 */
-  margin-bottom: 0.5rem; /* mb-2 */
+  line-height: 1.2;
 }
 
 /* ============================================================================
@@ -85,13 +57,7 @@
    ============================================================================ */
 
 .markdown-content p {
-  margin-bottom: 1rem; /* mb-4 */
-  line-height: 1.7;
-  color: rgb(55, 65, 81); /* gray-700 */
-}
-
-.markdown-content p:last-child {
-  margin-bottom: 0;
+  font-size: 12px;
 }
 
 /* ============================================================================
@@ -110,14 +76,11 @@
   color: rgb(17, 24, 39);
   border-bottom-color: rgb(17, 24, 39);
   background-color: rgba(17, 24, 39, 0.05);
-  padding: 2px 4px;
-  border-radius: 2px;
 }
 
 .markdown-content a:focus {
   outline: 2px solid rgb(17, 24, 39);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
 /* ============================================================================
@@ -139,6 +102,7 @@
 }
 
 .markdown-content li {
+  font-size: 12px;
   margin-bottom: 0.5rem; /* mb-2 */
   color: rgb(55, 65, 81); /* gray-700 */
   line-height: 1.6;
@@ -163,39 +127,6 @@
 }
 
 /* ============================================================================
-   CODE
-   ============================================================================ */
-
-.markdown-content code {
-  font-family: ui-monospace, 'Courier New', monospace;
-  font-size: 0.9em;
-  background-color: rgb(243, 244, 246); /* bg-gray-100 */
-  color: rgb(55, 65, 81); /* gray-700 */
-  padding: 0.125rem 0.25rem;
-  border-radius: 2px;
-  word-break: break-word;
-}
-
-.markdown-content pre {
-  background-color: rgb(31, 41, 55); /* bg-gray-800 */
-  color: rgb(229, 231, 235); /* text-gray-200 */
-  padding: 1rem; /* p-4 */
-  border-radius: 6px;
-  overflow-x: auto;
-  margin: 1.5rem 0; /* my-6 */
-  font-family: ui-monospace, 'Courier New', monospace;
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-.markdown-content pre code {
-  background-color: transparent;
-  color: inherit;
-  padding: 0;
-  font-size: inherit;
-}
-
-/* ============================================================================
    BLOCKQUOTES
    ============================================================================ */
 
@@ -214,42 +145,6 @@
 
 .markdown-content blockquote p:last-child {
   margin-bottom: 0;
-}
-
-/* ============================================================================
-   IMAGES
-   ============================================================================ */
-
-.markdown-content img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 6px;
-  margin: 1.5rem 0; /* my-6 */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.markdown-content figure {
-  margin: 1.5rem 0; /* my-6 */
-  text-align: center;
-}
-
-.markdown-content figcaption {
-  font-family: 'Eina03', ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.875rem;
-  color: rgb(107, 114, 128); /* gray-500 */
-  margin-top: 0.5rem; /* mt-2 */
-  font-style: italic;
-}
-
-/* ============================================================================
-   HORIZONTAL RULES
-   ============================================================================ */
-
-.markdown-content hr {
-  border: none;
-  border-top: 1px solid rgb(219, 234, 254); /* border-gray-200 */
-  margin: 2rem 0; /* my-8 */
 }
 
 /* ============================================================================
@@ -283,72 +178,6 @@
 
 .markdown-content table tbody tr:hover {
   background-color: rgb(249, 250, 251); /* bg-gray-50 */
-}
-
-/* ============================================================================
-   EMPHASIS
-   ============================================================================ */
-
-.markdown-content strong,
-.markdown-content b {
-  font-weight: 600;
-  color: rgb(17, 24, 39); /* gray-900 */
-}
-
-.markdown-content em,
-.markdown-content i {
-  font-style: italic;
-  color: rgb(55, 65, 81); /* gray-700 */
-}
-
-/* ============================================================================
-   STRIKETHROUGH & SUBSCRIPT/SUPERSCRIPT
-   ============================================================================ */
-
-.markdown-content del,
-.markdown-content s {
-  text-decoration: line-through;
-  color: rgb(107, 114, 128); /* gray-500 */
-}
-
-.markdown-content sub,
-.markdown-content sup {
-  font-size: 0.75em;
-  line-height: 0;
-  position: relative;
-}
-
-.markdown-content sup {
-  top: -0.5em;
-}
-
-.markdown-content sub {
-  bottom: -0.25em;
-}
-
-/* ============================================================================
-   UTILITY CLASSES FOR SPECIAL CASES
-   ============================================================================ */
-
-/* Highlight/callout boxes for important info */
-.markdown-content .info-box,
-.markdown-content [class*='alert'],
-.markdown-content [class*='callout'] {
-  padding: 1rem; /* p-4 */
-  border-radius: 6px;
-  margin: 1.5rem 0; /* my-6 */
-  border-left: 4px solid rgb(17, 24, 39); /* border-gray-900 */
-  background-color: rgb(249, 250, 251); /* bg-gray-50 */
-}
-
-.markdown-content [class*='alert'] p,
-.markdown-content [class*='callout'] p {
-  margin-bottom: 0.5rem;
-}
-
-.markdown-content [class*='alert'] p:last-child,
-.markdown-content [class*='callout'] p:last-child {
-  margin-bottom: 0;
 }
 
 /* ============================================================================
@@ -391,31 +220,5 @@
   .markdown-content table th,
   .markdown-content table td {
     padding: 0.5rem;
-  }
-}
-
-/* ============================================================================
-   PRINT STYLES
-   ============================================================================ */
-
-@media print {
-  .markdown-content a {
-    border-bottom: none;
-  }
-
-  .markdown-content a::after {
-    content: ' (' attr(href) ')';
-    font-size: 0.875rem;
-    color: rgb(107, 114, 128); /* gray-500 */
-  }
-
-  .markdown-content blockquote {
-    page-break-inside: avoid;
-  }
-
-  .markdown-content pre {
-    page-break-inside: avoid;
-    background-color: rgb(243, 244, 246);
-    color: rgb(17, 24, 39);
   }
 }

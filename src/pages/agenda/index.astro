@@ -95,35 +95,58 @@ const eventsBySeason = seasonCollection
 <Layout title="e29 | Agenda" showBackToTop={true}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout>Agenda</PageTopLayout>
-  </main>
 
-  {
-    seasonCollectionWithTinaProps.map(
-      ({ data: seasonData, tinaProps: seasonTinaProps }, seasonIndex) => (
-        <section class={`w-full`}>
-          {
-            /* Spacing between seasons */
-            seasonIndex > 0 ? <div class="h-16 w-full sm:h-32" /> : null
-          }
+    {
+      seasonCollectionWithTinaProps.map(
+        ({ data: seasonData, tinaProps: seasonTinaProps }, seasonIndex) => (
+          <section class={`w-full`}>
+            {
+              /* Spacing between seasons */
+              seasonIndex > 0 ? <div class="h-16 w-full sm:h-32" /> : null
+            }
 
-          {/* Season View (full screen height, fix title and horizontal scroll content) */}
-          <div
-            id={`season-${seasonIndex}`}
-            class="hidden h-screen overflow-hidden sm:flex sm:flex-col"
-          >
-            <h2 class="font-eina02 mb-1 shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
-              <SeasonTitle {...seasonTinaProps} client:tina />
-            </h2>
+            {/* Season View (full screen height, fix title and horizontal scroll content) */}
+            <div
+              id={`season-${seasonIndex}`}
+              class="hidden h-screen overflow-hidden sm:flex sm:flex-col"
+            >
+              <h2 class="font-eina02 mb-1 shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
+                <SeasonTitle {...seasonTinaProps} client:tina />
+              </h2>
 
-            <div class="w-full flex-1 overflow-hidden">
-              <div
-                id={`events-wrapper-${seasonIndex}`}
-                class="flex h-full flex-row flex-nowrap"
-              >
-                <div class="h-full w-10 shrink-0" />
+              <div class="w-full flex-1 overflow-hidden">
+                <div
+                  id={`events-wrapper-${seasonIndex}`}
+                  class="flex h-full flex-row flex-nowrap"
+                >
+                  <div class="h-full w-10 shrink-0" />
+                  {eventsBySeason[seasonData.name].map(
+                    ({ data: eventData, tinaProps: eventTinaProps }) => (
+                      <div class="h-full min-w-full shrink-0 sm:w-[500px] sm:min-w-[500px]">
+                        <EventCard
+                          grayscale="untilHover"
+                          className="h-full"
+                          href={`/agenda/${eventData.tinaInfo.filename}`}
+                          {...eventTinaProps}
+                          client:tina
+                        />
+                      </div>
+                    )
+                  )}
+                  <div class="h-full w-10 shrink-0" />
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Vertical Cards Section */}
+            <div class="block w-full px-2 pb-8 sm:hidden">
+              <h2 class="font-eina02 mb-2 text-3xl font-semibold text-gray-900 sm:mb-8">
+                <SeasonTitle {...seasonTinaProps} client:tina />
+              </h2>
+              <div class="flex flex-col gap-4">
                 {eventsBySeason[seasonData.name].map(
                   ({ data: eventData, tinaProps: eventTinaProps }) => (
-                    <div class="h-full min-w-full shrink-0 sm:w-[500px] sm:min-w-[500px]">
+                    <div class="h-[650px] w-full">
                       <EventCard
                         grayscale="untilHover"
                         className="h-full"
@@ -134,36 +157,16 @@ const eventsBySeason = seasonCollection
                     </div>
                   )
                 )}
-                <div class="h-full w-10 shrink-0" />
               </div>
             </div>
-          </div>
-
-          {/* Mobile Vertical Cards Section */}
-          <div class="block w-full px-2 pb-8 sm:hidden">
-            <h2 class="font-eina02 mb-2 text-3xl font-semibold text-gray-900 sm:mb-8">
-              <SeasonTitle {...seasonTinaProps} client:tina />
-            </h2>
-            <div class="flex flex-col gap-4">
-              {eventsBySeason[seasonData.name].map(
-                ({ data: eventData, tinaProps: eventTinaProps }) => (
-                  <div class="h-[650px] w-full">
-                    <EventCard
-                      grayscale="untilHover"
-                      className="h-full"
-                      href={`/agenda/${eventData.tinaInfo.filename}`}
-                      {...eventTinaProps}
-                      client:tina
-                    />
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-        </section>
+          </section>
+        )
       )
-    )
-  }
+    }
+
+    <!-- Vertical Content Section After Horizontal Scroll -->
+    <section id="vertical-content" class="w-full"></section>
+  </main>
 </Layout>
 
 <script>

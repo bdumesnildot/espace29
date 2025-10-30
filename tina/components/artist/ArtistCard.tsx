@@ -101,12 +101,12 @@ export const ArtistCard: React.FC<ArtistCardProps> = (props) => {
           </p>
         )}
         {cardDescription && (
-          <p
-            className="font-eina03 min-h-0 overflow-hidden text-lg leading-relaxed text-gray-700"
+          <div
+            className="markdown-content min-h-0 overflow-y-hidden"
             data-tina-field={tinaField(artist, "cardDescription")}
           >
             <TinaMarkdown content={cardDescription as any} />
-          </p>
+          </div>
         )}
       </div>
     </Component>

@@ -2,8 +2,7 @@ import React from "react"
 import { classMerge } from "@styles/utils"
 import { tinaField, useTina } from "tinacms/dist/react"
 import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
-import { formatDate, formatDateRange } from "@lib/date-helpers"
-import { date } from "astro:schema"
+import { formatDate } from "@lib/date-helpers"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 type EventCardProps = {
@@ -97,12 +96,12 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
           )}
         </p>
         {cardDescription && (
-          <p
-            className="font-eina03 min-h-0 overflow-y-hidden text-lg leading-relaxed text-gray-700"
+          <div
+            className="markdown-content min-h-0 overflow-y-hidden"
             data-tina-field={tinaField(event, "cardDescription")}
           >
             <TinaMarkdown content={cardDescription as any} />
-          </p>
+          </div>
         )}
       </div>
     </Component>
