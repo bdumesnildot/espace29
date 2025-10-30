@@ -9,6 +9,9 @@ export const EventCollection: Collection = {
     router({ document }) {
       return `/agenda/${document._sys.filename}`
     },
+    allowedActions: {
+      createNestedFolder: false,
+    },
   },
   fields: [
     {
