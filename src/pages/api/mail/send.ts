@@ -10,7 +10,7 @@ type ContactFormData = {
   phone?: string
   subject: string
   message: string
-  privacy: string
+  privacy: boolean
 }
 
 const validateFormData = (
@@ -25,7 +25,7 @@ const validateFormData = (
     !email?.trim() ||
     !subject?.trim() ||
     !message?.trim() ||
-    privacy !== "on"
+    !privacy
   ) {
     return null
   }
@@ -48,8 +48,7 @@ const validateFormData = (
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const formData = await request.formData()
-  const data = Object.fromEntries(formData)
+  const data = await request.json()
 
   const validatedData = validateFormData(data)
   if (!validatedData) {
@@ -102,25 +101,14 @@ ${message}
     )
   }
 
-  await mailgunClient
-    .send({
-      senderName: `${firstName} ${lastName}`,
-      from: import.meta.env.MAILGUN_FROM_EMAIL,
-      to: recipientEmail,
-      subject: `[espace29.com] ${subjectLabel}`,
-      text: textContent,
-      html: htmlContent,
-    })
-    .then((res) => {
-      console.log("Mailgun send response:", res)
-    })
-    .catch((error) => {
-      console.error("Mailgun send error:", error)
-      return new Response(JSON.stringify({ error: "Failed to send email" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      })
-    })
+  await mailgunClient.send({
+    senderName: `${firstName} ${lastName}`,
+    from: import.meta.env.MAILGUN_FROM_EMAIL,
+    to: recipientEmail,
+    subject: `[espace29.com] ${subjectLabel}`,
+    text: textContent,
+    html: htmlContent,
+  })
 
   return new Response(
     JSON.stringify({ success: true, message: "Email sent successfully" }),

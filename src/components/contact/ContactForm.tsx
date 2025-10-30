@@ -1,36 +1,82 @@
-import Button from "@components/ui/button/Button.astro"
+import { useForm } from "react-hook-form"
+import { useState } from "react"
+
+type ContactFormData = {
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  subject: string
+  message: string
+  privacy: boolean
+}
 
 export const ContactForm = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    // Handle form submission logic here
+  const [submissionStatus, setSubmissionStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+    reset,
+  } = useForm<ContactFormData>()
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      setSubmissionStatus("idle")
+      const response = await fetch("/api/mail/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        const errorResult = await response.json()
+        throw new Error(errorResult.error || "Une erreur s'est produite.")
+      }
+
+      setSubmissionStatus("success")
+      reset()
+    } catch (error: any) {
+      setSubmissionStatus("error")
+      setErrorMessage(error.message)
+    }
   }
 
   return (
     <div className="mx-auto max-w-2xl">
       {/* Status Messages */}
-      <div
-        id="successMessage"
-        className="mb-4 hidden rounded-lg border border-green-200 bg-green-50 p-4"
-      >
-        <p className="text-green-800">
-          Merci! Votre message a été envoyé avec succès.
-        </p>
-      </div>
-      <div
-        id="errorMessage"
-        className="mb-4 hidden rounded-lg border border-red-200 bg-red-50 p-4"
-      >
-        <p id="errorText" className="text-red-800">
-          Une erreur s'est produite. Veuillez réessayer.
-        </p>
-      </div>
+      {submissionStatus === "success" && (
+        <div
+          id="successMessage"
+          className="mb-4 rounded-lg border border-green-200 bg-green-50 p-4"
+        >
+          <p className="text-green-800">
+            Merci! Votre message a été envoyé avec succès.
+          </p>
+        </div>
+      )}
+      {submissionStatus === "error" && (
+        <div
+          id="errorMessage"
+          className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4"
+        >
+          <p id="errorText" className="text-red-800">
+            {errorMessage || "Une erreur s'est produite. Veuillez réessayer."}
+          </p>
+        </div>
+      )}
 
       {/* Contact Form */}
       <form
         id="contactForm"
         className="rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-sm"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         // method="POST"
         // action="/api/mail/send"
       >
@@ -43,11 +89,15 @@ export const ContactForm = () => {
             <input
               type="text"
               id="firstName"
-              name="firstName"
-              required
               placeholder="Votre prénom"
               className="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+              {...register("firstName", { required: "Le prénom est requis" })}
             />
+            {errors.firstName && (
+              <p className="mt-1 text-lg text-red-700">
+                {errors.firstName.message}
+              </p>
+            )}
           </div>
 
           {/* Last Name */}
@@ -58,11 +108,15 @@ export const ContactForm = () => {
             <input
               type="text"
               id="lastName"
-              name="lastName"
-              required
               placeholder="Votre nom"
               className="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+              {...register("lastName", { required: "Le nom est requis" })}
             />
+            {errors.lastName && (
+              <p className="mt-1 text-lg text-red-700">
+                {errors.lastName.message}
+              </p>
+            )}
           </div>
         </div>
 
@@ -74,11 +128,19 @@ export const ContactForm = () => {
           <input
             type="email"
             id="email"
-            name="email"
-            required
             placeholder="votre.email@exemple.com"
             className="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            {...register("email", {
+              required: "L'email est requis",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Format d'email invalide",
+              },
+            })}
           />
+          {errors.email && (
+            <p className="mt-1 text-lg text-red-700">{errors.email.message}</p>
+          )}
         </div>
 
         {/* Phone (optional) */}
@@ -89,9 +151,9 @@ export const ContactForm = () => {
           <input
             type="tel"
             id="phone"
-            name="phone"
             placeholder="+33 X XX XX XX XX"
             className="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            {...register("phone")}
           />
         </div>
 
@@ -102,9 +164,8 @@ export const ContactForm = () => {
           </label>
           <select
             id="subject"
-            name="subject"
-            required
             className="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            {...register("subject", { required: "Le sujet est requis" })}
           >
             <option value="">Choisissez un sujet</option>
             <option value="Question générale">Question générale</option>
@@ -117,6 +178,11 @@ export const ContactForm = () => {
             <option value="Presse / Médias">Presse / Médias</option>
             <option value="Autre">Autre</option>
           </select>
+          {errors.subject && (
+            <p className="mt-1 text-lg text-red-700">
+              {errors.subject.message}
+            </p>
+          )}
         </div>
 
         {/* Message */}
@@ -126,11 +192,15 @@ export const ContactForm = () => {
           </label>
           <textarea
             id="message"
-            name="message"
-            required
             placeholder="Décrivez votre demande, votre projet ou vos questions..."
-            className="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            className="font-eina03 h-30 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+            {...register("message", { required: "Le message est requis" })}
           ></textarea>
+          {errors.message && (
+            <p className="mt-1 text-lg text-red-700">
+              {errors.message.message}
+            </p>
+          )}
         </div>
 
         {/* Privacy Notice */}
@@ -139,9 +209,10 @@ export const ContactForm = () => {
             <input
               type="checkbox"
               id="privacy"
-              name="privacy"
-              required
               className="mt-1 h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-2 focus:ring-gray-900"
+              {...register("privacy", {
+                required: "Vous devez accepter les conditions",
+              })}
             />
             <label className="font-eina03 text-lg text-gray-600">
               J'accepte que mes données personnelles soient utilisées pour
@@ -150,17 +221,22 @@ export const ContactForm = () => {
               tiers. <span className="text-red-700">*</span>
             </label>
           </div>
+          {errors.privacy && (
+            <p className="mt-1 text-lg text-red-700">
+              {errors.privacy.message}
+            </p>
+          )}
         </div>
 
         {/* Submit Button */}
         <div className="mt-6 flex justify-end">
           <button
             type="submit"
-            className="font-eina04 inline-flex items-center rounded-lg bg-gray-900 px-6 py-3 text-lg font-medium text-white transition-colors duration-200 hover:bg-gray-700 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none disabled:opacity-50"
-            disabled={false}
+            className="font-eina04 inline-flex items-center rounded-lg bg-gray-900 px-6 py-3 text-lg font-medium text-white transition-colors duration-200 hover:cursor-pointer hover:bg-gray-700 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none disabled:opacity-50"
+            disabled={isSubmitting}
           >
             <div className="flex items-center justify-center">
-              Envoyer le message
+              {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
             </div>
           </button>
         </div>
