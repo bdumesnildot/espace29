@@ -3,6 +3,7 @@ import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
 import { tinaField, useTina } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { formatDate } from "@lib/date-helpers"
+import { Carousel } from "../ui/Carousel"
 
 type EventContentProps = {
   variables: EventQueryVariables
@@ -90,87 +91,12 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
 
       {/* Desktop: Image Carousel */}
       <div className="relative hidden flex-1 overflow-hidden bg-gray-50 md:flex">
-        <div className="relative h-full w-full">
-          {/* Images */}
-          <div className="carousel-container relative h-full w-full">
-            {(imageUrlList || []).map((image, index) => (
-              <img
-                key={`${_sys.filename}-carousel-image-${index}`}
-                src={image?.imageUrl || ""}
-                alt={image?.alt || ""}
-                className={`carousel-image absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                  index === currentImageIndex ? "opacity-100" : "opacity-0"
-                }`}
-                data-index={index}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            ))}
-          </div>
-
-          {/* Navigation Buttons */}
-          {(imageUrlList?.length || 0) > 1 && (
-            <>
-              <button
-                onClick={handlePrev}
-                className="carousel-btn absolute top-1/2 left-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                aria-label="Image précédente"
-              >
-                <svg
-                  className="h-4 w-4 text-gray-900"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-
-              <button
-                onClick={handleNext}
-                className="carousel-btn absolute top-1/2 right-6 -translate-y-1/2 transform rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                aria-label="Image suivante"
-              >
-                <svg
-                  className="h-4 w-4 text-gray-900"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </>
-          )}
-
-          {/* Image navigation dots (if multiple images) */}
-          {(imageUrlList?.length || 0) > 1 && (
-            <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-3">
-              {(imageUrlList || []).map((_, index) => (
-                <button
-                  key={`${_sys.filename}-dot-${index}`}
-                  onClick={() => goToImage(index)}
-                  className={`carousel-dot h-3 w-3 rounded-full transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none ${
-                    index === currentImageIndex
-                      ? "bg-white"
-                      : "bg-white/50 hover:bg-white/75"
-                  }`}
-                  data-index={index}
-                  aria-label={`Image ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        <Carousel
+          imageList={(imageUrlList || []).map((image) => ({
+            url: image?.imageUrl || "",
+            alt: image?.alt || "",
+          }))}
+        />
       </div>
 
       {/* Desktop: Event Details */}

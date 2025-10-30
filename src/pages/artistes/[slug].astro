@@ -44,52 +44,53 @@ if (!artist) {
       class="w-full overflow-y-hidden"
     >
       <ArtistContent {...tinaProps} client:load />
+      {/* client:load required to allow carousel functionality hydration */}
+
+      <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
+      <div id="pin-spacer" class="hidden h-0 sm:block"></div>
     </div>
-
-    <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
-    <div id="pin-spacer" class="hidden h-0 sm:block"></div>
   </main>
+
+  <script>
+    import { gsap } from "gsap"
+    import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Magnet scroll effect (desktop only)
+      if (window.innerWidth >= 640) {
+        // sm breakpoint
+        gsap.registerPlugin(ScrollTrigger)
+
+        const artistSlug = window.location.pathname.split("/").pop()
+        if (!artistSlug) return
+
+        const section = document.getElementById(
+          `artist-${artistSlug}-details-section`
+        )
+        const pinSpacer = document.getElementById("pin-spacer")
+        if (!section || !pinSpacer) return
+
+        const RELEASE_OFFSET = 300
+
+        // Set the pin-spacer height to match the pin duration
+        pinSpacer.style.height = `${RELEASE_OFFSET}px`
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: `+=${RELEASE_OFFSET}`,
+          pin: true,
+          scrub: 0.5,
+          invalidateOnRefresh: true,
+          onRefresh: () => {
+            // Ensure pin-spacer height is recalculated on window resize
+            pinSpacer.style.height = `${RELEASE_OFFSET}px`
+          },
+        })
+
+        // Ensure carousel buttons remain clickable during pin
+        section.style.pointerEvents = "auto"
+      }
+    })
+  </script>
 </Layout>
-
-<script>
-  import { gsap } from "gsap"
-  import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-  document.addEventListener("DOMContentLoaded", function () {
-    // Magnet scroll effect (desktop only)
-    if (window.innerWidth >= 640) {
-      // sm breakpoint
-      gsap.registerPlugin(ScrollTrigger)
-
-      const artistSlug = window.location.pathname.split("/").pop()
-      if (!artistSlug) return
-
-      const section = document.getElementById(
-        `artist-${artistSlug}-details-section`
-      )
-      const pinSpacer = document.getElementById("pin-spacer")
-      if (!section || !pinSpacer) return
-
-      const RELEASE_OFFSET = 300
-
-      // Set the pin-spacer height to match the pin duration
-      pinSpacer.style.height = `${RELEASE_OFFSET}px`
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: `+=${RELEASE_OFFSET}`,
-        pin: true,
-        scrub: 0.5,
-        invalidateOnRefresh: true,
-        onRefresh: () => {
-          // Ensure pin-spacer height is recalculated on window resize
-          pinSpacer.style.height = `${RELEASE_OFFSET}px`
-        },
-      })
-
-      // Ensure carousel buttons remain clickable during pin
-      section.style.pointerEvents = "auto"
-    }
-  })
-</script>

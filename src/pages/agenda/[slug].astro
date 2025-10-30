@@ -42,7 +42,8 @@ if (!event) {
       id={`event-${event.data.tinaInfo.filename}-details-section`}
       class="w-full overflow-y-hidden"
     >
-      <EventContent {...tinaProps} client:tina />
+      <EventContent {...tinaProps} client:load />
+      {/* client:load required to allow carousel functionality hydration */}
     </div>
 
     <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
