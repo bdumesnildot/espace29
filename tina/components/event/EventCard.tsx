@@ -68,7 +68,7 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
       }
     >
       {cardImageUrl && (
-        <div className="flex-3">
+        <div className="min-h-0 flex-3 overflow-hidden">
           <img
             src={cardImageUrl}
             alt={cardImageAlt || ""}
@@ -78,7 +78,7 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
         </div>
       )}
 
-      <div className="flex-1 border-t border-gray-700 bg-gray-50 p-6">
+      <div className="flex min-h-0 flex-1 flex-col border-t border-gray-700 bg-gray-50 p-6 overflow-ellipsis">
         <h3
           className="font-eina03 mb-3 text-2xl font-semibold text-gray-900"
           data-tina-field={tinaField(event, "title")}
@@ -98,7 +98,7 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
         </p>
         {cardDescription && (
           <p
-            className="font-eina03 line-clamp-6 text-lg leading-relaxed text-gray-700"
+            className="font-eina03 line-clamp-3 min-h-0 text-lg leading-relaxed overflow-ellipsis text-gray-700"
             data-tina-field={tinaField(event, "cardDescription")}
           >
             <TinaMarkdown content={cardDescription as any} />
