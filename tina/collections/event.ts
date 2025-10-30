@@ -61,7 +61,6 @@ export const EventCollection: Collection = {
       isBody: true,
       label: "Event description",
       description: "Long-form description shown on event detail page",
-      toolbarOverride: ["bold", "italic", "link", "quote", "ul", "ol", "table"],
     },
     {
       name: "imageUrlList",

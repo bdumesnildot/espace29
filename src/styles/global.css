@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './fonts.css';
+@import './markdown-content.css';
 
 /* Custom font families and sizes for Tailwind v4 */
 @theme {

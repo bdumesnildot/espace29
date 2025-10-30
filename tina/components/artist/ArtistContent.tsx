@@ -49,8 +49,6 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
     setCurrentImageIndex(0)
   }, [profileImageUrlList?.length])
 
-  console.log("🔥 artist description: ", profileDescription)
-
   return (
     <section className="flex w-full flex-col sm:h-screen sm:flex-row">
       {/* Mobile: Artist Details First */}
@@ -105,7 +103,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
             À propos
           </h3>
           <div
-            className="space-y-3"
+            className="markdown-content space-y-3"
             data-tina-field={tinaField(artist, "profileDescription")}
           >
             <TinaMarkdown content={profileDescription as any} />
@@ -272,7 +270,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
               À propos
             </h3>
             <div
-              className="flex-1 space-y-4 overflow-y-auto"
+              className="markdown-content flex-1 space-y-4 overflow-y-auto"
               data-tina-field={tinaField(artist, "profileDescription")}
             >
               <TinaMarkdown content={profileDescription as any} />

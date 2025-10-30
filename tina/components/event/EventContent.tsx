@@ -65,7 +65,7 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
             Description
           </h3>
           <div
-            className="space-y-3"
+            className="markdown-content space-y-3"
             data-tina-field={tinaField(event, "description")}
           >
             <TinaMarkdown content={description as any} />
@@ -197,7 +197,7 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
               Description
             </h3>
             <div
-              className="flex-1 space-y-4 overflow-y-auto"
+              className="markdown-content flex-1 space-y-4 overflow-y-auto"
               data-tina-field={tinaField(event, "description")}
             >
               <TinaMarkdown content={description as any} />
