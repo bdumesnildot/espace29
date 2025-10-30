@@ -79,7 +79,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = (props) => {
         </div>
       )}
 
-      <div className="flex min-h-0 flex-1 flex-col border-t border-gray-700 bg-gray-50 p-6 overflow-ellipsis">
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden border-t border-gray-700 bg-gray-50 p-6">
         <h3 className="font-eina03 mb-3 text-2xl font-semibold text-gray-900">
           <div className="flex items-center justify-start gap-2">
             {firstName && (
@@ -102,7 +102,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = (props) => {
         )}
         {cardDescription && (
           <p
-            className="font-eina03 line-clamp-3 min-h-0 text-lg leading-relaxed overflow-ellipsis text-gray-700"
+            className="font-eina03 min-h-0 overflow-hidden text-lg leading-relaxed text-gray-700"
             data-tina-field={tinaField(artist, "cardDescription")}
           >
             <TinaMarkdown content={cardDescription as any} />
