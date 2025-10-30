@@ -9,6 +9,9 @@ export const ArtistCollection: Collection = {
     router({ document }) {
       return `/artistes/${document._sys.filename}`
     },
+    allowedActions: {
+      createNestedFolder: false,
+    },
   },
   fields: [
     {

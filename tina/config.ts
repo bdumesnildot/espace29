@@ -15,7 +15,6 @@ export default defineConfig({
 
   // Get this from tina.io
   clientId: process.env.PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
   token: process.env.TINA_TOKEN,
 
   build: {
@@ -26,6 +25,7 @@ export default defineConfig({
     tina: {
       mediaRoot: "",
       publicFolder: "public",
+      static: true,
     },
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
