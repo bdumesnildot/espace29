@@ -49,29 +49,7 @@ export const ContactForm = () => {
   }
 
   return (
-    <div className="mx-auto max-w-2xl">
-      {/* Status Messages */}
-      {submissionStatus === "success" && (
-        <div
-          id="successMessage"
-          className="mb-4 rounded-lg border border-green-200 bg-green-50 p-4"
-        >
-          <p className="text-green-800">
-            Merci! Votre message a été envoyé avec succès.
-          </p>
-        </div>
-      )}
-      {submissionStatus === "error" && (
-        <div
-          id="errorMessage"
-          className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4"
-        >
-          <p id="errorText" className="text-red-800">
-            {errorMessage || "Une erreur s'est produite. Veuillez réessayer."}
-          </p>
-        </div>
-      )}
-
+    <div className="relative mx-auto max-w-2xl">
       {/* Contact Form */}
       <form
         id="contactForm"
@@ -241,6 +219,29 @@ export const ContactForm = () => {
           </button>
         </div>
       </form>
+
+      {/* Status Messages */}
+      {submissionStatus === "success" ||
+        (true && (
+          <div
+            id="successMessage"
+            className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4 md:absolute md:top-[-84px] md:w-full"
+          >
+            <p className="text-green-800">
+              Merci! Votre message a été envoyé avec succès.
+            </p>
+          </div>
+        ))}
+      {submissionStatus === "error" && (
+        <div
+          id="errorMessage"
+          className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4 md:absolute md:top-[-84px] md:w-full"
+        >
+          <p id="errorText" className="text-red-800">
+            {errorMessage || "Une erreur s'est produite. Veuillez réessayer."}
+          </p>
+        </div>
+      )}
     </div>
   )
 }
