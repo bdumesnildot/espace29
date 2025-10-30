@@ -5,6 +5,7 @@ import type {
   ArtistQuery,
   ArtistQueryVariables,
 } from "@tina/__generated__/types"
+import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 type ArtistCardProps = {
   variables: ArtistQueryVariables
@@ -104,7 +105,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = (props) => {
             className="font-eina03 line-clamp-6 text-lg leading-relaxed text-gray-700"
             data-tina-field={tinaField(artist, "cardDescription")}
           >
-            {cardDescription}
+            <TinaMarkdown content={cardDescription as any} />
           </p>
         )}
       </div>

@@ -4,6 +4,7 @@ import { tinaField, useTina } from "tinacms/dist/react"
 import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
 import { formatDate, formatDateRange } from "@lib/date-helpers"
 import { date } from "astro:schema"
+import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 type EventCardProps = {
   variables: EventQueryVariables
@@ -100,7 +101,7 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
             className="font-eina03 line-clamp-6 text-lg leading-relaxed text-gray-700"
             data-tina-field={tinaField(event, "cardDescription")}
           >
-            {cardDescription}
+            <TinaMarkdown content={cardDescription as any} />
           </p>
         )}
       </div>

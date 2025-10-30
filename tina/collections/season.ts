@@ -12,26 +12,26 @@ export const SeasonCollection: Collection = {
   },
   fields: [
     {
-      type: "string",
       name: "name",
+      type: "string",
+      required: true,
+      isTitle: true,
       label: "Season Name",
       description: "e.g., Saison 2024-2025",
-      isTitle: true,
-      required: true,
     },
     {
-      type: "datetime",
       name: "dateStart",
+      type: "datetime",
+      required: true,
       label: "Start Date",
       description: "Start date of the season",
-      required: true,
     },
     {
-      type: "datetime",
       name: "dateEnd",
+      type: "datetime",
+      required: true,
       label: "End Date",
       description: "End date of the season",
-      required: true,
     },
   ],
 }

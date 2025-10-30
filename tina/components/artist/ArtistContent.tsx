@@ -49,6 +49,8 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
     setCurrentImageIndex(0)
   }, [profileImageUrlList?.length])
 
+  console.log("🔥 artist description: ", profileDescription)
+
   return (
     <section className="flex w-full flex-col sm:h-screen sm:flex-row">
       {/* Mobile: Artist Details First */}
