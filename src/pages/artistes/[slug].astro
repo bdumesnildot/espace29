@@ -41,7 +41,7 @@ if (!artist) {
 
     <div
       id={`artist-${artist.data.tinaInfo.filename}-details-section`}
-      class="w-full"
+      class="w-full overflow-y-hidden"
     >
       <ArtistContent {...tinaProps} client:load />
     </div>

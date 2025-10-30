@@ -61,9 +61,9 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
 
         {/* Description */}
         <div className="border-gray-400 pb-4">
-          <h3 className="font-eina04 mb-3 text-base font-semibold text-gray-900">
+          {/* <h3 className="font-eina04 mb-3 text-base font-semibold text-gray-900">
             Description
-          </h3>
+          </h3> */}
           <div
             className="markdown-content space-y-3"
             data-tina-field={tinaField(event, "description")}
@@ -193,9 +193,9 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
 
           {/* Description */}
           <div className="flex flex-1 flex-col">
-            <h3 className="font-eina04 mb-4 text-lg font-semibold text-gray-900">
+            {/* <h3 className="font-eina04 mb-4 text-lg font-semibold text-gray-900">
               Description
-            </h3>
+            </h3> */}
             <div
               className="markdown-content flex-1 space-y-4 overflow-y-auto"
               data-tina-field={tinaField(event, "description")}

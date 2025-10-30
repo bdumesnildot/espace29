@@ -1,9 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
-import { formatDateRange } from "@lib/date-helpers"
 import client from "@tina/__generated__/client"
 import { EventContent } from "@tina/components/event/EventContent"
+import { EventTitle } from "@tina/components/event/EventTitle"
 import { getCollection } from "astro:content"
 
 export async function getStaticPaths() {
@@ -35,14 +35,14 @@ if (!event) {
       backTo={{
         href: "/agenda",
         label: "Retour à l'agenda",
-      }}>{event.data.title}</PageTopLayout
+      }}><EventTitle {...tinaProps} client:tina /></PageTopLayout
     >
 
     <div
       id={`event-${event.data.tinaInfo.filename}-details-section`}
-      class="w-full"
+      class="w-full overflow-y-hidden"
     >
-      <EventContent {...tinaProps} client:load />
+      <EventContent {...tinaProps} client:tina />
     </div>
 
     <!-- Spacer div to prevent footer from moving up during pin (desktop only) -->
