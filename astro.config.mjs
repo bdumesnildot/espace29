@@ -19,9 +19,16 @@ export default defineConfig({
 	env: {
 		schema: {
 			SITE_URL: envField.string({ context: "client", access: "public", optional: true }),
+			// TinaCMS variables
 			PUBLIC_TINA_CLIENT_ID: envField.string({ context: "client", access: "public" }),
 			TINA_TOKEN: envField.string({ context: "server", access: "secret" }),
 			TINA_SEARCH_TOKEN: envField.string({ context: "server", access: "secret" }),
+			GITHUB_BRANCH: envField.string({ context: "server", access: "secret", optional: true  }),
+			// Mailgun variables
+			MAILGUN_DOMAIN: envField.string({ context: "server", access: "secret"}),
+			MAILGUN_USERNAME: envField.string({ context: "server", access: "secret" }),
+			MAILGUN_API_KEY: envField.string({ context: "server", access: "secret" }),
+			MAILGUN_URL: envField.string({ context: "server", access: "secret" }),
 		},
 	},
 
