@@ -221,17 +221,16 @@ export const ContactForm = () => {
       </form>
 
       {/* Status Messages */}
-      {submissionStatus === "success" ||
-        (true && (
-          <div
-            id="successMessage"
-            className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4 md:absolute md:top-[-84px] md:w-full"
-          >
-            <p className="text-green-800">
-              Merci! Votre message a été envoyé avec succès.
-            </p>
-          </div>
-        ))}
+      {submissionStatus === "success" && (
+        <div
+          id="successMessage"
+          className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4 md:absolute md:top-[-84px] md:w-full"
+        >
+          <p className="text-green-800">
+            Merci! Votre message a été envoyé avec succès.
+          </p>
+        </div>
+      )}
       {submissionStatus === "error" && (
         <div
           id="errorMessage"
