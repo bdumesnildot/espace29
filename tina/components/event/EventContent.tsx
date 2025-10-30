@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
 import { tinaField, useTina } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
-import { formatDate } from "@lib/date-helpers"
+import { formatDate } from "@lib/formatter/date-helpers"
 import { Carousel } from "../ui/Carousel"
 
 type EventContentProps = {

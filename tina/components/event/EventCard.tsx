@@ -2,7 +2,7 @@ import React from "react"
 import { classMerge } from "@styles/utils"
 import { tinaField, useTina } from "tinacms/dist/react"
 import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
-import { formatDate } from "@lib/date-helpers"
+import { formatDate } from "@lib/formatter/date-helpers"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 type EventCardProps = {
