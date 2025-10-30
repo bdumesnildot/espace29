@@ -1,4 +1,5 @@
 ---
+export const prerender = false
 import Layout from "../layouts/Layout.astro"
 import Button from "../components/ui/button/Button.astro"
 ---
@@ -13,11 +14,30 @@ import Button from "../components/ui/button/Button.astro"
       </h1>
       <!-- Contact Form Section -->
       <div class="mx-auto max-w-2xl">
+        <!-- Status Messages -->
+        <div
+          id="successMessage"
+          class="mb-4 hidden rounded-lg border border-green-200 bg-green-50 p-4"
+        >
+          <p class="text-green-800">
+            Merci! Votre message a été envoyé avec succès.
+          </p>
+        </div>
+        <div
+          id="errorMessage"
+          class="mb-4 hidden rounded-lg border border-red-200 bg-red-50 p-4"
+        >
+          <p id="errorText" class="text-red-800">
+            Une erreur s'est produite. Veuillez réessayer.
+          </p>
+        </div>
+
         <!-- Contact Form -->
         <form
+          id="contactForm"
           class="rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-sm"
           method="POST"
-          action="#"
+          action="/api/mail/send"
         >
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <!-- First Name -->
@@ -107,13 +127,17 @@ import Button from "../components/ui/button/Button.astro"
               class="font-eina03 w-full rounded-lg border border-gray-300 px-3 py-2 text-lg transition-all duration-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
             >
               <option value="">Choisissez un sujet</option>
-              <option value="general">Question générale</option>
-              <option value="event">Événement / Spectacle</option>
-              <option value="artist">Artiste / Collaboration</option>
-              <option value="space">Location d'espace</option>
-              <option value="partnership">Partenariat</option>
-              <option value="press">Presse / Médias</option>
-              <option value="other">Autre</option>
+              <option value="Question générale">Question générale</option>
+              <option value="Événement / Spectacle"
+                >Événement / Spectacle</option
+              >
+              <option value="Artiste / Collaboration"
+                >Artiste / Collaboration</option
+              >
+              <option value="Location d'espace">Location d'espace</option>
+              <option value="Partenariat">Partenariat</option>
+              <option value="Presse / Médias">Presse / Médias</option>
+              <option value="Autre">Autre</option>
             </select>
           </div>
 
@@ -156,7 +180,7 @@ import Button from "../components/ui/button/Button.astro"
 
           <!-- Submit Button -->
           <div class="mt-6 flex justify-end">
-            <Button type="submit" intent="primary" size="small">
+            <Button type="submit" intent="primary" size="small" id="submitBtn">
               Envoyer le message
             </Button>
           </div>
@@ -165,3 +189,59 @@ import Button from "../components/ui/button/Button.astro"
     </section>
   </main>
 </Layout>
+
+<script>
+  const form = document.getElementById("contactForm") as HTMLFormElement
+  const successMessage = document.getElementById("successMessage")
+  const errorMessage = document.getElementById("errorMessage")
+  const errorText = document.getElementById("errorText")
+  const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    // Hide previous messages
+    successMessage?.classList.add("hidden")
+    errorMessage?.classList.add("hidden")
+
+    // Disable submit button
+    submitBtn.disabled = true
+    const originalText = submitBtn.textContent
+    submitBtn.textContent = "Envoi en cours..."
+
+    try {
+      const formData = new FormData(form)
+      const response = await fetch("/api/mail/send", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        // Show success message
+        successMessage?.classList.remove("hidden")
+        // Reset form
+        form.reset()
+        // Scroll to success message
+        successMessage?.scrollIntoView({ behavior: "smooth", block: "start" })
+      } else {
+        // Show error message
+        errorText!.textContent =
+          data.error || "Une erreur s'est produite. Veuillez réessayer."
+        errorMessage?.classList.remove("hidden")
+        errorMessage?.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      errorText!.textContent =
+        "Erreur de connexion. Veuillez vérifier votre connexion et réessayer."
+      errorMessage?.classList.remove("hidden")
+      errorMessage?.scrollIntoView({ behavior: "smooth", block: "start" })
+    } finally {
+      // Re-enable submit button
+      submitBtn.disabled = false
+      submitBtn.textContent = originalText
+    }
+  })
+</script>

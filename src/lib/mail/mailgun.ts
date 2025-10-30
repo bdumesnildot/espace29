@@ -29,28 +29,32 @@ export const mailgunClient = {
     form.set("html", message.html!)
 
     if (message.attachments) {
-      message.attachments.map((attachment: Attachment) => {
-        form.set("attachment", attachment.data, attachment.fileName)
+      message.attachments.forEach((attachment: Attachment) => {
+        form.append("attachment", attachment.data, attachment.fileName)
       })
     }
 
     const headers = {
-      Authorization:
-        "Basic " +
-        btoa(
-          import.meta.env.MAILGUN_USERNAME +
-            ":" +
-            import.meta.env.MAILGUN_API_KEY
-        ),
+      Authorization: `Basic ${btoa(
+        import.meta.env.MAILGUN_USERNAME + ":" + import.meta.env.MAILGUN_API_KEY
+      )}`,
     }
 
-    await fetch(
+    return await fetch(
       `${import.meta.env.MAILGUN_URL}/${import.meta.env.MAILGUN_DOMAIN}/messages`,
       {
         method: "POST",
         body: form,
         headers,
       }
-    )
+    ).then((response) => {
+      if (!response.ok) {
+        console.error("Mailgun API response error:", response)
+        throw new Error(
+          `Mailgun API error: ${response.status} ${response.statusText}`
+        )
+      }
+      return response
+    })
   },
 }
