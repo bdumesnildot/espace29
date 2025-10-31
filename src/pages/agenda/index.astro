@@ -146,7 +146,7 @@ const eventsBySeason = seasonCollection
                   ({ data: eventData, tinaProps: eventTinaProps }) => (
                     <div class="h-[650px] w-full">
                       <EventCard
-                        grayscale="untilHover"
+                        grayscale="false"
                         className="h-full"
                         href={`/agenda/${eventData.tinaInfo.filename}`}
                         {...eventTinaProps}

@@ -81,7 +81,7 @@ const artistCollectionWithTinaProps = await Promise.all(
             ({ data: artistData, tinaProps }) => (
               <div class="h-[650px] w-full">
                 <ArtistCard
-                  grayscale="untilHover"
+                  grayscale="false"
                   className="h-full"
                   href={`/artistes/${artistData.tinaInfo.filename}`}
                   {...tinaProps}
