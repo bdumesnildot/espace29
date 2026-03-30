@@ -1,0 +1,248 @@
+---
+
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&#8203;</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #000;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+      a.back {
+        position: fixed;
+        bottom: 16px;
+        right: 20px;
+        font-family: monospace;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0);
+        text-decoration: none;
+        letter-spacing: 0.3em;
+        z-index: 10;
+      }
+      a.back:hover {
+        color: rgba(255, 255, 255, 0.1);
+        transition: color 5s;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <a class="back" href="/">&#8203;</a>
+
+    <script>
+      const canvas = document.getElementById("c") as HTMLCanvasElement
+      const ctx = canvas.getContext("2d")!
+
+      let W = (canvas.width = window.innerWidth)
+      let H = (canvas.height = window.innerHeight)
+
+      const shapes: {
+        x: number
+        y: number
+        w: number
+        h: number
+        vx: number
+        vy: number
+        rotation: number
+        rotSpeed: number
+        shape: number
+        ghost: number
+      }[] = []
+
+      // Shape types: 0=rect, 1=square, 2=line-h, 3=line-v, 4=cross
+      const SHAPE_COUNT = 7
+
+      function randSpeed() {
+        const s = 0.8 + Math.random() * 2
+        return Math.random() > 0.5 ? s : -s
+      }
+
+      for (let i = 0; i < SHAPE_COUNT; i++) {
+        const type = Math.floor(Math.random() * 5)
+        let w, h
+        switch (type) {
+          case 0:
+            w = 40 + Math.random() * 80
+            h = 20 + Math.random() * 40
+            break
+          case 1:
+            w = h = 20 + Math.random() * 50
+            break
+          case 2:
+            w = 60 + Math.random() * 120
+            h = 1
+            break
+          case 3:
+            w = 1
+            h = 60 + Math.random() * 120
+            break
+          case 4:
+            w = h = 30 + Math.random() * 40
+            break
+        }
+        shapes.push({
+          x: Math.random() * (W - w),
+          y: Math.random() * (H - h),
+          w: w!,
+          h: h!,
+          vx: randSpeed(),
+          vy: randSpeed(),
+          rotation:
+            type === 4 ? Math.floor(Math.random() * 4) * (Math.PI / 4) : 0,
+          rotSpeed:
+            type === 4 ? (Math.random() > 0.5 ? 1 : -1) * (Math.PI / 180) : 0,
+          shape: type,
+          ghost: 0,
+        })
+      }
+
+      // "29" counter
+      let cornerHits = 0
+      let showText = false
+      let textOpacity = 0
+      let textX = W / 2
+      let textY = H / 2
+      let inverted = false
+
+      function draw() {
+        // Ghost fade
+        ctx.fillStyle = inverted
+          ? "rgba(255, 255, 255, 0.06)"
+          : "rgba(0, 0, 0, 0.06)"
+        ctx.fillRect(0, 0, W, H)
+
+        for (const s of shapes) {
+          s.x += s.vx
+          s.y += s.vy
+          s.rotation += s.rotSpeed
+
+          let hitCorner = false
+
+          // Bounce
+          if (s.x <= 0) {
+            s.x = 0
+            s.vx = -s.vx
+            hitCorner = true
+          }
+          if (s.x + s.w >= W) {
+            s.x = W - s.w
+            s.vx = -s.vx
+            hitCorner = true
+          }
+          if (s.y <= 0) {
+            s.y = 0
+            s.vy = -s.vy
+            hitCorner = true
+          }
+          if (s.y + s.h >= H) {
+            s.y = H - s.h
+            s.vy = -s.vy
+            hitCorner = true
+          }
+
+          // Corner hit detection
+          if (hitCorner) {
+            if (
+              (s.x <= 1 || s.x + s.w >= W - 1) &&
+              (s.y <= 1 || s.y + s.h >= H - 1)
+            ) {
+              cornerHits++
+              if (cornerHits % 5 === 0) {
+                showText = true
+                textOpacity = 1
+                textX = s.x + s.w / 2
+                textY = s.y + s.h / 2
+              }
+            }
+          }
+
+          // Draw shape
+          ctx.save()
+          ctx.translate(s.x + s.w / 2, s.y + s.h / 2)
+          ctx.rotate(s.rotation)
+
+          ctx.strokeStyle = inverted
+            ? "rgba(0, 0, 0, 0.6)"
+            : "rgba(255, 255, 255, 0.6)"
+          ctx.lineWidth = 1
+
+          switch (s.shape) {
+            case 0: // rect
+              ctx.strokeRect(-s.w / 2, -s.h / 2, s.w, s.h)
+              break
+            case 1: // square
+              ctx.strokeRect(-s.w / 2, -s.h / 2, s.w, s.h)
+              break
+            case 2: // h line
+              ctx.beginPath()
+              ctx.moveTo(-s.w / 2, 0)
+              ctx.lineTo(s.w / 2, 0)
+              ctx.stroke()
+              break
+            case 3: // v line
+              ctx.beginPath()
+              ctx.moveTo(0, -s.h / 2)
+              ctx.lineTo(0, s.h / 2)
+              ctx.stroke()
+              break
+            case 4: // cross
+              ctx.beginPath()
+              ctx.moveTo(-s.w / 2, 0)
+              ctx.lineTo(s.w / 2, 0)
+              ctx.moveTo(0, -s.h / 2)
+              ctx.lineTo(0, s.h / 2)
+              ctx.stroke()
+              break
+          }
+
+          ctx.restore()
+        }
+
+        // "29" text flash
+        if (showText) {
+          textOpacity -= 0.012
+          if (textOpacity <= 0) {
+            showText = false
+            textOpacity = 0
+          }
+          ctx.save()
+          ctx.font = "100px 'Eina01', monospace"
+          ctx.fillStyle = inverted
+            ? `rgba(0, 0, 0, ${textOpacity * 0.15})`
+            : `rgba(255, 255, 255, ${textOpacity * 0.15})`
+          ctx.textAlign = "center"
+          ctx.textBaseline = "middle"
+          ctx.fillText("29", textX, textY)
+          ctx.restore()
+        }
+
+        requestAnimationFrame(draw)
+      }
+
+      draw()
+
+      window.addEventListener("click", () => {
+        inverted = !inverted
+        document.body.style.background = inverted ? "#fff" : "#000"
+      })
+
+      window.addEventListener("resize", () => {
+        W = canvas.width = window.innerWidth
+        H = canvas.height = window.innerHeight
+      })
+    </script>
+  </body>
+</html>
