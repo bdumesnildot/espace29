@@ -98,23 +98,13 @@ const searchItems = eventCollectionWithTinaProps.map(({ data }) => ({
     (data.dateEnd ? ` - ${formatDate(data.dateEnd)}` : ""),
   href: `/agenda/${data.tinaInfo.filename}`,
   imageUrl: data.cardImageUrl,
-  searchText:
-    `${data.title} ${data.cardDescription ?? ""}`.toLowerCase(),
+  searchText: `${data.title} ${data.cardDescription ?? ""}`.toLowerCase(),
 }))
 ---
 
 <Layout title="e29 | Agenda" showBackToTop={true}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout>Agenda</PageTopLayout>
-
-    <!-- Search -->
-    <div class="w-full px-2 pb-6 sm:px-10">
-      <SearchDropdown
-        items={searchItems}
-        placeholder="Rechercher un événement..."
-        client:load
-      />
-    </div>
 
     {
       seasonCollectionWithTinaProps.map(
@@ -130,9 +120,19 @@ const searchItems = eventCollectionWithTinaProps.map(({ data }) => ({
               id={`season-${seasonIndex}`}
               class="hidden h-screen overflow-hidden sm:flex sm:flex-col"
             >
-              <h2 class="font-eina02 mb-1 shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
-                <SeasonTitle {...seasonTinaProps} client:tina />
-              </h2>
+              <div class="flex w-full items-center justify-between">
+                <h2 class="font-eina02 mb-1 shrink-0 px-2 py-4 text-5xl text-gray-900 sm:px-10">
+                  <SeasonTitle {...seasonTinaProps} client:tina />
+                </h2>
+
+                <div class="mr-2 w-100">
+                  <SearchDropdown
+                    items={searchItems}
+                    placeholder="Rechercher un événement..."
+                    client:load
+                  />
+                </div>
+              </div>
 
               <div class="w-full flex-1 overflow-hidden">
                 <div

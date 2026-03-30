@@ -43,15 +43,15 @@ export const SearchDropdown: React.FC<SearchDropdownProps> = ({
 
   return (
     <Combobox immediate onChange={handleSelect} onClose={() => setQuery("")}>
-      <div className="relative w-full max-w-xl">
+      <div className="relative w-full max-w-sm">
         <ComboboxInput
           aria-label={placeholder}
           placeholder={placeholder}
           onChange={(e) => setQuery(e.target.value)}
           className={classMerge(
-            "font-eina03 w-full border border-gray-700 bg-white px-4 py-3",
-            "text-xl text-gray-900 placeholder:text-gray-400",
-            "focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:outline-none",
+            "font-eina03 w-full border border-gray-700 bg-white px-3 py-2",
+            "text-lg text-gray-900 placeholder:text-gray-400",
+            "focus:outline-none",
             "transition-colors duration-150"
           )}
         />
@@ -65,7 +65,7 @@ export const SearchDropdown: React.FC<SearchDropdownProps> = ({
           )}
         >
           {filteredItems.length === 0 && query !== "" ? (
-            <div className="font-eina03 px-4 py-3 text-xl text-gray-400">
+            <div className="font-eina03 px-3 py-2 text-lg text-gray-400">
               Aucun résultat
             </div>
           ) : (
@@ -74,7 +74,7 @@ export const SearchDropdown: React.FC<SearchDropdownProps> = ({
                 key={item.href}
                 value={item}
                 className={classMerge(
-                  "flex cursor-pointer items-center gap-3 px-4 py-3",
+                  "flex cursor-pointer items-center gap-3 px-3 py-2",
                   "data-focus:bg-gray-100"
                 )}
               >
@@ -82,11 +82,11 @@ export const SearchDropdown: React.FC<SearchDropdownProps> = ({
                   <img
                     src={item.imageUrl}
                     alt=""
-                    className="h-10 w-10 shrink-0 rounded object-cover"
+                    className="h-8 w-8 shrink-0 rounded object-cover"
                   />
                 )}
                 <div className="min-w-0">
-                  <div className="font-eina03 truncate text-xl font-semibold text-gray-900">
+                  <div className="font-eina03 truncate text-lg font-semibold text-gray-900">
                     {item.title}
                   </div>
                   {item.subtitle && (
