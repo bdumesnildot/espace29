@@ -71,7 +71,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
               href={websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-eina04 text-base text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
+              className="font-eina04 text-base text-gray-700 transition-colors duration-200 hover:text-gray-900"
               data-tina-field={tinaField(artist, "websiteUrl")}
             >
               {websiteUrl}
@@ -80,7 +80,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
           {email && (
             <a
               href={`mailto:${email}`}
-              className="font-eina04 text-base text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
+              className="font-eina04 text-base text-gray-700 transition-colors duration-200 hover:text-gray-900"
               data-tina-field={tinaField(artist, "email")}
             >
               {email}
@@ -146,7 +146,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
                 href={websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-eina04 text-xl text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
+                className="font-eina04 text-xl text-gray-700 transition-colors duration-200 hover:text-gray-900"
                 data-tina-field={tinaField(artist, "websiteUrl")}
               >
                 {websiteUrl}
@@ -155,7 +155,7 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
             {email && (
               <a
                 href={`mailto:${email}`}
-                className="font-eina04 text-xl text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
+                className="font-eina04 text-xl text-gray-700 transition-colors duration-200 hover:text-gray-900"
                 data-tina-field={tinaField(artist, "email")}
               >
                 {email}

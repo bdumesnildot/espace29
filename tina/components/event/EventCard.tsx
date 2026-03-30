@@ -37,7 +37,7 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
 
   // Base classes following design system philosophy
   const baseClasses =
-    "bg-transparent border border-gray-700 shadow-md overflow-hidden transition-all duration-300 h-full flex flex-col w-full"
+    "bg-transparent border border-black overflow-hidden transition-all duration-300 h-full flex flex-col w-full"
   const interactiveClasses = isInteractive ? "cursor-pointer" : ""
   const grayscaleClasses = (() => {
     if (grayscale === "always") return "filter grayscale"
@@ -66,8 +66,33 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
           : undefined
       }
     >
+      <div className="border-b border-black px-4 py-3">
+        <h3
+          className="font-eina03 text-2xl font-semibold text-gray-900"
+          data-tina-field={tinaField(event, "title")}
+        >
+          {title}
+        </h3>
+      </div>
+
+      <div className="border-b border-black px-4 py-2">
+        <p className="font-eina03 flex items-center gap-2 text-xl text-gray-700">
+          <span data-tina-field={tinaField(event, "dateStart")}>
+            {formatDate(dateStart)}
+          </span>
+          {dateEnd && (
+            <>
+              <span>-</span>
+              <span data-tina-field={tinaField(event, "dateEnd")}>
+                {formatDate(dateEnd)}
+              </span>
+            </>
+          )}
+        </p>
+      </div>
+
       {cardImageUrl && (
-        <div className="min-h-0 flex-3 overflow-hidden">
+        <div className="min-h-0 flex-1 overflow-hidden">
           <img
             src={cardImageUrl}
             alt={cardImageAlt || ""}
@@ -76,34 +101,6 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
           />
         </div>
       )}
-
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden border-t border-gray-700 bg-gray-50 p-6">
-        <h3
-          className="font-eina03 mb-3 text-2xl font-semibold text-gray-900"
-          data-tina-field={tinaField(event, "title")}
-        >
-          {title}
-        </h3>
-        <p className="font-eina03 mb-2 flex items-center justify-start gap-2 text-xl font-medium text-gray-700">
-          <span data-tina-field={tinaField(event, "dateStart")}>
-            {formatDate(dateStart)}
-          </span>
-          {dateEnd && <span>{"-"}</span>}
-          {dateEnd && (
-            <span data-tina-field={tinaField(event, "dateEnd")}>
-              {formatDate(dateEnd)}
-            </span>
-          )}
-        </p>
-        {cardDescription && (
-          <div
-            className="markdown-content min-h-0 overflow-y-hidden"
-            data-tina-field={tinaField(event, "cardDescription")}
-          >
-            <TinaMarkdown content={cardDescription as any} />
-          </div>
-        )}
-      </div>
     </Component>
   )
 }

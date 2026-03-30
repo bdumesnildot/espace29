@@ -31,3 +31,5 @@ node_modules/
 
 # Tina
 tina/__generated__
+
+_legacy
