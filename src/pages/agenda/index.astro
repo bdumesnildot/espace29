@@ -106,6 +106,14 @@ const searchItems = eventCollectionWithTinaProps.map(({ data }) => ({
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout>Agenda</PageTopLayout>
 
+    <div class="flex w-full justify-end px-2 pb-4 sm:hidden">
+      <SearchDropdown
+        items={searchItems}
+        placeholder="Rechercher un événement..."
+        client:load
+      />
+    </div>
+
     {
       seasonCollectionWithTinaProps.map(
         ({ data: seasonData, tinaProps: seasonTinaProps }, seasonIndex) => (
