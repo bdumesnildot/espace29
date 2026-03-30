@@ -32,12 +32,7 @@ if (!artist) {
 
 <Layout title={`e29 | ${formatArtistName(artist.data)}`}>
   <main class="flex min-h-full w-full flex-col items-start">
-    <PageTopLayout
-      backTo={{
-        href: "/artistes",
-        label: "Retour au artistes",
-      }}><ArtistTitle {...tinaProps} client:load /></PageTopLayout
-    >
+    <PageTopLayout><ArtistTitle {...tinaProps} client:load /></PageTopLayout>
 
     <div
       id={`artist-${artist.data.tinaInfo.filename}-details-section`}
