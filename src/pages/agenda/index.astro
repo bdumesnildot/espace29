@@ -4,6 +4,8 @@ import PageTopLayout from "@layouts/PageTopLayout.astro"
 import { getCollection } from "astro:content"
 import type { CollectionEntry } from "astro:content"
 import { EventCard } from "@tina/components/event/EventCard.tsx"
+import { SearchDropdown } from "@components/ui/search/SearchDropdown"
+import { formatDate } from "@lib/formatter/date-helpers"
 import client from "@tina/__generated__/client"
 import { SeasonTitle } from "@tina/components/season/SeasonTitle"
 
@@ -88,11 +90,31 @@ const eventsBySeason = seasonCollection
     },
     {} as Record<string, EventWithTinaProps[]>
   )
+
+const searchItems = eventCollectionWithTinaProps.map(({ data }) => ({
+  title: data.title,
+  subtitle:
+    formatDate(data.dateStart) +
+    (data.dateEnd ? ` - ${formatDate(data.dateEnd)}` : ""),
+  href: `/agenda/${data.tinaInfo.filename}`,
+  imageUrl: data.cardImageUrl,
+  searchText:
+    `${data.title} ${data.cardDescription ?? ""}`.toLowerCase(),
+}))
 ---
 
 <Layout title="e29 | Agenda" showBackToTop={true}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout>Agenda</PageTopLayout>
+
+    <!-- Search -->
+    <div class="w-full px-2 pb-6 sm:px-10">
+      <SearchDropdown
+        items={searchItems}
+        placeholder="Rechercher un événement..."
+        client:load
+      />
+    </div>
 
     {
       seasonCollectionWithTinaProps.map(

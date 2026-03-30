@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
 import { ArtistCard } from "@tina/components/artist/ArtistCard.tsx"
+import { SearchDropdown } from "@components/ui/search/SearchDropdown"
 import { getCollection } from "astro:content"
 import client from "@tina/__generated__/client"
 
@@ -18,11 +19,29 @@ const artistCollectionWithTinaProps = await Promise.all(
     }
   })
 )
+
+const searchItems = artistCollectionWithTinaProps.map(({ data }) => ({
+  title: `${data.firstName ?? ""} ${data.lastName}`,
+  subtitle: data.title ?? "",
+  href: `/artistes/${data.tinaInfo.filename}`,
+  imageUrl: data.cardImageUrl,
+  searchText:
+    `${data.firstName ?? ""} ${data.lastName} ${data.title ?? ""}`.toLowerCase(),
+}))
 ---
 
 <Layout title="e29 | Artistes" showBackToTop={true}>
   <main class="flex min-h-full w-full flex-col items-start">
     <PageTopLayout>Artistes</PageTopLayout>
+    <!-- Search -->
+    <div class="w-full px-2 pb-6 sm:px-10">
+      <SearchDropdown
+        items={searchItems}
+        placeholder="Rechercher un artiste..."
+        client:load
+      />
+    </div>
+
     <!-- With padding container -->
     <div class="px-2 pb-2 sm:px-10 sm:pb-0">
       <!-- Introduction Text -->
