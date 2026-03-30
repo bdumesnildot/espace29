@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
 import type {
   ArtistQuery,
   ArtistQueryVariables,
 } from "@tina/__generated__/types"
+import React, { useEffect, useState } from "react"
 import { tinaField, useTina } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { Carousel } from "../ui/Carousel"
@@ -53,62 +53,48 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
   return (
     <section className="flex w-full flex-col sm:h-screen sm:flex-row">
       {/* Mobile: Artist Details First */}
-      <div className="flex w-full flex-col space-y-4 p-4 sm:hidden">
-        {/* Artist Title */}
-        <div className="border-b border-gray-400 pb-4">
-          <h2
-            className="font-eina02 text-2xl font-semibold text-gray-900"
-            data-tina-field={tinaField(artist, "title")}
-          >
-            {title}
-          </h2>
-        </div>
+      <div className="flex w-full flex-col sm:hidden">
+        {/* Title / Specialty */}
+        <hr className="w-full border-t border-black" />
+        <p
+          className="font-eina04 px-4 py-4 text-xl text-gray-900"
+          data-tina-field={tinaField(artist, "title")}
+        >
+          {title}
+        </p>
+        <hr className="w-full border-t border-black" />
 
-        {/* Website Link */}
-        {websiteUrl && (
-          <div className="border-b border-gray-400 pb-4">
-            <h3 className="font-eina04 mb-2 text-base font-semibold text-gray-900">
-              Site Web
-            </h3>
+        {/* Website + Email */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-1 px-4 py-4">
+          {websiteUrl && (
             <a
               href={websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-eina03 border-b border-transparent text-sm text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+              className="font-eina04 text-base text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
               data-tina-field={tinaField(artist, "websiteUrl")}
             >
               {websiteUrl}
             </a>
-          </div>
-        )}
-
-        {/* Email */}
-        {email && (
-          <div className="border-b border-gray-400 pb-4">
-            <h3 className="font-eina04 mb-2 text-base font-semibold text-gray-900">
-              Contact
-            </h3>
+          )}
+          {email && (
             <a
               href={`mailto:${email}`}
-              className="font-eina03 border-b border-transparent text-sm text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+              className="font-eina04 text-base text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
               data-tina-field={tinaField(artist, "email")}
             >
               {email}
             </a>
-          </div>
-        )}
+          )}
+        </div>
+        <hr className="w-full border-t border-black" />
 
         {/* Description */}
-        <div>
-          <h3 className="font-eina04 mb-3 text-base font-semibold text-gray-900">
-            À propos
-          </h3>
-          <div
-            className="markdown-content space-y-3"
-            data-tina-field={tinaField(artist, "profileDescription")}
-          >
-            <TinaMarkdown content={profileDescription as any} />
-          </div>
+        <div
+          className="markdown-content px-4 py-4"
+          data-tina-field={tinaField(artist, "profileDescription")}
+        >
+          <TinaMarkdown content={profileDescription as any} />
         </div>
       </div>
 
@@ -142,62 +128,48 @@ export const ArtistContent: React.FC<ArtistContentProps> = (props) => {
 
       {/* Desktop: Artist Details */}
       <div className="hidden h-full flex-1 flex-col sm:flex">
-        <div className="flex h-full flex-col space-y-8 p-8 pt-12">
-          {/* Artist Title */}
-          <div className="border-b border-gray-400 pb-6">
-            <h2
-              className="font-eina02 text-4xl font-semibold text-gray-900"
-              data-tina-field={tinaField(artist, "title")}
-            >
-              {title}
-            </h2>
-          </div>
+        <hr className="w-full border-t border-black" />
+        <div className="flex h-full flex-col">
+          {/* Title / Specialty */}
+          <p
+            className="font-eina04 px-8 py-6 text-4xl text-gray-900"
+            data-tina-field={tinaField(artist, "title")}
+          >
+            {title}
+          </p>
+          <hr className="w-full border-t border-black" />
 
-          {/* Website Link */}
-          {websiteUrl && (
-            <div className="border-b border-gray-400 pb-6">
-              <h3 className="font-eina04 mb-3 text-lg font-semibold text-gray-900">
-                Site Web
-              </h3>
+          {/* Website + Email */}
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-1 px-8 py-6">
+            {websiteUrl && (
               <a
                 href={websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-eina03 border-b border-transparent text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+                className="font-eina04 text-xl text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
                 data-tina-field={tinaField(artist, "websiteUrl")}
               >
                 {websiteUrl}
               </a>
-            </div>
-          )}
-
-          {/* Email */}
-          {email && (
-            <div className="border-b border-gray-400 pb-6">
-              <h3 className="font-eina04 mb-3 text-lg font-semibold text-gray-900">
-                Contact
-              </h3>
+            )}
+            {email && (
               <a
                 href={`mailto:${email}`}
-                className="font-eina03 border-b border-transparent text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:text-gray-900"
+                className="font-eina04 text-xl text-gray-700 underline underline-offset-2 transition-colors duration-200 hover:text-gray-900"
                 data-tina-field={tinaField(artist, "email")}
               >
                 {email}
               </a>
-            </div>
-          )}
+            )}
+          </div>
+          <hr className="w-full border-t border-black" />
 
           {/* Description */}
-          <div className="flex flex-1 flex-col">
-            <h3 className="font-eina04 mb-4 text-lg font-semibold text-gray-900">
-              À propos
-            </h3>
-            <div
-              className="markdown-content flex-1 space-y-4 overflow-y-auto"
-              data-tina-field={tinaField(artist, "profileDescription")}
-            >
-              <TinaMarkdown content={profileDescription as any} />
-            </div>
+          <div
+            className="markdown-content flex-1 overflow-y-auto px-8 py-6"
+            data-tina-field={tinaField(artist, "profileDescription")}
+          >
+            <TinaMarkdown content={profileDescription as any} />
           </div>
         </div>
       </div>
