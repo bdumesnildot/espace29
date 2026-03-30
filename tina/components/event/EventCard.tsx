@@ -68,7 +68,7 @@ export const EventCard: React.FC<EventCardProps> = (props) => {
     >
       <div className="border-b border-black px-4 py-3">
         <h3
-          className="font-eina03 text-2xl font-semibold text-gray-900"
+          className="font-eina03 line-clamp-1 text-2xl font-normal text-gray-900"
           data-tina-field={tinaField(event, "title")}
         >
           {title}

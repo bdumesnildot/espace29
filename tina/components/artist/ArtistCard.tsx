@@ -69,7 +69,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = (props) => {
       }
     >
       <div className="border-b border-black px-4 py-3">
-        <h3 className="font-eina03 text-2xl font-semibold text-gray-900">
+        <h3 className="font-eina03 line-clamp-1 text-2xl font-normal text-gray-900">
           <div className="flex items-center justify-start gap-2">
             {firstName && (
               <span data-tina-field={tinaField(artist, "firstName")}>
