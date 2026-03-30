@@ -31,12 +31,7 @@ if (!event) {
 
 <Layout title={`e29 | ${event.data.title}`}>
   <main class="flex min-h-full w-full flex-col items-start">
-    <PageTopLayout
-      backTo={{
-        href: "/agenda",
-        label: "Retour à l'agenda",
-      }}><EventTitle {...tinaProps} client:tina /></PageTopLayout
-    >
+    <PageTopLayout><EventTitle {...tinaProps} client:tina /></PageTopLayout>
 
     <div
       id={`event-${event.data.tinaInfo.filename}-details-section`}
