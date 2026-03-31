@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import { formatDate } from "@lib/formatter/date-helpers"
 import type { EventQuery, EventQueryVariables } from "@tina/__generated__/types"
+import React, { useEffect, useState } from "react"
 import { tinaField, useTina } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
-import { formatDate } from "@lib/formatter/date-helpers"
 import { Carousel } from "../ui/Carousel"
 
 type EventContentProps = {
@@ -44,33 +44,39 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
   return (
     <section className="flex w-full flex-col md:h-screen md:flex-row">
       {/* Mobile: Event Details First */}
-      <div className="flex w-full flex-col space-y-4 p-4 md:hidden">
+      <div className="flex w-full flex-col md:hidden">
+        {/* Event Title */}
+        <hr className="w-full border-t border-black" />
+        <p
+          className="font-eina04 px-4 py-4 text-xl text-gray-900"
+          data-tina-field={tinaField(event, "title")}
+        >
+          {event.title}
+        </p>
+        <hr className="w-full border-t border-black" />
+
         {/* Event Date */}
-        <div className="border-b border-gray-400 pb-4">
-          <h2 className="font-eina02 flex items-center justify-start gap-2 text-2xl font-semibold text-gray-900">
-            <span data-tina-field={tinaField(event, "dateStart")}>
-              {formatDate(dateStart)}
-            </span>
-            {dateEnd && <span>{"-"}</span>}
-            {dateEnd && (
+        <p className="font-eina04 flex items-center gap-2 px-4 py-4 text-base text-gray-700">
+          <span data-tina-field={tinaField(event, "dateStart")}>
+            {formatDate(dateStart)}
+          </span>
+          {dateEnd && (
+            <>
+              <span>-</span>
               <span data-tina-field={tinaField(event, "dateEnd")}>
                 {formatDate(dateEnd)}
               </span>
-            )}
-          </h2>
-        </div>
+            </>
+          )}
+        </p>
+        <hr className="w-full border-t border-black" />
 
         {/* Description */}
-        <div className="border-gray-400 pb-4">
-          {/* <h3 className="font-eina04 mb-3 text-base font-semibold text-gray-900">
-            Description
-          </h3> */}
-          <div
-            className="markdown-content space-y-3"
-            data-tina-field={tinaField(event, "description")}
-          >
-            <TinaMarkdown content={description as any} />
-          </div>
+        <div
+          className="markdown-content px-4 py-4"
+          data-tina-field={tinaField(event, "description")}
+        >
+          <TinaMarkdown content={description as any} />
         </div>
       </div>
 
@@ -101,33 +107,39 @@ export const EventContent: React.FC<EventContentProps> = (props) => {
 
       {/* Desktop: Event Details */}
       <div className="hidden h-full flex-1 flex-col md:flex">
-        <div className="flex h-full flex-col space-y-8 p-8 pt-12">
+        <hr className="w-full border-t border-black" />
+        <div className="flex h-full flex-col">
+          {/* Event Title */}
+          <p
+            className="font-eina04 px-8 py-6 text-4xl text-gray-900"
+            data-tina-field={tinaField(event, "title")}
+          >
+            {event.title}
+          </p>
+          <hr className="w-full border-t border-black" />
+
           {/* Event Date */}
-          <div className="border-b border-gray-400 pb-6">
-            <h2 className="font-eina02 flex items-center justify-start gap-2 text-4xl font-semibold text-gray-900">
-              <span data-tina-field={tinaField(event, "dateStart")}>
-                {formatDate(dateStart)}
-              </span>
-              {dateEnd && <span>{"-"}</span>}
-              {dateEnd && (
+          <p className="font-eina04 flex items-center gap-2 px-8 py-6 text-xl text-gray-700">
+            <span data-tina-field={tinaField(event, "dateStart")}>
+              {formatDate(dateStart)}
+            </span>
+            {dateEnd && (
+              <>
+                <span>-</span>
                 <span data-tina-field={tinaField(event, "dateEnd")}>
                   {formatDate(dateEnd)}
                 </span>
-              )}
-            </h2>
-          </div>
+              </>
+            )}
+          </p>
+          <hr className="w-full border-t border-black" />
 
           {/* Description */}
-          <div className="flex flex-1 flex-col">
-            {/* <h3 className="font-eina04 mb-4 text-lg font-semibold text-gray-900">
-              Description
-            </h3> */}
-            <div
-              className="markdown-content flex-1 space-y-4 overflow-y-auto"
-              data-tina-field={tinaField(event, "description")}
-            >
-              <TinaMarkdown content={description as any} />
-            </div>
+          <div
+            className="markdown-content flex-1 overflow-y-auto px-8 py-6"
+            data-tina-field={tinaField(event, "description")}
+          >
+            <TinaMarkdown content={description as any} />
           </div>
         </div>
       </div>

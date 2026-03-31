@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro"
 import PageTopLayout from "@layouts/PageTopLayout.astro"
 import { ArtistCard } from "@tina/components/artist/ArtistCard.tsx"
+import { SearchDropdown } from "@components/ui/search/SearchDropdown"
 import { getCollection } from "astro:content"
 import client from "@tina/__generated__/client"
 
@@ -18,6 +19,15 @@ const artistCollectionWithTinaProps = await Promise.all(
     }
   })
 )
+
+const searchItems = artistCollectionWithTinaProps.map(({ data }) => ({
+  title: `${data.firstName ?? ""} ${data.lastName}`,
+  subtitle: data.title ?? "",
+  href: `/artistes/${data.tinaInfo.filename}`,
+  imageUrl: data.cardImageUrl,
+  searchText:
+    `${data.firstName ?? ""} ${data.lastName} ${data.title ?? ""}`.toLowerCase(),
+}))
 ---
 
 <Layout title="e29 | Artistes" showBackToTop={true}>
@@ -28,7 +38,7 @@ const artistCollectionWithTinaProps = await Promise.all(
       <!-- Introduction Text -->
       <section class="mb-12 w-full">
         <div class="max-w-4xl">
-          <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
+          <p class="font-eina03 mb-6 text-base leading-relaxed text-gray-700">
             Les ateliers et studios d'artistes résidents de l'Espace29 forment
             un lieu de travail communautaire unique, où la créativité et
             l'échange sont au cœur de la démarche artistique. Ces espaces,
@@ -37,7 +47,7 @@ const artistCollectionWithTinaProps = await Promise.all(
             collaboration et le dialogue entre créateur-ices de diverses
             disciplines.
           </p>
-          <p class="font-eina03 mb-6 text-lg leading-relaxed text-gray-700">
+          <p class="font-eina03 mb-6 text-base leading-relaxed text-gray-700">
             L'Espace29 se veut ainsi un véritable laboratoire de création, où le
             collectif et le partage enrichissent les pratiques artistiques et
             permettent l'émergence de projets communs.
@@ -49,35 +59,54 @@ const artistCollectionWithTinaProps = await Promise.all(
     <!-- Horizontal Scroll Section (no padding) -->
     <section
       id="horizontal-scroll-section"
-      class="hidden h-screen w-full overflow-hidden sm:block"
+      class="hidden h-screen w-full overflow-hidden sm:flex sm:flex-col"
     >
-      <div
-        id="artist-cards-wrapper"
-        class="flex h-full flex-row flex-nowrap py-4"
-      >
-        <div class="h-full w-10 shrink-0"></div>
+      <div class="flex w-full justify-end py-4">
+        <div class="mr-6 w-100">
+          <SearchDropdown
+            items={searchItems}
+            placeholder="Rechercher un artiste..."
+            client:load
+          />
+        </div>
+      </div>
 
-        {
-          artistCollectionWithTinaProps.map(
-            ({ data: artistData, tinaProps }) => (
-              <div class="w-[500px] min-w-[500px] shrink-0">
-                <ArtistCard
-                  grayscale="untilHover"
-                  className="h-full"
-                  href={`/artistes/${artistData.tinaInfo.filename}`}
-                  {...tinaProps}
-                  client:tina
-                />
-              </div>
+      <div class="flex-1 overflow-hidden">
+        <div
+          id="artist-cards-wrapper"
+          class="flex h-full flex-row flex-nowrap pb-4"
+        >
+          <div class="h-full w-10 shrink-0"></div>
+
+          {
+            artistCollectionWithTinaProps.map(
+              ({ data: artistData, tinaProps }) => (
+                <div class="h-full w-[500px] min-w-[500px] shrink-0">
+                  <ArtistCard
+                    grayscale="untilHover"
+                    className="h-full"
+                    href={`/artistes/${artistData.tinaInfo.filename}`}
+                    {...tinaProps}
+                    client:tina
+                  />
+                </div>
+              )
             )
-          )
-        }
-        <div class="h-full w-10 shrink-0"></div>
+          }
+          <div class="h-full w-10 shrink-0"></div>
+        </div>
       </div>
     </section>
 
     <!-- Mobile Vertical Cards Section -->
     <section id="mobile-cards-section" class="block w-full px-2 pb-8 sm:hidden">
+      <div class="flex w-full justify-end pb-4">
+        <SearchDropdown
+          items={searchItems}
+          placeholder="Rechercher un artiste..."
+          client:load
+        />
+      </div>
       <div class="flex flex-col gap-4">
         {
           artistCollectionWithTinaProps.map(

@@ -23,3 +23,31 @@ import galleryImage from "@assets/e29-gallery.webp"
     </div>
   </main>
 </Layout>
+
+<script>
+  const secret = "e29"
+  let buffer = ""
+  let resetTimer: ReturnType<typeof setTimeout> | null = null
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key.length !== 1) return
+    if (e.ctrlKey || e.metaKey || e.altKey) return
+
+    buffer += e.key.toLowerCase()
+
+    if (resetTimer) clearTimeout(resetTimer)
+    resetTimer = setTimeout(() => {
+      buffer = ""
+    }, 2000)
+
+    if (buffer === secret) {
+      buffer = ""
+      if (resetTimer) clearTimeout(resetTimer)
+      window.location.href = "/void"
+    }
+
+    if (!secret.startsWith(buffer)) {
+      buffer = ""
+    }
+  })
+</script>
